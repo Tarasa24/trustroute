@@ -3,6 +3,7 @@
 # Key model
 class Key
   include ActiveGraph::Node
+  include ActiveGraph::Timestamps
 
   property :key_id, type: Integer
   property :master, type: Boolean, default: false
