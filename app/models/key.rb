@@ -20,4 +20,13 @@ class Key
   def short_key_id
     long_key_id.split(' ')[-2..].join(' ')
   end
+
+  def self.build_with_hex_key_id(key_id)
+    throw 'key_id must be a hex string' unless key_id.is_a?(String) && key_id.match?(/^[0-9a-fA-F]+$/)
+
+    key = Key.new
+    key.key_id = key_id.to_i(16)
+
+    key
+  end
 end
