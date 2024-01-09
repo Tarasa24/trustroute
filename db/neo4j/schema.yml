@@ -12,6 +12,8 @@
 
 ---
 :constraints:
+- 'CREATE CONSTRAINT `constraint_11c63037` FOR (n:`Key`) REQUIRE (n.`email`) IS UNIQUE
+  OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
 - 'CREATE CONSTRAINT `constraint_3a5a7e3a` FOR (n:`Key`) REQUIRE (n.`uuid`) IS UNIQUE
   OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
 - 'CREATE CONSTRAINT `constraint_dbcee0a4` FOR (n:`ActiveGraph::Migrations::SchemaMigration`)
@@ -21,3 +23,4 @@
 :indexes: []
 :versions:
 - '20230811215859'
+- '20240109003027'
