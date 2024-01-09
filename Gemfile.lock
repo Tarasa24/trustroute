@@ -104,6 +104,8 @@ GEM
     fiber-local (1.0.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    gpgme (2.0.23)
+      mini_portile2 (~> 2.7)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     io-console (0.6.0)
@@ -127,6 +129,7 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.5)
     minitest (5.19.0)
     msgpack (1.7.2)
     neo4j-ruby-driver (4.4.4)
@@ -302,6 +305,7 @@ DEPENDENCIES
   bootsnap
   byebug
   debug
+  gpgme
   jbuilder
   neo4j-ruby-driver (~> 4.4)
   puma (~> 5.0)
