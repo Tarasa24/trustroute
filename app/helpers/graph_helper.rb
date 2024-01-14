@@ -14,13 +14,13 @@ module GraphHelper
 
     data_string = "window.graph_data = {nodes: ["
     nodes.each do |node|
-      data_string += "{id: \"#{node.short_key_id}\", "
+      data_string += "{id: \"#{node.sha}\", "
       data_string += "group: #{node.master? ? 1 : 0}},"
     end
     data_string += "], links: ["
     links.each do |link|
-      data_string += "{source: \"#{link[:from].short_key_id}\", "
-      data_string += "target: \"#{link[:to].short_key_id}\", "
+      data_string += "{source: \"#{link[:from].sha}\", "
+      data_string += "target: \"#{link[:to].sha}\", "
       data_string += "value: #{link[:rel].signature_id} },"
     end
     data_string += "]};"
