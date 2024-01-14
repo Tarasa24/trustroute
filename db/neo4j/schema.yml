@@ -16,11 +16,10 @@
   OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
 - 'CREATE CONSTRAINT `constraint_3a5a7e3a` FOR (n:`Key`) REQUIRE (n.`uuid`) IS UNIQUE
   OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
+- 'CREATE CONSTRAINT `constraint_cec38590` FOR (n:`Key`) REQUIRE (n.`fingerprint`)
+  IS UNIQUE OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
 - 'CREATE CONSTRAINT `constraint_dbcee0a4` FOR (n:`ActiveGraph::Migrations::SchemaMigration`)
   REQUIRE (n.`migration_id`) IS UNIQUE OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
-- 'CREATE CONSTRAINT `constraint_e203f196` FOR (n:`Key`) REQUIRE (n.`key_id`) IS UNIQUE
-  OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
 :indexes: []
 :versions:
-- '20230811215859'
-- '20240109003027'
+- '20240114020011'
