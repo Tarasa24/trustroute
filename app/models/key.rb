@@ -4,6 +4,7 @@
 class Key
   include ActiveGraph::Node
   include ActiveGraph::Timestamps
+  include Authenticationable
 
   property :fingerprint, type: Integer
   property :master, type: Boolean, default: false
@@ -17,6 +18,10 @@ class Key
 
   def sha
     fingerprint.to_s(16).last(8)
+  end
+
+  def keyring_entry
+    @keyring_entry ||= GPGME::Key.find(:public, email).first
   end
 
   def self.create_from_keyserver!(query, keyserver = Keyserver::KeysOpenpgpOrg)
