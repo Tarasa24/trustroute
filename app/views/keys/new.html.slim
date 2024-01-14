@@ -1,0 +1,18 @@
+= form_with url: keys_path do |f|
+  - # Dropdown to select keyserver
+  = f.label :keyserver
+  = f.select :keyserver, KEYSERVERS, required: true
+
+  = f.label :identifier
+  = f.text_field :identifier, autofocus: true, required: true, placeholder: 'Public key hex (0x) or email address'
+
+  = f.submit 'Import key'
+
+  h2 or
+
+= form_with url: keys_path do |f|
+  - # Upload asc public key file
+  = f.label :public_key_file
+  = f.file_field :public_key_file, accept: '.asc'
+
+  = f.submit 'Upload key'

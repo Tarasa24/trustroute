@@ -19,15 +19,24 @@ class Key
     fingerprint.to_s(16).last(8)
   end
 
-  def short_key_id
-    long_key_id.split(" ")[-2..].join(" ")
+  def self.create_from_keyserver!(query, keyserver = Keyserver::KeysOpenpgpOrg)
+    build_from_keyring_entry(keyserver.new.search_by_query(query)).save!
   end
 
-  def self.build_with_hex_key_id(key_id)
-    throw "key_id must be a hex string" unless key_id.is_a?(String) && key_id.match?(/^[0-9a-fA-F]+$/)
+  def self.create_from_file!(file)
+    # File contains the ascii armored public key
+    imported = GPGME::Key.import(file.read).imports.first
+    raise "Key import failed" unless imported
 
+    build_from_keyring_entry(GPGME::Key.find(:public, imported.fpr).first).save!
+  end
+
+  private_class_method
+
+  def self.build_from_keyring_entry(keyring_entry)
     key = Key.new
-    key.key_id = key_id.to_i(16)
+    key.fingerprint = keyring_entry.fingerprint.to_i(16)
+    key.email = keyring_entry.email
 
     key
   end
