@@ -18,4 +18,9 @@ class KeySessionsController < ApplicationController
       redirect_to new_user_session_path
     end
   end
+
+  def destroy
+    session.delete(:key_uuid)
+    redirect_to root_path
+  end
 end
