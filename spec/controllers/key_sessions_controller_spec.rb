@@ -13,7 +13,7 @@ RSpec.describe KeySessionsController, type: :controller do
     let(:key) { create(:key) }
 
     it "redirects to root_path on success" do
-      Key.any_instance.stub(:authenticate).and_return(true)
+      expect_any_instance_of(Key).to receive(:authenticate).and_return(true)
       post :create, params: {identifier: key.email, signed_challenge: "valid"}
 
       expect(response).to redirect_to(root_path)
@@ -21,7 +21,7 @@ RSpec.describe KeySessionsController, type: :controller do
     end
 
     it "redirects to new_key_session_path on failure" do
-      Key.any_instance.stub(:authenticate).and_return(false)
+      expect_any_instance_of(Key).to receive(:authenticate).and_return(false)
       post :create, params: {identifier: key.email, signed_challenge: "invalid"}
 
       expect(response).to redirect_to(new_key_session_path)

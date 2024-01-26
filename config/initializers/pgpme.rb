@@ -1,3 +1,5 @@
+return unless Rails.env.development?
+
 home_dir = ENV.fetch("GNUPGHOME", Rails.root.join(".gnupg").to_s)
 GPGME::Engine.home_dir = home_dir
 
