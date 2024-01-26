@@ -11,5 +11,7 @@
     shellHook = ''
       export DB_USER=postgres
       export DB_PASSWORD=postgres
+
+      codium .
     '';
   }
