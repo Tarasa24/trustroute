@@ -5,18 +5,14 @@ class KeySessionsController < ApplicationController
   def create
     @key = Key.find_by(email: params[:identifier])
 
-    unless @key
-      flash[:alert] = "Key not found"
+    if @key.nil? || !@key.authenticate(params[:signed_challenge])
+      flash[:alert] = "Couldn't be authenticated"
       redirect_to new_key_session_path
+      return
     end
 
-    if @key.authenticate(params[:signed_challenge])
-      session[:key_uuid] = @key.uuid
-      redirect_to root_path
-    else
-      flash[:alert] = "Key not authenticated"
-      redirect_to new_user_session_path
-    end
+    flash[:notice] = "Key authenticated"
+    redirect_to root_path
   end
 
   def destroy
