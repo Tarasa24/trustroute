@@ -16,6 +16,11 @@ class Key
   has_many :out, :vouches_for, rel_class: :VouchRelationship
   has_many :in, :is_vouched_for_by, rel_class: :VouchRelationship
 
+  after_destroy :remove_from_keyring!
+
+  delegate :name, to: :keyring_entry
+  delegate :comment, to: :keyring_entry
+
   def sha
     fingerprint.to_s(16).last(8)
   end
@@ -36,13 +41,21 @@ class Key
     build_from_keyring_entry(GPGME::Key.find(:public, imported.fpr).first).save!
   end
 
-  private_class_method
-
   def self.build_from_keyring_entry(keyring_entry)
+    unless keyring_entry.is_a?(GPGME::Key)
+      raise "Expected GPGME::Key, got #{keyring_entry.class}"
+    end
+
     key = Key.new
     key.fingerprint = keyring_entry.fingerprint.to_i(16)
     key.email = keyring_entry.email
 
     key
+  end
+
+  private
+
+  def remove_from_keyring!
+    keyring_entry&.delete!
   end
 end
