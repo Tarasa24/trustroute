@@ -12,7 +12,7 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_path = Rails.root.join("spec/fixtures").to_s
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 

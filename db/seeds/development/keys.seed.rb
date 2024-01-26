@@ -38,6 +38,6 @@ keys = []
   key.master = true
   key.save!
 
-  puts "Generated key #{key.fingerprint}"
+  Rails.logger.debug { "Generated key #{key.fingerprint}" }
   keys << key
 end
