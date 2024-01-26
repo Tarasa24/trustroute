@@ -1,5 +1,5 @@
 require "spec_helper"
-# ENV["RAILS_ENV"] ||= "test" TODO: Fix this to use testing database
+ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 
 # Prevent database truncation if the environment is production

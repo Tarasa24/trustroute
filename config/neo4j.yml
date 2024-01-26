@@ -3,3 +3,9 @@ development:
   username: neo4j
   password: '12345678'
   encryption: false
+
+test:
+  url: neo4j://localhost:7688
+  username: neo4j
+  password: '12345678'
+  encryption: false
