@@ -3,7 +3,8 @@ class KeySessionsController < ApplicationController
   end
 
   def create
-    @key = Key.find_by(email: params[:identifier])
+    session[:identifier] ||= params[:identifier]
+    @key = Key.by_query(params[:identifier]).first
 
     if @key.nil? || !@key.authenticate(params[:signed_challenge])
       flash[:alert] = "Couldn't be authenticated"
@@ -11,9 +12,9 @@ class KeySessionsController < ApplicationController
       return
     end
 
-    flash[:notice] = "Key authenticated"
-    @identifier = session.delete(:identifier)
-    redirect_to root_path
+    session.delete(:identifier)
+    set_current_key(@key)
+    redirect_to key_path(current_key), notice: "Key was successfully authenticated."
   end
 
   def destroy

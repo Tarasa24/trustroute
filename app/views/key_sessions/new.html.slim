@@ -1,9 +1,11 @@
 = form_with url: key_sessions_path do |f|
   = f.label :identifier
-  = f.text_field :identifier, autofocus: true, required: true, placeholder: 'Public key hex (0x) or email address', value: @identifier
+  = f.text_field :identifier, autofocus: true, required: true, placeholder: 'Public key hex (0x) or email address', value: session[:identifier]
 
   br
   b Payload is the following: TEST
+  code
+    = "$ echo TEST | gpg --detach-sign --armor"
   br
 
   = f.label :signed_challenge

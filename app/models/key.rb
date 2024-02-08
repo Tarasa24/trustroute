@@ -45,7 +45,7 @@ class Key
     imported = GPGME::Key.import(file.read).imports.first
     raise "Key import failed" unless imported
 
-    return if Key.find_by(fingerprint: imported.fpr)
+    return if Key.find_by(fingerprint: imported.fpr.to_i(16))
 
     build_from_keyring_entry(GPGME::Key.find(:public, imported.fpr).first).save!
   end

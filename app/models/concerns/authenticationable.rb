@@ -9,12 +9,11 @@ module Authenticationable
       return false unless signed_challenge
 
       begin
-        crypto = GPGME::Crypto.new
-        crypto.verify(signed_challenge, signed_text: CHALLENGE_PAYLOAD) do |signature|
+        GPGME::Crypto.new.verify(signed_challenge, signed_text: CHALLENGE_PAYLOAD) do |signature|
           return false unless signature.valid?
           return false unless signature.fpr.to_i(16) == fingerprint
         end
-      rescue GPGME::Error::NoData
+      rescue GPGME::Error::NoData, GPGME::Error::BadData
         return false
       end
 
