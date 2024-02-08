@@ -21,6 +21,11 @@ class Key
   delegate :name, to: :keyring_entry
   delegate :comment, to: :keyring_entry
 
+  scope :by_query, ->(query) do
+    fingerprints = GPGME::Key.find(:public, query).map(&:fingerprint)
+    where(fingerprint: fingerprints.map { |f| f.to_i(16) })
+  end
+
   def sha
     fingerprint.to_s(16).last(8)
   end
@@ -30,6 +35,8 @@ class Key
   end
 
   def self.create_from_keyserver!(query, keyserver = Keyserver::KeysOpenpgpOrg)
+    return if Key.by_query(query).exists?
+
     build_from_keyring_entry(keyserver.new.search_by_query(query)).save!
   end
 
@@ -37,6 +44,8 @@ class Key
     # File contains the ascii armored public key
     imported = GPGME::Key.import(file.read).imports.first
     raise "Key import failed" unless imported
+
+    return if Key.find_by(fingerprint: imported.fpr)
 
     build_from_keyring_entry(GPGME::Key.find(:public, imported.fpr).first).save!
   end
