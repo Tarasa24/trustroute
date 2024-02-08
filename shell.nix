@@ -1,17 +1,16 @@
 { pkgs ? import <nixpkgs> {} }:
   pkgs.mkShell {
     # nativeBuildInputs is usually what you want -- tools you need to run
-    nativeBuildInputs = with pkgs.buildPackages; [ 
-      ruby
-      nodejs yarn 
+    nativeBuildInputs = with pkgs.buildPackages; [
+      ruby_3_3
+      rubyPackages_3_3.gpgme rubyPackages_3_3.ffi rubyPackages_3_3.nokogiri rubyPackages_3_3.sassc
+      nodejs yarn
       overmind
       redis
+      libstdcxx5 zlib xz libxml2
     ];
 
     shellHook = ''
-      export DB_USER=postgres
-      export DB_PASSWORD=postgres
-
       codium .
     '';
   }
