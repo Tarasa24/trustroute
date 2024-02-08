@@ -14,4 +14,12 @@ class KeysController < ApplicationController
   rescue => e
     redirect_to new_key_path, alert: "Key creation failed: #{e.message} (#{e.class})"
   end
+
+  def show
+    @key = Key.find_by(uuid: params[:id])
+
+    if @key.nil?
+      redirect_to new_key_path, alert: "Key not found"
+    end
+  end
 end
