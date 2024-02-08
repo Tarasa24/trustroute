@@ -9,7 +9,8 @@ class KeysController < ApplicationController
       Key.create_from_keyserver!(params[:identifier])
     end
 
-    redirect_to root_path, notice: "Key was successfully created."
+    session[:identifier] = params[:identifier]
+    redirect_to new_key_session_path, notice: "Key was successfully created."
   rescue => e
     redirect_to new_key_path, alert: "Key creation failed: #{e.message} (#{e.class})"
   end

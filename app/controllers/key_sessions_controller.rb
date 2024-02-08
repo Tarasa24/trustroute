@@ -12,6 +12,7 @@ class KeySessionsController < ApplicationController
     end
 
     flash[:notice] = "Key authenticated"
+    @identifier = session.delete(:identifier)
     redirect_to root_path
   end
 
