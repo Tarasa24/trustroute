@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :keys, only: [:new, :create]
+  resources :keys, only: [:new, :create, :show]
 
   resources :key_sessions, only: [:new, :create] do
     collection do

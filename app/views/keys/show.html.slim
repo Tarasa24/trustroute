@@ -1,0 +1,16 @@
+h2 Profile
+
+p = "#{@key.fingerprint.to_s(16).upcase.scan(/.{4}/).join(' ')} - #{@key.sha}"
+
+p = @key.email
+
+- keyring_entry = @key.keyring_entry
+p Subkeys:
+ol
+- keyring_entry.subkeys.each do |subkey|
+  li = subkey
+
+p User IDs:
+ol
+- keyring_entry.uids.each do |uid|
+  li = uid
