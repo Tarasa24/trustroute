@@ -2,13 +2,14 @@
   = f.label :identifier
   = f.text_field :identifier, autofocus: true, required: true, placeholder: 'Public key hex (0x) or email address', value: session[:identifier]
 
-  br
-  b Payload is the following: TEST
-  code
-    = "$ echo TEST | gpg --detach-sign --armor"
-  br
+  p
+    b Payload is the following: TEST
+    br
+    code
+      = "$ echo TEST | gpg --detach-sign --armor #{session[:identifier] && "--local-user \"#{session[:identifier]}\""}"
 
   = f.label :signed_challenge
-  = f.text_area :signed_challenge, required: true, placeholder: 'Signature'
-
+  br
+  = f.text_area :signed_challenge, required: true, placeholder: '--BEGIN PGP SIGNED MESSAGE--', cols: 80, rows: 10
+  br
   = f.submit 'Log in'

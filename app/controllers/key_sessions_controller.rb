@@ -5,8 +5,10 @@ class KeySessionsController < ApplicationController
   def create
     session[:identifier] ||= params[:identifier]
     @key = Key.by_query(params[:identifier]).first
+    signed_challenge = params[:signed_challenge]
+      .match(/-----BEGIN PGP SIGNATURE-----(.+)-----END PGP SIGNATURE-----/m)[0]
 
-    if @key.nil? || !@key.authenticate(params[:signed_challenge])
+    if @key.nil? || !@key.authenticate(signed_challenge)
       flash[:alert] = "Couldn't be authenticated"
       redirect_to new_key_session_path
       return
