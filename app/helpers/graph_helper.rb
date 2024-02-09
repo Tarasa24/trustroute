@@ -12,7 +12,7 @@ module GraphHelper
     #   ]
     # }
 
-    data_string = "window.graph_data = {nodes: ["
+    data_string = "window.GRAPH_DATA = {nodes: ["
     nodes.each do |node|
       data_string += "{id: \"#{node.sha}\", "
       data_string += "group: #{node.master? ? 1 : 0}},"
