@@ -110,9 +110,13 @@ function d3_chart(data) {
   return canvas;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function render_graph() {
+  if (document.location.pathname != '/') return;
   if (!graph_data) return;
 
   const canvas = d3_chart(graph_data);
   document.getElementById('chart').appendChild(canvas);
-});
+}
+
+document.addEventListener('DOMContentLoaded', () => render_graph());
+document.addEventListener("turbo:render", () => render_graph());
