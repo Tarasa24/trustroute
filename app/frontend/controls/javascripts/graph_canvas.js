@@ -2,63 +2,63 @@ import * as d3 from 'd3';
 
 const WIDTH = 928;
 const HEIGHT = 600;
+const ARROW_COLOR = 'grey';
+const NODE_COLOR = 'steelblue';
+const LINK_COLOR = 'lightblue';
 
-export default function graphCanvas(data) {
-  const nodes = data.nodes;
-  const links = data.links;
-
-  let svg = d3.create('svg')
+function createSVG() {
+  return d3.create('svg')
     .attr('width', WIDTH)
     .attr('height', HEIGHT)
     .style('background-color', 'lightgrey');
+}
 
-  const simulation = d3.forceSimulation(nodes)
+function createSimulation(nodes, links) {
+  return d3.forceSimulation(nodes)
     .force("link", d3.forceLink(links).id(d => d.id))
     .force("charge", d3.forceManyBody().strength(-400))
     .force("x", d3.forceX())
     .force("y", d3.forceY());
+}
 
-  const link = svg.append("g")
+function appendLinks(svg, links) {
+  return svg.append("g")
     .attr("fill", "none")
+    .attr("stroke", LINK_COLOR)
     .attr("stroke-width", 1.5)
     .selectAll("path")
     .data(links)
     .join("path")
-    .attr("stroke", d => color(d.type))
-    .attr("marker-end", d => `url(${new URL(`#arrow-${d.type}`, location)})`);
+    .attr("marker-end", "url(#arrowhead)");
+}
 
+function appendNodes(svg, nodes, simulation, onClick) {
   const node = svg.append("g")
-    .attr("fill", "currentColor")
-    .attr("stroke-linecap", "round")
-    .attr("stroke-linejoin", "round")
+    .attr("fill", NODE_COLOR)
+    .attr("stroke", "white")
+    .attr("stroke-width", 1.5)
     .selectAll("g")
     .data(nodes)
     .join("g")
-    .call(drag(simulation));
+    .call(drag(simulation))
+    .on("click", onClick);
 
   node.append("circle")
-    .attr("stroke", "white")
-    .attr("stroke-width", 1.5)
-    .attr("r", 4);
+    .attr("r", 8);
 
   node.append("text")
-    .attr("x", 8)
+    .attr("x", 12)
     .attr("y", "0.31em")
-    .text(d => d.id)
+    .text(d => d.sha)
     .clone(true).lower()
     .attr("fill", "none")
     .attr("stroke", "white")
     .attr("stroke-width", 3);
 
-  simulation.on("tick", () => {
-    link.attr("d", linkArc);
-    node.attr("transform", d => `translate(${d.x},${d.y})`);
-  });
-
-  return svg.node();
+  return node;
 }
 
-const drag = simulation => {
+function drag(simulation) {
   function dragstarted(event, d) {
     if (!event.active) simulation.alphaTarget(0.3).restart();
     d.fx = d.x;
@@ -80,12 +80,49 @@ const drag = simulation => {
     .on("start", dragstarted)
     .on("drag", dragged)
     .on("end", dragended);
-};
+}
 
-function linkArc(d) {
-  const r = Math.hypot(d.target.x - d.source.x, d.target.y - d.source.y);
+function linkArc(d, centerX, centerY) {
+  const sourceX = d.source.x + centerX;
+  const sourceY = d.source.y + centerY;
+  const targetX = d.target.x + centerX;
+  const targetY = d.target.y + centerY;
+  const r = Math.hypot(targetX - sourceX, targetY - sourceY);
   return `
-    M${d.source.x},${d.source.y}
-    A${r},${r} 0 0,1 ${d.target.x},${d.target.y}
+    M${sourceX},${sourceY}
+    A${r},${r} 0 0,1 ${targetX},${targetY}
   `;
+}
+
+
+export default function graphCanvas(data, onClick) {
+  const nodes = data.nodes;
+  const links = data.links;
+
+  const svg = createSVG();
+
+  const simulation = createSimulation(nodes, links);
+
+  const arrowhead = svg.append('defs').append('marker')
+    .attr("id", "arrowhead")
+    .attr("viewBox", "-6 -6 12 12")
+    .attr("refX", 0)
+    .attr("refY", 0)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto")
+    .append("path")
+    .attr("fill", ARROW_COLOR)
+    .attr("d", "M-6,-6L6,0L-6,6Z");
+
+  const link = appendLinks(svg, links);
+
+  const node = appendNodes(svg, nodes, simulation, onClick);
+
+  simulation.on("tick", () => {
+    link.attr("d", d => linkArc(d, WIDTH / 2, HEIGHT / 2));
+    node.attr("transform", d => `translate(${d.x + WIDTH / 2},${d.y + HEIGHT / 2})`);
+  });
+
+  return svg.node();
 }
