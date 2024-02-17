@@ -1,8 +1,8 @@
 class GraphController < ApplicationController
-  include GraphHelper
-
   def index
-    @nodes = Key.all
-    @links = VouchRelationship.between_master_keys
+  end
+
+  def data
+    render json: GraphData.new(Key.all)
   end
 end

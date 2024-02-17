@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   end
 
   root "graph#index"
+  get "graph/data", to: "graph#data"
 end

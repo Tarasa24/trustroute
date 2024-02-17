@@ -3,8 +3,4 @@ h1 Trustroute
 - if current_key 
   h2 You are logged in as #{current_key.sha} (#{current_key.email})
 
-script
-  - # This loads window.graph_data which is then used by the graph.js file
-  == graph_js_data_string(@nodes, @links)
-
 div id="chart"
