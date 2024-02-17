@@ -9,6 +9,7 @@ gem "neo4j-ruby-driver", "~> 4.4"
 gem "puma", "~> 5.0"
 gem "rails", "~> 7.0.7"
 gem "sqlite3", "~> 1.4"
+gem "active_model_serializers"
 
 # Assets
 gem "sassc-rails", "~> 2.1"
