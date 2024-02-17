@@ -14,6 +14,10 @@ class GraphData < ActiveModelSerializers::Model
   end
 
   def links
-    []
+    @keys.map do |key|
+      key.vouches_for.map do |vouch|
+        { source: key.id, target: vouch.id }
+      end
+    end.flatten
   end
 end
