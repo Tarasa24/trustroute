@@ -10,8 +10,9 @@ async function renderGraph() {
     Turbo.visit(`/keys/${d.id}`);
   };
 
-  document.getElementById('chart')
-    .appendChild(graphCanvas(data, onClick));
+  const container = document.getElementById('chart');
+  container.innerHTML = '';
+  container.appendChild(graphCanvas(data, onClick));
 }
 
 document.addEventListener('DOMContentLoaded', () => renderGraph());
