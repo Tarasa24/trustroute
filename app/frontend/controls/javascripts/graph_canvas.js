@@ -2,20 +2,22 @@ import * as d3 from 'd3';
 
 const WIDTH = 928;
 const HEIGHT = 600;
-const ARROW_COLOR = 'grey';
+const ARROW_COLOR = 'lightgray';
+const LINK_COLOR = 'lightgray';
 const NODE_COLOR = 'red';
-const LINK_COLOR = 'black';
+const BACKGROUND_COLOR = '#1b192e';
+const TEXT_COLOR = 'white';
 
 function createSVG() {
   return d3.create('svg')
     .attr('width', WIDTH)
     .attr('height', HEIGHT)
-    .style('background-color', 'lightgrey');
+    .style('background-color', BACKGROUND_COLOR);
 }
 
 function createSimulation(nodes, links) {
   return d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(links).id(d => d.id))
+    .force("link", d3.forceLink(links).strength(1e-3).id(d => d.id))
     .force("charge", d3.forceManyBody().strength(-400))
     .force("x", d3.forceX())
     .force("y", d3.forceY());
@@ -49,9 +51,7 @@ function appendNodes(svg, nodes, simulation, onClick) {
     .attr("x", 12)
     .attr("y", "0.31em")
     .text(d => d.sha)
-    .clone(false).lower()
-    .attr("fill", "black")
-    .attr("stroke", "white");
+    .attr("fill", TEXT_COLOR);
 
   return node;
 }
@@ -92,7 +92,6 @@ function linkArc(d, centerX, centerY) {
   `;
 }
 
-
 export default function graphCanvas(data, onClick) {
   const nodes = data.nodes;
   const links = data.links;
@@ -101,15 +100,15 @@ export default function graphCanvas(data, onClick) {
 
   const simulation = createSimulation(nodes, links);
 
-  const arrowhead = svg.append('defs').append('marker')
+  svg.append('defs').append('marker')
     .attr("id", "arrowhead")
     .attr("viewBox", "-6 -6 12 12")
-    .attr("refX", 0)
-    .attr("refY", 0)
+    .attr("refX", 12)
+    .attr("refY", -3)
     .attr("markerWidth", 6)
     .attr("markerHeight", 6)
     .attr("orient", "auto")
-    .append("path")
+    .append("svg:path")
     .attr("fill", ARROW_COLOR)
     .attr("d", "M-6,-6L6,0L-6,6Z");
 
