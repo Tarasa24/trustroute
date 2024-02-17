@@ -7,7 +7,7 @@ async function renderGraph() {
   if (data === null) return;
 
   const onClick = (event, d) => {
-    Turbo.visit(`/keys/${d.id}`, re
+    Turbo.visit(`/keys/${d.id}`);
   };
 
   document.getElementById('chart')
