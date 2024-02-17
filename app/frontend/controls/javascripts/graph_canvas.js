@@ -3,8 +3,8 @@ import * as d3 from 'd3';
 const WIDTH = 928;
 const HEIGHT = 600;
 const ARROW_COLOR = 'grey';
-const NODE_COLOR = 'steelblue';
-const LINK_COLOR = 'lightblue';
+const NODE_COLOR = 'red';
+const LINK_COLOR = 'black';
 
 function createSVG() {
   return d3.create('svg')
@@ -34,26 +34,24 @@ function appendLinks(svg, links) {
 
 function appendNodes(svg, nodes, simulation, onClick) {
   const node = svg.append("g")
-    .attr("fill", NODE_COLOR)
-    .attr("stroke", "white")
-    .attr("stroke-width", 1.5)
     .selectAll("g")
     .data(nodes)
     .join("g")
-    .call(drag(simulation))
-    .on("click", onClick);
+    .call(drag(simulation));
 
   node.append("circle")
-    .attr("r", 8);
+    .attr("r", 8)
+    .attr("fill", NODE_COLOR)
+    .on("click", onClick)
+    .attr("cursor", "pointer");
 
   node.append("text")
     .attr("x", 12)
     .attr("y", "0.31em")
     .text(d => d.sha)
-    .clone(true).lower()
-    .attr("fill", "none")
-    .attr("stroke", "white")
-    .attr("stroke-width", 3);
+    .clone(false).lower()
+    .attr("fill", "black")
+    .attr("stroke", "white");
 
   return node;
 }
