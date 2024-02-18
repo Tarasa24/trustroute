@@ -23,4 +23,10 @@ class KeySessionsController < ApplicationController
     session.delete(:key_uuid)
     redirect_to root_path
   end
+
+  def set_development_key
+    set_current_key(Key.first)
+
+    redirect_to root_path
+  end
 end

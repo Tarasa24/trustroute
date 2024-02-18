@@ -13,3 +13,7 @@
   = f.text_area :signed_challenge, required: true, placeholder: '--BEGIN PGP SIGNED MESSAGE--', cols: 80, rows: 10
   br
   = f.submit 'Log in'
+
+
+- if Rails.env.development?
+  = button_to "Login as #{Key.first.sha}", set_development_key_key_sessions_path, method: :post

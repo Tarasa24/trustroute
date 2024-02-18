@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :key_sessions, only: [:new, :create] do
     collection do
       delete :destroy
+      post :set_development_key, if: -> { Rails.env.development? }
     end
   end
 
