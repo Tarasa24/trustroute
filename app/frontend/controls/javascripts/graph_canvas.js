@@ -5,6 +5,7 @@ const HEIGHT = 600;
 const ARROW_COLOR = 'lightgray';
 const LINK_COLOR = 'lightgray';
 const NODE_COLOR = 'red';
+const SELF_NODE_COLOR = 'lime';
 const BACKGROUND_COLOR = '#1b192e';
 const TEXT_COLOR = 'white';
 
@@ -43,7 +44,7 @@ function appendNodes(svg, nodes, simulation, onClick) {
 
   node.append("circle")
     .attr("r", 8)
-    .attr("fill", NODE_COLOR)
+    .attr("fill", d => d.is_self ? SELF_NODE_COLOR : NODE_COLOR)
     .on("click", onClick)
     .attr("cursor", "pointer");
 
