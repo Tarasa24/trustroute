@@ -172,6 +172,7 @@ GEM
     parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
+    prism (0.24.0)
     puma (5.6.6)
       nio4r (~> 2.0)
     racc (1.7.1)
@@ -252,6 +253,16 @@ GEM
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
       rubocop-ast (>= 1.30.0, < 2.0)
+    ruby-lsp (0.14.1)
+      language_server-protocol (~> 3.17.0)
+      prism (>= 0.22.0, < 0.25)
+      sorbet-runtime (>= 0.5.10782)
+    ruby-lsp-rails (0.3.0)
+      actionpack (>= 6.0)
+      activerecord (>= 6.0)
+      railties (>= 6.0)
+      ruby-lsp (>= 0.14.0, < 0.15.0)
+      sorbet-runtime (>= 0.5.9897)
     ruby-progressbar (1.13.0)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -269,6 +280,7 @@ GEM
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (>= 3.0, < 6.0, != 5.0.0)
+    sorbet-runtime (0.5.11262)
     sorted_set (1.0.3)
       rbtree
       set (~> 1.0)
@@ -327,6 +339,7 @@ DEPENDENCIES
   rspec-rails (~> 6.0.0)
   rubocop
   rubocop-rails
+  ruby-lsp-rails
   sassc-rails (~> 2.1)
   slim-rails (~> 3.6)
   sprockets-rails
