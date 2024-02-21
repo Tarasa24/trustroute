@@ -4,6 +4,7 @@
     nativeBuildInputs = with pkgs.buildPackages; [
       ruby_3_3
       rubyPackages_3_3.gpgme rubyPackages_3_3.ffi rubyPackages_3_3.nokogiri rubyPackages_3_3.sassc
+      rubyPackages_3_3.ruby-lsp
       nodejs yarn
       overmind
       redis
@@ -11,6 +12,6 @@
     ];
 
     shellHook = ''
-      codium .
+      codium .vscode/trustroute.code-workspace
     '';
   }
