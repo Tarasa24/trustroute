@@ -30,15 +30,12 @@ group :development, :test do
   gem "debug", require: false
   gem "rspec-rails", "~> 6.0.0"
   gem "factory_bot_rails"
-  gem "standard"
-  gem "standard-rails"
   gem "ffaker"
+  gem "rubocop"
+  gem "rubocop-rails"
 end
 
 group :development do
   gem "rack-mini-profiler"
   gem "web-console"
-end
-
-group :test do
 end
