@@ -13,7 +13,8 @@ class Key
   validates :fingerprint, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
 
-  has_many :out, :vouches_for, rel_class: :VouchRelationship, dependent: :destroy
+  has_many :out, :vouches_for, rel_class: :VouchRelationship
+  has_many :out, :has_identity, rel_class: :HasIdentityRelationship
 
   after_destroy :remove_from_keyring!
 
