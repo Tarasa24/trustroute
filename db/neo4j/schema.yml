@@ -16,10 +16,18 @@
   OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
 - 'CREATE CONSTRAINT `constraint_3a5a7e3a` FOR (n:`Key`) REQUIRE (n.`uuid`) IS UNIQUE
   OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
+- 'CREATE CONSTRAINT `constraint_53288765` FOR (n:`EmailIdentity`) REQUIRE (n.`uuid`)
+  IS UNIQUE OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
+- 'CREATE CONSTRAINT `constraint_b11a67e4` FOR (n:`OAuthIdentity`) REQUIRE (n.`uuid`)
+  IS UNIQUE OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
 - 'CREATE CONSTRAINT `constraint_cec38590` FOR (n:`Key`) REQUIRE (n.`fingerprint`)
   IS UNIQUE OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
 - 'CREATE CONSTRAINT `constraint_dbcee0a4` FOR (n:`ActiveGraph::Migrations::SchemaMigration`)
   REQUIRE (n.`migration_id`) IS UNIQUE OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
-:indexes: []
+:indexes:
+- CREATE RANGE INDEX `index_4de0c2ed` FOR (n:`OAuthIdentity`) ON (n.`provider`)
 :versions:
 - '20240114020011'
+- '20240221212919'
+- '20240221212930'
+- '20240221213649'
