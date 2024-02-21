@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"rubyLsp.formatter": "auto"
+	},
+	"extensions": {
+		"recommendations": [
+			"lokalise.i18n-ally",
+			"maptz.regionfolder",
+			"shopify.ruby-lsp"
+		]
+	}
+}
