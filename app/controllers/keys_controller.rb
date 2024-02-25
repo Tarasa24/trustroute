@@ -21,5 +21,7 @@ class KeysController < ApplicationController
     if @key.nil?
       redirect_to new_key_path, alert: "Key not found"
     end
+
+    @identities = @key.identities.where(validated: true)
   end
 end
