@@ -4,6 +4,7 @@ class OAuthIdentity
 
   PROVIDERS = %i[github]
 
+  property :validated, type: Boolean, default: false
   property :uid, type: String
   enum provider: PROVIDERS
 
