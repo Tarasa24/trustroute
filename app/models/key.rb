@@ -14,7 +14,7 @@ class Key
   validates :email, presence: true, uniqueness: true
 
   has_many :out, :vouches_for, rel_class: :VouchRelationship
-  has_many :out, :has_identity, rel_class: :HasIdentityRelationship
+  has_many :out, :identities, rel_class: :HasIdentityRelationship
 
   after_destroy :remove_from_keyring!
 
