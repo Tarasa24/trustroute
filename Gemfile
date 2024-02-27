@@ -24,6 +24,8 @@ gem "slim-rails", "~> 3.6"
 gem "bootsnap", require: false
 gem "gpgme"
 gem "httparty"
+gem "omniauth"
+gem "omniauth-rails_csrf_protection"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
