@@ -4,4 +4,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   end
 
   provider :developer if Rails.env.development?
+  provider :github, Rails.application.credentials.oauth_providers.github.id,
+                    Rails.application.credentials.oauth_providers.github.secret
 end
