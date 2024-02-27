@@ -8,11 +8,14 @@ class OAuthIdentity
   property :uid, type: String
   enum provider: PROVIDERS
   property :encrypted_token, type: String
+  property :identity_data, type: Hash
 
-  validates :uid, presence: true, uniqueness: {scope: :provider}
+  validates :uid, presence: true, uniqueness: {scope: :provider}, if: -> { validated? }
   validates :provider, presence: true
   validate :validate_token, if: -> { encrypted_token.present? }
   validates :encrypted_token, presence: true, if: -> { validated? }
+
+  has_one :in, :key, type: :has_identity, model_class: :Key
 
   def token
     return @token if defined?(@token)
