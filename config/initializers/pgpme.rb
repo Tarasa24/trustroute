@@ -7,8 +7,8 @@ GPGME::Engine.home_dir = home_dir
 FileUtils.mkdir_p(home_dir)
 
 # if common.conf does not exist, initialize gpg directory
-common_conf = File.join(home_dir, "common.conf")
-unless File.exist?(common_conf)
+pubring = File.join(home_dir, "pubring.kbx")
+unless File.exist?(pubring)
   gpg_bin = GPGME::Engine.info.first.file_name
   system("#{gpg_bin} --homedir #{home_dir} --list-keys")
 end
