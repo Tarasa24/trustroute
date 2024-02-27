@@ -10,4 +10,8 @@ Rails.application.routes.draw do
 
   root "graph#index"
   get "graph/data", to: "graph#data"
+
+  # OAuthIdentity providers
+  get "oauth_identities/:provider/callback", to: "o_auth_identities#callback"
+  get "oauth_identities/new", to: "o_auth_identities#new"
 end
