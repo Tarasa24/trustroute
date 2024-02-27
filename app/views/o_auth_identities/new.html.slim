@@ -1,2 +1,7 @@
-= form_tag('/oauth_identities/developer', method: 'post', data: {turbo: false}) do 
-  button type="submit" class="btn btn-primary" Sign in with Developer Provider
+
+- if Rails.env.development?
+  = form_tag('/oauth_identities/developer', method: 'post', data: {turbo: false}) do 
+    button type="submit" class="btn btn-primary" Sign in with Developer Provider
+
+= form_tag('/oauth_identities/github', method: 'post', data: {turbo: false}) do 
+  button type="submit" class="btn btn-primary" Sign in with GitHub Provider
