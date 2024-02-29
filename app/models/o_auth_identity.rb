@@ -8,18 +8,16 @@ class OAuthIdentity
   property :uid, type: String
   enum provider: OmniAuth::Builder.providers
   property :encrypted_token, type: String
-  property :encrypted_secret, type: String
-  property :identity_data, type: Hash
+  property :encrypted_refresh_token, type: String
+  property :expires_at, type: Integer
+  property :info, type: Hash
 
-  property_encryptable :encrypted_token, :encrypted_secret
+  property_encryptable :encrypted_token, :encrypted_refresh_token
 
   validates :uid, presence: true, uniqueness: {scope: :provider}, if: -> { validated? }
   validates :provider, presence: true
   validates :encrypted_token, presence: true, if: -> { validated? }
+  validates :expires_at, presence: true, if: -> { encrypted_refresh_token.present? }
 
   has_one :in, :key, type: :has_identity, model_class: :Key
-
-  def credentials_expire?
-    !(encrypted_token.present? && encrypted_secret.blank?)
-  end
 end
