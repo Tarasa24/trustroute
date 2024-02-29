@@ -25,7 +25,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :github,
     Rails.application.credentials.oauth_providers.github.id,
     Rails.application.credentials.oauth_providers.github.secret
-  provider :twitter,
-    Rails.application.credentials.oauth_providers.twitter.id,
-    Rails.application.credentials.oauth_providers.twitter.secret
+  provider :twitter2,
+    Rails.application.credentials.oauth_providers.twitter2.id,
+    Rails.application.credentials.oauth_providers.twitter2.secret,
+    scope: "tweet.read users.read offline.access"
 end
