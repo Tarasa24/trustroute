@@ -3,29 +3,28 @@ class OAuthIdentitiesController < ApplicationController
   end
 
   def callback
-    return unless current_key
+    return redirect_to root_path, flash: {error: "Not logged in"} unless current_key
 
     user_info = request.env["omniauth.auth"]
-    uid = user_info.uid
-    provider = user_info.provider
-
-    identity = OAuthIdentity.find_or_initialize_by(uid: uid, provider: provider, key: current_key)
+    identity = OAuthIdentity.find_or_initialize_by(uid: user_info.uid, provider: user_info.provider, key: current_key)
     identity.token = user_info.credentials.token
+
+    if user_info.credentials.expires
+      identity.expires_at = user_info.credentials.expires_at
+      identity.refresh_token = user_info.credentials.refresh_token
+    end
+
+    puts user_info.info.to_h
+    identity.info = user_info.info.to_h.slice("nickname", "name", "description")
+    identity.validated = true
 
     unless identity.valid?
       flash[:error] = identity.errors.full_messages.join(", ")
       return redirect_to oauth_identities_new_path
     end
 
-    service = OAuthIdentityDataFetcherService.new(identity)
-    identity = service.call
+    return redirect_to oauth_identities_new_path, flash: {error: "Failed to save identity"} unless identity.save
 
-    if identity.validated?
-      flash[:success] = "Identity validated"
-      redirect_to root_path
-    else
-      flash[:error] = identity.errors.full_messages.join(", ")
-      redirect_to oauth_identities_new_path
-    end
+    redirect_to root_path
   end
 end
