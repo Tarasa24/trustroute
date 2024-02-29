@@ -27,6 +27,7 @@ gem "httparty"
 gem "omniauth"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-github", github: "intridea/omniauth-github"
+gem "omniauth-twitter", github: "arunagw/omniauth-twitter"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
