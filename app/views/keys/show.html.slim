@@ -1,5 +1,8 @@
 h2 Profile
 
+- if @key == current_key
+  = button_to "Edit Key", edit_key_path(@key), method: :get
+
 p = "#{@key.fingerprint.to_s(16).upcase.scan(/.{4}/).join(' ')} - #{@key.sha}"
 
 p = @key.email

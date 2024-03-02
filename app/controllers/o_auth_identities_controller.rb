@@ -1,7 +1,4 @@
 class OAuthIdentitiesController < ApplicationController
-  def new
-  end
-
   def callback
     return redirect_to root_path, flash: {error: "Not logged in"} unless current_key
 

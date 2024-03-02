@@ -1,13 +1,16 @@
 
+h2 
+  = "Edit key #{@key.sha}"
+
 - if Rails.env.development?
   = form_tag('/oauth_identities/developer', method: 'post', data: {turbo: false}) do 
-    button type="submit" class="btn btn-primary" Sign in with Developer Provider
+    button type="submit" class="btn btn-primary" Add Developer Identity
 
 = form_tag('/oauth_identities/github', method: 'post', data: {turbo: false}) do 
-  button type="submit" class="btn btn-primary" Sign in with GitHub Provider
+  button type="submit" class="btn btn-primary" Add GitHub Identity
 
 = form_tag('/oauth_identities/twitter2', method: 'post', data: {turbo: false}) do 
-  button type="submit" class="btn btn-primary" Sign in with Twitter Provider
+  button type="submit" class="btn btn-primary" Add Twitter Identity
 
 = form_tag('/oauth_identities/discord', method: 'post', data: {turbo: false}) do 
-  button type="submit" class="btn btn-primary" Sign in with Discord Provider
+  button type="submit" class="btn btn-primary" Add Discord Identity

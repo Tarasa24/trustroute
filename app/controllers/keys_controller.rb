@@ -24,4 +24,12 @@ class KeysController < ApplicationController
 
     @identities = @key.identities.where(validated: true)
   end
+
+  def edit
+    @key = Key.find_by(uuid: params[:id])
+
+    if @key.nil? || @key != current_key
+      redirect_to root_path, alert: "Key not found"
+    end
+  end
 end
