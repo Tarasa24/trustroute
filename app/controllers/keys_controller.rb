@@ -1,4 +1,6 @@
 class KeysController < ApplicationController
+  before_action :load_current_key, only: [:show, :edit]
+
   def new
   end
 
@@ -16,8 +18,6 @@ class KeysController < ApplicationController
   end
 
   def show
-    @key = Key.find_by(uuid: params[:id])
-
     if @key.nil?
       redirect_to new_key_path, alert: "Key not found"
     end
@@ -26,10 +26,14 @@ class KeysController < ApplicationController
   end
 
   def edit
-    @key = Key.find_by(uuid: params[:id])
-
     if @key.nil? || @key != current_key
       redirect_to root_path, alert: "Key not found"
     end
+  end
+
+  private
+
+  def load_current_key
+    @key = Key.find_by(uuid: params[:id])
   end
 end
