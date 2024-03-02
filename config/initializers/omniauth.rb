@@ -29,4 +29,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     Rails.application.credentials.oauth_providers.twitter2.id,
     Rails.application.credentials.oauth_providers.twitter2.secret,
     scope: "tweet.read users.read offline.access"
+  provider :discord,
+    Rails.application.credentials.oauth_providers.discord.id,
+    Rails.application.credentials.oauth_providers.discord.secret,
+    scope: "identify email"
 end
