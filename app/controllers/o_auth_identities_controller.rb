@@ -10,7 +10,7 @@ class OAuthIdentitiesController < ApplicationController
     identity.token = user_info.credentials.token
 
     if user_info.credentials.expires
-      identity.expires_at = user_info.credentials.expires_at
+      identity.expires_at = Time.at(user_info.credentials.expires_at)
       identity.refresh_token = user_info.credentials.refresh_token
     end
 

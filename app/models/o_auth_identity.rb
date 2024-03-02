@@ -9,7 +9,7 @@ class OAuthIdentity
   enum provider: OmniAuth::Builder.providers
   property :encrypted_token, type: String
   property :encrypted_refresh_token, type: String
-  property :expires_at, type: Integer
+  property :expires_at, type: DateTime
   property :info, type: Hash
 
   property_encryptable :encrypted_token, :encrypted_refresh_token
