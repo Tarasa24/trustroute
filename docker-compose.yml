@@ -22,5 +22,14 @@ services:
     environment:
       - NEO4J_AUTH=neo4j/12345678
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - cluster.name=elasticsearch-rails
+      - cluster.routing.allocation.disk.threshold_enabled=false
+    ports:
+      - 9200:9200
 volumes:
   neo4j-data:
