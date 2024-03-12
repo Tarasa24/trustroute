@@ -7,6 +7,7 @@ class Key
   include Authenticationable
 
   property :fingerprint, type: Integer
+  property :master, type: Boolean, default: false
   property :email, type: String
 
   validates :fingerprint, presence: true, uniqueness: true
@@ -16,9 +17,6 @@ class Key
   has_many :out, :identities, rel_class: :HasIdentityRelationship
 
   after_destroy :remove_from_keyring!
-  after_save -> { KeyRepository.new.save(self) }
-  after_destroy -> { KeyRepository.new.delete(self) }
-  after_update -> { KeyRepository.new.update(self) }
 
   delegate :name, to: :keyring_entry
   delegate :comment, to: :keyring_entry
@@ -62,14 +60,6 @@ class Key
     key.email = keyring_entry.email
 
     key
-  end
-
-  def to_hash
-    {
-      uuid: uuid,
-      fingerprint: fingerprint.to_s(16),
-      email: email
-    }
   end
 
   private
