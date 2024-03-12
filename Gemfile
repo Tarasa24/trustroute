@@ -29,7 +29,7 @@ gem "omniauth-rails_csrf_protection"
 gem "omniauth-github", github: "intridea/omniauth-github"
 gem "omniauth-twitter2"
 gem "omniauth-discord"
-gem "elasticsearch-rails"
+gem "elasticsearch-model"
 gem "elasticsearch-persistence"
 
 group :development, :test do

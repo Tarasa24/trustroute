@@ -129,7 +129,6 @@ GEM
       elasticsearch (~> 7)
       elasticsearch-model (= 7.2.1)
       hashie
-    elasticsearch-rails (7.2.1)
     elasticsearch-transport (7.17.10)
       faraday (>= 1, < 3)
       multi_json
@@ -396,8 +395,8 @@ DEPENDENCIES
   bootsnap
   byebug
   debug
+  elasticsearch-model
   elasticsearch-persistence
-  elasticsearch-rails
   factory_bot_rails
   ffaker
   gpgme
