@@ -21,6 +21,7 @@ class KeySessionsController < ApplicationController
 
   def destroy
     session.delete(:key_uuid)
+    cookies.delete(:key_uuid)
     redirect_to root_path
   end
 

@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   def set_current_key(key)
     session[:key_uuid] = key&.uuid
+    cookies[:key_uuid] = key&.uuid
     @current_key = key
   end
 end

@@ -3,6 +3,6 @@ class GraphController < ApplicationController
   end
 
   def data
-    render json: GraphData.new(Key.all), current_key:
+    render json: GraphData.new(Key.all)
   end
 end
