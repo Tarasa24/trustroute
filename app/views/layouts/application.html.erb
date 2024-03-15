@@ -24,9 +24,16 @@
 
   <body>
     <%= render 'layouts/navbar' %>
+    
+    <div class="graph-container">
+      <main class="graph-container__main">
+        <%= render 'layouts/flash' %>
+        <div id="chart"></div>
+      </main>
 
-    <%= render 'layouts/flash' %>
-
-    <%= yield %>
+      <aside class="graph-container__sidebar">
+        <%= yield %>
+      <aside>
+    </div>
   </body>
 </html>
