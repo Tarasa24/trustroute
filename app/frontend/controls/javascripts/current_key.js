@@ -6,4 +6,9 @@ function getCookie(name) {
   return null;
 }
 
-document.current_key = getCookie("key_uuid");
+function loadCurrentKey() {
+  document.current_key = getCookie("key_uuid");
+}
+
+document.addEventListener('DOMContentLoaded', () => loadCurrentKey());
+document.addEventListener('turbo:visit', () => loadCurrentKey());

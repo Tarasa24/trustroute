@@ -54,13 +54,10 @@ function transformData(data) {
     };
   });
 
-  // Set current_key marking
-  if (document.current_key) {
-    for (const key of data.nodes) {
-      if (key.id != document.current_key) continue;
-      key.is_self = true;
-    }
-  }
+  data.nodes = data.nodes.map((n) => {
+    n.is_self = (n.id == document.current_key);
+    return n;
+  });
 
   return data;
 }
