@@ -1,7 +1,6 @@
 import * as d3 from 'd3';
 import graphCanvas from './graph_canvas.js';
 import fetchGraphData from './graph_data.js';
-import graphInteractions from './graph_interactions.js';
 
 async function renderGraph() {
   const container = document.getElementById('chart');
@@ -23,7 +22,13 @@ function saveGraph() {
 
   const data = JSON.stringify({
     nodes: d3.select(container).selectAll('.node').data(),
-    links: d3.select(container).selectAll('.link').data()
+    links: d3.select(container).selectAll('.link').data().map((l) => (
+      // Strip positional data from links, since it will be calculated dynamically
+      {
+        source: l.source.id,
+        target: l.target.id
+      }
+    ))
   });
 
   localStorage.setItem('graph_data', data);
@@ -36,8 +41,6 @@ function reRenderGraph() {
   // Use the saved graph state from local storage
   const data = JSON.parse(localStorage.getItem('graph_data'));
   if (data === null) return;
-
-  console.log(data);
 
   container.innerHTML = '';
   container.appendChild(graphCanvas(data));
