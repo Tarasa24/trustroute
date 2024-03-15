@@ -1,8 +1,9 @@
 export const WIDTH = 928;
 export const HEIGHT = 600;
-export const ARROW_COLOR = 'lightgray';
-export const LINK_COLOR = 'lightgray';
-export const NODE_COLOR = 'red';
-export const SELF_NODE_COLOR = 'lime';
-export const BACKGROUND_COLOR = '#1b192e';
+export const LINK_COLOR = '#3F3F3F';
+export const ARROW_COLOR = LINK_COLOR;
+export const NODE_COLOR = '#BEC6CF';
+export const SELF_NODE_COLOR = '#28A4D9';
+export const TARGET_NODE_COLOR = '#FF7A00';
+export const BACKGROUND_COLOR = '#1C2127';
 export const TEXT_COLOR = 'white';
