@@ -54,8 +54,12 @@ function transformData(data) {
     };
   });
 
+  // get taerget node id from current url /key/:id
+  const targetNodeId = window.location.pathname.split('/').pop();
+
   data.nodes = data.nodes.map((n) => {
     n.is_self = (n.id == document.current_key);
+    n.is_target = (n.id == targetNodeId);
     return n;
   });
 

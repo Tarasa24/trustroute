@@ -2,7 +2,8 @@ import * as d3 from 'd3';
 import graphInteractions from './graph_interactions';
 import {
   WIDTH, HEIGHT, BACKGROUND_COLOR, LINK_COLOR,
-  NODE_COLOR, SELF_NODE_COLOR, TEXT_COLOR, ARROW_COLOR
+  NODE_COLOR, SELF_NODE_COLOR, TEXT_COLOR, ARROW_COLOR,
+  TARGET_NODE_COLOR
 } from './graph_constants';
 
 function createSVG() {
@@ -30,9 +31,15 @@ function appendNodes(svg, nodes) {
     .data(nodes)
     .join("g");
 
+  const fillColor = (d) => {
+    if (d.is_self) return SELF_NODE_COLOR;
+    if (d.is_target) return TARGET_NODE_COLOR;
+    return NODE_COLOR;
+  };
+
   node.append("circle")
     .attr("r", 8)
-    .attr("fill", d => d.is_self ? SELF_NODE_COLOR : NODE_COLOR)
+    .attr("fill", fillColor)
     .attr("cursor", "pointer");
 
   node.append("text")
