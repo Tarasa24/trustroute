@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
+require "elasticsearch/model"
+
 # Key model
 class Key
   include ActiveGraph::Node
   include ActiveGraph::Timestamps
   include Authenticationable
+  include Elasticsearch::Model
 
   property :fingerprint, type: Integer
   property :master, type: Boolean, default: false
@@ -39,6 +42,24 @@ class Key
 
     build_from_keyring_entry(keyserver.new.search_by_query(query)).save!
   end
+
+  # region Elasticsearch
+  def as_indexed_json(_options = {})
+    {
+      "fingerprint" => fingerprint.to_s(16),
+      "sha" => sha,
+      "email" => email
+    }
+  end
+
+  settings index: {number_of_shards: 1} do
+    mappings dynamic: "false" do
+      indexes :fingerprint, type: :keyword
+      indexes :sha, type: :keyword
+      indexes :email, type: :text
+    end
+  end
+  # endregion Elasticsearch
 
   def self.create_from_file!(file)
     # File contains the ascii armored public key
