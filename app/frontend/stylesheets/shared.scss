@@ -1,15 +1,14 @@
-// create function that return same values as .dot but with size passed as argument
 @mixin dot($size) {
   width: $size;
   height: $size ;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 5px;
 }
 
 .dot {
   @include dot(25px);
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
 }
 
 .dot--large {
@@ -18,4 +17,13 @@
 
 .dot--small {
   @include dot(10px);
+}
+
+@mixin line($color, $width) {
+  border-left: $width solid $color;
+  margin-left: calc($width / -2);
+}
+
+.line {
+  @include line(#bbb, 2px);
 }

@@ -32,3 +32,37 @@
     height: 100%;
   }
 }
+
+.legend {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  li {
+    list-style: none;
+
+    >* {
+      text-decoration: none;
+      color: white;
+      display: flex;
+    }
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  .dot--current {
+    background-color: $SELF_NODE_COLOR;
+  }
+
+  .dot--selected {
+    background-color: $TARGET_NODE_COLOR;
+  }
+
+  .line--path {
+    @include line($PATH_COLOR, 1px);
+    margin-right: 17px;
+    margin-left: 12px;
+  }
+}
