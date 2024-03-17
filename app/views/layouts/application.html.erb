@@ -22,18 +22,14 @@
 
   </head>
 
-  <body>
-    <%= render 'layouts/navbar' %>
-    
-    <div class="graph-container">
-      <main class="graph-container__main">
-        <%= render 'layouts/flash' %>
-        <div id="chart"></div>
-      </main>
+  <body class="application-layout">
+    <div class="application-layout__header">
+      <%= render 'layouts/navbar' %>
+      <%= render 'layouts/flash' %>
+    </div>
 
-      <aside class="graph-container__sidebar">
-        <%= yield %>
-      <aside>
+    <div class="application-layout__content">
+      <%= yield %>
     </div>
   </body>
 </html>
