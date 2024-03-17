@@ -1,22 +1,23 @@
-- if @key == current_key
-  = button_to "Edit Key", edit_key_path(@key), method: :get
+= render layout: 'shared/graph_template' do
+  - if @key == current_key
+    = button_to "Edit Key", edit_key_path(@key), method: :get
 
-p = "#{@key.fingerprint.to_s(16).upcase.scan(/.{4}/).join(' ')} - #{@key.sha}"
+  p = "#{@key.fingerprint.to_s(16).upcase.scan(/.{4}/).join(' ')} - #{@key.sha}"
 
-p = @key.email
+  p = @key.email
 
-- keyring_entry = @key.keyring_entry
-p Subkeys:
-ol
-- keyring_entry.subkeys.each do |subkey|
-  li = subkey
+  - keyring_entry = @key.keyring_entry
+  p Subkeys:
+  ol
+  - keyring_entry.subkeys.each do |subkey|
+    li = subkey
 
-p User IDs:
-ol
-- keyring_entry.uids.each do |uid|
-  li = uid
+  p User IDs:
+  ol
+  - keyring_entry.uids.each do |uid|
+    li = uid
 
-p Identities:
-ol
-- @identities.each do |identity|
-  li = identity
+  p Identities:
+  ol
+  - @identities.each do |identity|
+    li = identity

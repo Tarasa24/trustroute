@@ -1,20 +1,30 @@
-.graph-container {
+.graph-template {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
 
-  .graph-container__main {
+  .graph-template__main {
     height: 100%;
     background-color: $BACKGROUND_COLOR;
     flex: 3;
   }
 
-  .graph-container__sidebar {
+  .graph-template__sidebar {
     height: 100%;
     background-color: $ACCENT_BACKGROUND_COLOR;
     color: white;
     flex: 1;
+  }
+}
+
+#chart {
+  width: 100%;
+  height: 100%;
+
+  svg {
+    width: 100%;
+    height: 100%;
   }
 }

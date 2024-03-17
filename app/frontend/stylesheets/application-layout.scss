@@ -1,0 +1,11 @@
+.application-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .application-layout__header {}
+
+  .application-layout__content {
+    flex-grow: 1;
+  }
+}
