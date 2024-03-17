@@ -1,7 +1,7 @@
 nav {
   width: 100%;
   height: $NAVBAR_HEIGHT;
-  padding: 0 1rem;
+  padding: 10px;
 
   ul {
     margin: 0;
@@ -15,6 +15,16 @@ nav {
 
   li {
     list-style: none;
+    display: flex;
+    align-items: center;
+
+    &:first-child {
+      a {
+        line-height: 0;
+        font-size: 0;
+        color: transparent;
+      }
+    }
   }
 
   a {
