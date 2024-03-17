@@ -8,9 +8,8 @@ import {
 
 function createSVG() {
   return d3.create('svg')
-    .attr('width', WIDTH)
-    .attr('height', HEIGHT)
-    .style('background-color', BACKGROUND_COLOR);
+    .style('background-color', BACKGROUND_COLOR)
+    .attr('viewBox', [0, 0, WIDTH, HEIGHT]);
 }
 
 function appendLinks(svg, links) {
