@@ -15,9 +15,6 @@ for (let line of colors.split("\n")) {
   }
 }
 
-export const WIDTH = 928;
-export const HEIGHT = 600;
-
 export const LINK_COLOR = colorsObj['$LINK_COLOR'];
 export const ARROW_COLOR = colorsObj['$ARROW_COLOR'];
 export const NODE_COLOR = colorsObj['$NODE_COLOR'];

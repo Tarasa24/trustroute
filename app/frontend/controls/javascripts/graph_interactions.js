@@ -1,5 +1,12 @@
 import * as d3 from 'd3';
-import { WIDTH, HEIGHT } from './graph_constants';
+
+function width(svg) {
+  return svg.node().getBoundingClientRect().width;
+}
+
+function height(svg) {
+  return svg.node().getBoundingClientRect().height;
+}
 
 export default function graphInteractions(svg) {
   svg.selectAll(".node")
@@ -21,6 +28,9 @@ function createSimulation(svg) {
     .force("y", d3.forceY());
 
   simulation.on("tick", () => {
+    const WIDTH = width(svg);
+    const HEIGHT = height(svg);
+
     svgLinks.attr("d", d => linkArc(d, WIDTH / 2, HEIGHT / 2));
     svgNodes.attr("transform", d => `translate(${d.x + WIDTH / 2},${d.y + HEIGHT / 2})`);
   });

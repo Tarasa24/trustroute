@@ -1,15 +1,14 @@
 import * as d3 from 'd3';
 import graphInteractions from './graph_interactions';
 import {
-  WIDTH, HEIGHT, BACKGROUND_COLOR, LINK_COLOR,
+  BACKGROUND_COLOR, LINK_COLOR,
   NODE_COLOR, SELF_NODE_COLOR, TEXT_COLOR, ARROW_COLOR,
   TARGET_NODE_COLOR
 } from './graph_constants';
 
 function createSVG() {
   return d3.create('svg')
-    .style('background-color', BACKGROUND_COLOR)
-    .attr('viewBox', [0, 0, WIDTH, HEIGHT]);
+    .style('background-color', BACKGROUND_COLOR);
 }
 
 function appendLinks(svg, links) {
