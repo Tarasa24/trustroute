@@ -2,13 +2,9 @@ nav
   ul
     li
       = link_to "Home", root_path
-    - unless current_key
-      li
-        = link_to "Sign up", new_key_path
-      li
-        = link_to "Log in", new_key_session_path
-    - else
+    - if current_key
       li
         = link_to "Log out", key_sessions_path, data: { "turbo-method": :delete }
+    - else
       li
-        = link_to "Profile", key_path(current_key)
+        = link_to "Log in", new_key_session_path

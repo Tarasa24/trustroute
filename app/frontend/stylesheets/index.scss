@@ -17,9 +17,11 @@ body {
   line-height: 1.5;
   padding: 0;
   margin: 0;
+
+  background-color: $BACKGROUND_COLOR;
+  color: $TEXT_COLOR;
 }
 
 @import "application-layout.scss";
+@import "navbar.scss";
 @import "graph.scss";
-
-// do the basid styles like bounding box etc
