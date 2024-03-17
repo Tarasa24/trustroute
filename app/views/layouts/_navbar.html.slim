@@ -1,7 +1,7 @@
 nav
   ul
     li
-      = link_to "Home", root_path
+      a.dot--large href=root_path
     - if current_key
       li
         = link_to "Log out", key_sessions_path, data: { "turbo-method": :delete }

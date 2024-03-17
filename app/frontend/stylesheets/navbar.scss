@@ -1,6 +1,7 @@
 nav {
-  position: fixed;
   width: 100%;
+  height: $NAVBAR_HEIGHT;
+  padding: 0 1rem;
 
   ul {
     margin: 0;
@@ -14,5 +15,10 @@ nav {
 
   li {
     list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: $TEXT_COLOR;
   }
 }

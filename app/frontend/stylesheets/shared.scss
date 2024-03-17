@@ -1,0 +1,21 @@
+// create function that return same values as .dot but with size passed as argument
+@mixin dot($size) {
+  width: $size;
+  height: $size ;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.dot {
+  @include dot(25px);
+}
+
+.dot--large {
+  @include dot(40px);
+}
+
+.dot--small {
+  @include dot(10px);
+}
