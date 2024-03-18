@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :keys, only: [:new, :create, :show, :edit, :update]
+  resources :keys, only: [:new, :create, :show, :edit, :update] do
+    member do
+      get :dump
+    end
+  end
 
   resources :key_sessions, only: [:new, :create] do
     collection do

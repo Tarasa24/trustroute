@@ -12,7 +12,7 @@
 
   hr
 
-  p = @key.sha
+  = link_to @key.sha, dump_key_path(@key)
 
   ul
     li = @key.email

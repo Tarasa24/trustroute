@@ -10,7 +10,7 @@ class PGPDumpService
   end
 
   def call
-    IO.popen("pgpdump -i", "r+") do |pipe|
+    IO.popen("pgpdump", "r+") do |pipe|
       pipe.write(@key_string)
       pipe.close_write
       pipe.read
