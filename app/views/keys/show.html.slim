@@ -1,23 +1,23 @@
 = render layout: 'shared/graph_template' do
-  - if @key == current_key
-    = button_to "Edit Key", edit_key_path(@key), method: :get
+  .card
+    .dot.dot--profile
+    .card__content
+      h1 = @key.name
+      - if @key.aliases.any?
+        span
+          .card__aka aka.
+          ul
+            - @key.aliases.each do |uid|
+              li = uid.name
 
-  p = "#{@key.fingerprint.to_s(16).upcase.scan(/.{4}/).join(' ')} - #{@key.sha}"
+  hr
 
-  p = @key.email
+  p = @key.sha
 
-  - keyring_entry = @key.keyring_entry
-  p Subkeys:
-  ol
-  - keyring_entry.subkeys.each do |subkey|
-    li = subkey
+  ul
+    li = @key.email
+    - @key.aliases.each do |uid|
+      li = uid.email
 
-  p User IDs:
-  ol
-  - keyring_entry.uids.each do |uid|
-    li = uid
-
-  p Identities:
-  ol
-  - @identities.each do |identity|
-    li = identity
+  - @key.identities.each do |identity|
+    li = render 'identity', identity:
