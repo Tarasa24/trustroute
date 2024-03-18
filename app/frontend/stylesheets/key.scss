@@ -1,6 +1,74 @@
 $TERMINAL_HEIGHT: 35px;
 $KEY_DUMP_PADDING: 20px;
 
+.profile {
+  padding: 2em;
+
+  .profile__card {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .dot--profile {
+    @include dot(60px);
+    background-color: $TARGET_NODE_COLOR;
+  }
+
+  .profile__card__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+      margin: 0;
+    }
+  }
+
+  .profile__fingerprint {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+
+    a {
+      text-decoration: none;
+      font-weight: bold;
+      color: $TEXT_COLOR;
+
+      sup {
+        margin-left: 5px;
+        font-size: 0.5em;
+      }
+    }
+  }
+
+  .profile__emails {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .profile__identities {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .profile__identities__item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5em;
+    }
+  }
+}
+
 .key_dump {
   display: flex;
   flex-direction: column;
