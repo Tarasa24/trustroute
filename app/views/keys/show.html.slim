@@ -1,32 +1,37 @@
 = render layout: 'shared/graph_template' do
   .profile
-    .profile__card
-      .dot.dot--profile
-      .profile__card__content
-        h1 = @key.name
-        - if @key.aliases.any?
-          span
-            .card__aka aka.
-            ul.profile__aliases
-              - @key.aliases.each do |uid|
-                li = uid.name
-    hr
-    .profile__fingerprint
-      .fa-solid.fa-fingerprint
-      a href=dump_key_path(@key)
-        = @key.sha.upcase.insert(4, ' ')
-        sup.fa-solid.fa-arrow-up-right-from-square
+    .profile__info
+      .profile__card
+        .dot.dot--profile
+        .profile__card__content
+          h1 = @key.name
+          - if @key.aliases.any?
+            span
+              .card__aka aka.
+              ul.profile__aliases
+                - @key.aliases.each do |uid|
+                  li = uid.name
+      hr
+      .profile__fingerprint
+        .fa-solid.fa-fingerprint
+        a href=dump_key_path(@key)
+          = @key.sha.upcase.insert(4, ' ')
+          sup.fa-solid.fa-arrow-up-right-from-square
 
-    .profile__emails
-      .fa-solid.fa-envelope
-      ul
-        li = @key.email
-        - @key.aliases.each do |uid|
-          li = uid.email
+      .profile__emails
+        .fa-solid.fa-envelope
+        ul
+          li = @key.email
+          - @key.aliases.each do |uid|
+            li = uid.email
 
-    ruby:
-      non_email_identities = @key.identities.to_a.reject {|i| i.is_a? EmailIdentity }
-  
-    ul.profile__identities
-      - non_email_identities.each do |identity|
-        li = render 'identity', identity:
+      ruby:
+        non_email_identities = @key.identities.to_a.reject {|i| i.is_a? EmailIdentity }
+      ul.profile__identities
+        - non_email_identities.each do |identity|
+          li = render 'identity', identity:
+    .profile__management
+      - if current_key && @key != current_key
+        .button
+          .fa-solid.fa-handshake
+          a href="#" Vouch for this key 
