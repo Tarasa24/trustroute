@@ -23,7 +23,10 @@
         li = @key.email
         - @key.aliases.each do |uid|
           li = uid.email
-    
+
+    ruby:
+      non_email_identities = @key.identities.to_a.reject {|i| i.is_a? EmailIdentity }
+  
     ul.profile__identities
-      - @key.identities.each do |identity|
+      - non_email_identities.each do |identity|
         li = render 'identity', identity:
