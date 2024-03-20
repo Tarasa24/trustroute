@@ -18,10 +18,8 @@ ruby:
 
     .signature-challenge__curl
       pre
-        = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} | /\n"
-        = "  curl -X POST -d @- #{signature_challenge_path} -H 'Content-Type: text/plain'"
+        = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} | curl -X POST -d @- \"#{signature_challenge_path}\" -H 'Content-Type: text/plain'"
 
     .signature-challenge__wget
       pre
-        = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} | /\n"
-        = "  wget --post-file=- --header='Content-Type: text/plain' #{signature_challenge_path} -O -"
+        = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} | wget --post-file=- --header='Content-Type: text/plain' \"#{signature_challenge_path}\" -O -"
