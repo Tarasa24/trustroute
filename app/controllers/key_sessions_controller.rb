@@ -24,11 +24,14 @@ class KeySessionsController < ApplicationController
         redirect_to new_key_session_path, notice: "Something went wrong. Please try again."
       end
     end
-
-    # set_current_key(@key)
   end
 
   def signature_challenge
+    # Verify the signature using a service
+    # Then depending on the content type, either redirect to the root path
+    #   or make the client redirect to the root path via action cable
+
+    # set_current_key(@key)
   end
 
   def destroy
