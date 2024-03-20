@@ -19,6 +19,7 @@ gem "vite_rails", "~> 3.0"
 # View Extensions
 gem "jbuilder"
 gem "slim-rails", "~> 3.6"
+gem "turbo-rails"
 
 # Eco system
 gem "bootsnap", require: false
@@ -47,3 +48,6 @@ group :development do
   gem "web-console"
   gem "ruby-lsp-rails"
 end
+
+# Use Redis for Action Cable
+gem "redis", "~> 4.0"
