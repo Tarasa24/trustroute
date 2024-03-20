@@ -10,14 +10,14 @@ export default async function fetchGraphData() {
   if (data === null) return null;
   if (!validateData(data)) return null;
 
-  return transformData(data);
+  return await transformData(data);
 }
 
-export function fetchLocalGraphData() {
+export async function fetchLocalGraphData() {
   const data = JSON.parse(localStorage.getItem('graph_data'));
   if (!validateData(data)) return null;
 
-  return transformData(data);
+  return await transformData(data);
 }
 
 export function saveLocalGraphData(container) {
@@ -29,7 +29,7 @@ export function saveLocalGraphData(container) {
   localStorage.setItem('graph_data', data);
 }
 
-export async function fetchPathData(from_id, to_id) {
+async function fetchPathData(from_id, to_id) {
   const res = await fetch(`/graph/path/${from_id}/${to_id}`)
     .catch(handleError);
   if (res === null) return null;
@@ -53,7 +53,7 @@ function validateData(data) {
   return true;
 }
 
-function transformData(data) {
+async function transformData(data) {
   data.links = data.links.map((l) => {
     if (typeof l.source === 'string' && typeof l.target === 'string') return l;
 
@@ -61,17 +61,39 @@ function transformData(data) {
     //  happens when you load from local storage
     return {
       source: l.source.id,
-      target: l.target.id
+      target: l.target.id,
+      active: l.active
     };
   });
 
-  // get taerget node id from current url /key/:id
+  // get target node id from current url /key/:id
   const targetNodeId = window.location.pathname.split('/').pop();
   data.nodes = data.nodes.map((n) => {
     n.is_self = (n.id == document.current_key);
     n.is_target = (n.id == targetNodeId);
     return n;
   });
+
+  // Display the path from the current key to the target key
+  if (window.location.pathname.match(/\/keys\/[a-f0-9-]+/)) {
+    const path = window.location.pathname.split('/');
+    const from_id = document.current_key;
+    const to_id = path.pop();
+    const pathData = await fetchPathData(from_id, to_id);
+    if (pathData === null) return;
+
+    data.links = data.links.map((l) => {
+      l.active = false;
+
+      pathData.forEach((segment) => {
+        if (l.source == segment.from && l.target == segment.to) {
+          l.active = true;
+        }
+      });
+
+      return l;
+    });
+  }
 
   return data;
 }

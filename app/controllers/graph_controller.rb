@@ -16,10 +16,12 @@ class GraphController < ApplicationController
     CYPHER
 
     result = ActiveGraph::Base.query(query, from: params[:from], to: params[:to]).to_a.first
+    return render json: [] if result.nil?
+
     shortest_path = result["path"].map do |segment|
       {
-        source: segment.start_node[:uuid],
-        target: segment.end_node[:uuid]
+        from: segment.start_node[:uuid],
+        to: segment.end_node[:uuid]
       }
     end
 
