@@ -3,7 +3,7 @@ import graphInteractions from './graph_interactions';
 import {
   BACKGROUND_COLOR, LINK_COLOR,
   NODE_COLOR, SELF_NODE_COLOR, TEXT_COLOR, ARROW_COLOR,
-  TARGET_NODE_COLOR
+  TARGET_NODE_COLOR, PATH_COLOR
 } from './graph_constants';
 
 function createSVG() {
@@ -12,14 +12,23 @@ function createSVG() {
 }
 
 function appendLinks(svg, links) {
+  const fillColor = (d) => {
+    if (d.active) return PATH_COLOR;
+    return LINK_COLOR;
+  };
+  const marker = (d) => {
+    if (d.active) return "url(#arrowhead-active)";
+    return "url(#arrowhead)";
+  };
+
   return svg.append("g")
     .attr("fill", "none")
-    .attr("stroke", LINK_COLOR)
     .attr("stroke-width", 1.5)
     .selectAll("path")
     .data(links)
     .join("path")
-    .attr("marker-end", "url(#arrowhead)")
+    .attr("stroke", fillColor)
+    .attr("marker-end", marker)
     .attr("class", "link");
 }
 
@@ -51,14 +60,9 @@ function appendNodes(svg, nodes) {
   return node;
 }
 
-export default function graphCanvas(data) {
-  const nodes = data.nodes;
-  const links = data.links;
-
-  const svg = createSVG();
-
+function arrowheadNode(svg, color, id) {
   svg.append('defs').append('marker')
-    .attr("id", "arrowhead")
+    .attr("id", id)
     .attr("viewBox", "-6 -6 12 12")
     .attr("refX", 12)
     .attr("refY", -3)
@@ -66,9 +70,23 @@ export default function graphCanvas(data) {
     .attr("markerHeight", 6)
     .attr("orient", "auto")
     .append("svg:path")
-    .attr("fill", ARROW_COLOR)
+    .attr("fill", color)
     .attr("d", "M-6,-6L6,0L-6,6Z");
 
+}
+
+function appendArrowheads(svg) {
+  arrowheadNode(svg, ARROW_COLOR, "arrowhead");
+  arrowheadNode(svg, PATH_COLOR, "arrowhead-active");
+}
+
+export default function graphCanvas(data) {
+  const nodes = data.nodes;
+  const links = data.links;
+
+  const svg = createSVG();
+
+  appendArrowheads(svg);
   appendLinks(svg, links);
   appendNodes(svg, nodes);
   graphInteractions(svg);

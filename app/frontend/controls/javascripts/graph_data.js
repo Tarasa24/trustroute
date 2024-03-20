@@ -29,6 +29,17 @@ export function saveLocalGraphData(container) {
   localStorage.setItem('graph_data', data);
 }
 
+export async function fetchPathData(from_id, to_id) {
+  const res = await fetch(`/graph/path/${from_id}/${to_id}`)
+    .catch(handleError);
+  if (res === null) return null;
+
+  const data = res.json()
+    .catch(handleError);
+
+  return data;
+}
+
 function handleError(e) {
   console.log("Error: ", e);
 
@@ -56,7 +67,6 @@ function transformData(data) {
 
   // get taerget node id from current url /key/:id
   const targetNodeId = window.location.pathname.split('/').pop();
-
   data.nodes = data.nodes.map((n) => {
     n.is_self = (n.id == document.current_key);
     n.is_target = (n.id == targetNodeId);

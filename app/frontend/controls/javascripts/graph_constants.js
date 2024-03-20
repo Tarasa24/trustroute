@@ -22,3 +22,4 @@ export const SELF_NODE_COLOR = colorsObj['$SELF_NODE_COLOR'];
 export const TARGET_NODE_COLOR = colorsObj['$TARGET_NODE_COLOR'];
 export const BACKGROUND_COLOR = colorsObj['$BACKGROUND_COLOR'];
 export const TEXT_COLOR = 'white';
+export const PATH_COLOR = colorsObj['$PATH_COLOR'];
