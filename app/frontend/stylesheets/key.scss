@@ -103,6 +103,11 @@ $KEY_DUMP_PADDING: 20px;
           color: gray;
         }
       }
+
+      .profile__identity--add {
+        justify-content: center;
+        background-color: $ACCENT_BACKGROUND_COLOR;
+      }
     }
   }
 

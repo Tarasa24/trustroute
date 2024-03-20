@@ -30,6 +30,11 @@
       ul.profile__identities
         - non_email_identities.each do |identity|
           li = render 'identity', identity:
+        - if current_key && @key == current_key
+          li
+            a.profile__identity.profile__identity--add href="#"
+              .profile__identity__icon
+                .fa-solid.fa-plus
     .profile__management
       - if current_key && @key != current_key
         .button
