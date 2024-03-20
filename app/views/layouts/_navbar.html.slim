@@ -5,6 +5,6 @@ nav
     - if current_key
       li
         = link_to "Log out", key_sessions_path, data: { "turbo-method": :delete }
-    - else
+    - elsif !current_page?(new_key_session_path)
       li
         = link_to "Log in", new_key_session_path
