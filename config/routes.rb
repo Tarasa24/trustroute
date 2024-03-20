@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       delete :destroy
       post :set_development_key, if: -> { Rails.env.development? }
     end
+    member do
+      post :signature_challenge
+    end
   end
 
   root "graph#index"

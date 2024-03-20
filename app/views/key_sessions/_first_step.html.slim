@@ -1,0 +1,13 @@
+.login
+  = turbo_frame_tag :login do
+    h1 Sign in
+
+    = form_with url: key_sessions_path, class: 'login__form', turbo: true do |f|
+      = f.text_field :identifier, autofocus: true, required: true, placeholder: 'Identifier'
+
+      = f.button :submit, class: 'login__form__submit' do
+          .fa-solid.fa-arrow-right
+
+  - if Rails.env.development?
+    =  link_to "Login as #{Key.first.sha}", set_development_key_key_sessions_path,
+        method: :post, data: { 'turbo-method': 'post' }
