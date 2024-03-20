@@ -61,8 +61,7 @@ async function transformData(data) {
     //  happens when you load from local storage
     return {
       source: l.source.id,
-      target: l.target.id,
-      active: l.active
+      target: l.target.id
     };
   });
 
