@@ -1,0 +1,68 @@
+.graph-template {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100vw;
+  max-width: 100%;
+
+  .graph-template__main {
+    flex: 3;
+    height: 100%;
+    background-color: $BACKGROUND_COLOR;
+  }
+
+  .graph-template__sidebar {
+    flex: 1;
+    height: calc(100% + $NAVBAR_HEIGHT);
+    background-color: $ACCENT_BACKGROUND_COLOR;
+    color: white;
+
+    position: relative;
+    top: calc($NAVBAR_HEIGHT / -2);
+  }
+}
+
+#chart {
+  width: 100%;
+  height: 100%;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.legend {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  li {
+    list-style: none;
+
+    >* {
+      text-decoration: none;
+      color: white;
+      display: flex;
+    }
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  .dot--current {
+    background-color: $SELF_NODE_COLOR;
+  }
+
+  .dot--selected {
+    background-color: $TARGET_NODE_COLOR;
+  }
+
+  .line--path {
+    @include line($PATH_COLOR, 1px);
+    margin-right: 17px;
+    margin-left: 12px;
+  }
+}

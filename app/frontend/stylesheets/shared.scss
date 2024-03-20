@@ -1,0 +1,46 @@
+@mixin dot($size) {
+  width: $size;
+  height: $size ;
+}
+
+.dot {
+  @include dot(25px);
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.dot--large {
+  @include dot(40px);
+}
+
+.dot--small {
+  @include dot(10px);
+}
+
+@mixin line($color, $width) {
+  border-left: $width solid $color;
+  margin-left: calc($width / -2);
+}
+
+.line {
+  @include line(#bbb, 2px);
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 10px 20px;
+  border: 1px solid $BORDER_COLOR;
+  border-radius: 5px;
+  background-color: $BACKGROUND_COLOR;
+
+  a {
+    color: $TEXT_COLOR;
+    text-decoration: none;
+  }
+}

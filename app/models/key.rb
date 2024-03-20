@@ -61,6 +61,10 @@ class Key
   end
   # endregion Elasticsearch
 
+  def aliases
+    keyring_entry&.uids&.slice(1..-1)
+  end
+
   def self.create_from_file!(file)
     # File contains the ascii armored public key
     imported = GPGME::Key.import(file.read).imports.first

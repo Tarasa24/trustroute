@@ -22,11 +22,14 @@
 
   </head>
 
-  <body>
-    <%= render 'layouts/navbar' %>
+  <body class="application-layout">
+    <div class="application-layout__header">
+      <%= render 'layouts/navbar' %>
+      <%= render 'layouts/flash' %>
+    </div>
 
-    <%= render 'layouts/flash' %>
-
-    <%= yield %>
+    <div class="application-layout__content">
+      <%= yield %>
+    </div>
   </body>
 </html>

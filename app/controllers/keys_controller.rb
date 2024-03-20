@@ -1,5 +1,5 @@
 class KeysController < ApplicationController
-  before_action :load_current_key, only: [:show, :edit]
+  before_action :load_current_key, only: [:show, :edit, :dump]
 
   def new
   end
@@ -18,11 +18,6 @@ class KeysController < ApplicationController
   end
 
   def show
-    if @key.nil?
-      redirect_to new_key_path, alert: "Key not found"
-    end
-
-    @identities = @key.identities.where(validated: true)
   end
 
   def edit
@@ -31,9 +26,18 @@ class KeysController < ApplicationController
     end
   end
 
+  def dump
+    @filename = "#{@key.sha}.asc"
+    @formatted_string = PGPDumpService.new(@key.keyring_entry).call
+  end
+
   private
 
   def load_current_key
     @key = Key.find_by(uuid: params[:id])
+
+    if @key.nil?
+      redirect_to root_path, alert: "Key not found"
+    end
   end
 end
