@@ -5,21 +5,22 @@ ruby:
   = turbo_frame_tag :login, class: 'login' do
     h1 Signature challenge
 
-    select
-      option value="plain" selected=true
-        | plain
-      option value="curl"
-        | curl
-      option value="wget"
-        | wget
+    .signature-challenge
+      select#signature-challenge-format-selector
+        option value="plain" selected=true
+          | plain
+        option value="curl"
+          | curl
+        option value="wget"
+          | wget
 
-    .signature-challenge__plain
-      pre = nonce
+      .signature-challenge__option.signature-challenge__option--plain
+        pre = nonce
 
-    .signature-challenge__curl
-      pre
-        = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} | curl -X POST -d @- \"#{signature_challenge_path}\" -H 'Content-Type: text/plain'"
+      .signature-challenge__option.signature-challenge__option--curl
+        pre
+          = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} | curl -X POST -d @- \"#{signature_challenge_path}\" -H 'Content-Type: text/plain'"
 
-    .signature-challenge__wget
-      pre
-        = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} | wget --post-file=- --header='Content-Type: text/plain' \"#{signature_challenge_path}\" -O -"
+      .signature-challenge__option.signature-challenge__option--wget
+        pre
+          = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} | wget --post-file=- --header='Content-Type: text/plain' \"#{signature_challenge_path}\" -O -"
