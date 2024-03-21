@@ -1,4 +1,4 @@
-import colors from '../../stylesheets/variables.scss?raw';
+import colors from '../../../stylesheets/variables.scss?raw';
 
 const colorsObj = {};
 for (let line of colors.split("\n")) {
