@@ -42,11 +42,77 @@
     }
   }
 
-  .signature-challenge__option {
-    display: none;
-  }
+  .signature-challenge {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto;
+    gap: 10px;
 
-  .signature-challenge__option--plain {
-    display: block;
+    select {
+      border: 1px solid $LINK_COLOR;
+      border-radius: 5px;
+      padding: 10px;
+      background-color: $ACCENT_BACKGROUND_COLOR;
+      font-size: 2rem;
+      color: $TEXT_COLOR;
+      margin: 0 auto;
+    }
+
+    .signature-challenge__form {
+      margin-top: 4rem;
+
+      label {
+        cursor: pointer;
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .signature-challenge__upload-icon {
+        width: 100px;
+        height: 100px;
+        border: 1px solid $LINK_COLOR;
+        border-radius: 100%;
+        background-color: $BUTTON_COLOR;
+        margin: 0 auto;
+
+        font-size: 3rem;
+        color: $TEXT_COLOR;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .signature-challenge__option {
+      display: none;
+      font-size: 2rem;
+
+      .signature-challenge__nonce {
+        font-family: monospace;
+
+        background-color: $ACCENT_BACKGROUND_COLOR;
+        color: $TEXT_COLOR;
+
+        padding: 5px;
+        border: 1px solid $LINK_COLOR;
+        border-radius: 5px;
+
+        white-space: break-spaces;
+      }
+    }
+
+    .signature-challenge__option--plain {
+      display: block;
+      text-align: center;
+    }
+
+    .signature-challenge__option--curl,
+    .signature-challenge__option--wget {
+      font-size: 1rem;
+    }
   }
 }

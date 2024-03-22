@@ -15,12 +15,22 @@ ruby:
           | wget
 
       .signature-challenge__option.signature-challenge__option--plain
-        pre = nonce
+        p.signature-challenge__nonce = nonce
+
+        = form_with url: signature_challenge_key_session_path(key), method: :post, class: 'signature-challenge__form' do
+          = label_tag :signature, '' do
+            .fa-solid.fa-upload.signature-challenge__upload-icon
+            span Sign and upload the signature
+          = file_field_tag :signature, accept: 'text/plain', required: true
 
       .signature-challenge__option.signature-challenge__option--curl
-        pre
-          = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} | curl -X POST -d @- \"#{signature_challenge_path}\" -H 'Content-Type: text/plain'"
+        p.signature-challenge__nonce
+          = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} \\"
+          br
+          = "  | curl -X POST -d @- \"#{signature_challenge_path}\" -H 'Content-Type: text/plain'"
 
       .signature-challenge__option.signature-challenge__option--wget
-        pre
-          = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} | wget --post-file=- --header='Content-Type: text/plain' \"#{signature_challenge_path}\" -O -"
+        p.signature-challenge__nonce
+          = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} \\"
+          br
+          = "  | wget --post-file=- --header='Content-Type: text/plain' \"#{signature_challenge_path}\" -O -"
