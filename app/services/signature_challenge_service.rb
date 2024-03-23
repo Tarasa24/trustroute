@@ -18,7 +18,7 @@ class SignatureChallengeService < ApplicationService
 
     true
   rescue GPGME::Error
-    false
+    error(:invalid_signature, "")
   end
 
   def full_signature_check
@@ -31,6 +31,6 @@ class SignatureChallengeService < ApplicationService
 
     true
   rescue GPGME::Error
-    false
+    error(:invalid_signature, "")
   end
 end
