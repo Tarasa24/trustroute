@@ -1,7 +1,14 @@
+ruby:
+  keyservers = Keyservers.constants
+    .map(&Keyservers.method(:const_get))
+    .select { |constant| constant.is_a? Class }
+    .delete_if { |klass| klass == Keyservers::KeyserverBase }
+    .freeze
+
 = form_with url: keys_path do |f|
   - # Dropdown to select keyserver
   = f.label :keyserver
-  = f.select :keyserver, KEYSERVERS, required: true
+  = f.select :keyserver, keyservers, required: true
 
   = f.label :identifier
   = f.text_field :identifier, autofocus: true, required: true, placeholder: 'Public key hex (0x) or email address'

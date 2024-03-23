@@ -1,4 +1,4 @@
-module Keyserver
+module Keyservers
   # Query mechanism for keys.openpgp.org
   # Implementation is done through http api, since this keyserver doesnt play well with gpgme
   # See https://keys.openpgp.org/about/api for more information

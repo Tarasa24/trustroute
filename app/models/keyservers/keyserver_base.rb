@@ -1,4 +1,4 @@
-module Keyserver
+module Keyservers
   # Interface for keyserver implementations
   # All keyserver implementations should inherit from this class
   # and implement the following methods
