@@ -24,7 +24,7 @@ ruby:
           = label_tag :signature, '' do
             .fa-solid.fa-upload.signature-challenge__upload-icon
             span Sign and upload the signature
-          = file_field_tag :signature, accept: 'text/plain', required: true
+          = file_field_tag :signature, accept: 'application/pgp-keys', required: true
 
       .signature-challenge__option.signature-challenge__option--curl
         p.signature-challenge__nonce

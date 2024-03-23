@@ -3,7 +3,8 @@
     h1 Sign in
 
     = form_with url: key_sessions_path, class: 'login__form', turbo: true do |f|
-      = f.text_field :identifier, autofocus: true, required: true, placeholder: 'Identifier'
+      = f.text_field :identifier, autofocus: true, required: true, placeholder: 'Identifier',
+          value: params[:identifier]
 
       = f.button :submit, class: 'login__form__submit' do
         .fa-solid.fa-arrow-right

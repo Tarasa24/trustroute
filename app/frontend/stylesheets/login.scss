@@ -79,15 +79,10 @@
       }
 
       .signature-challenge__upload-icon {
-        width: 100px;
-        height: 100px;
-        border: 1px solid $LINK_COLOR;
-        border-radius: 100%;
-        background-color: $BUTTON_COLOR;
-        margin: 0 auto;
+        @include icon-button(100px);
 
+        margin: 0 auto;
         font-size: 3rem;
-        color: $TEXT_COLOR;
 
         display: flex;
         justify-content: center;
