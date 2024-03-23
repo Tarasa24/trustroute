@@ -4,10 +4,14 @@ def redis
   end
 end
 
-def async_redirect(path, identifier)
-  NChannel.broadcast_to(
-    identifier,
-    head: 302, # redirection code, just to make it clear what you're doing
-    path: path # you'll need to use url_helpers, so include them in your file
-  )
+def async_redirect(path, identifier, params = {})
+  if params[:flash]
+    params[:flash] = render_to_string(partial: "layouts/flash", locals: {flash: params[:flash]})
+  end
+
+  ActionCable.server.broadcast "async_redirect_channel:#{identifier}",
+    {
+      path:,
+      **params
+    }
 end

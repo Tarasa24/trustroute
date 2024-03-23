@@ -16,6 +16,7 @@ module Trustroute
       g.factory_bot dir: "spec/factories"
       g.factory_bot suffix: "factory"
     end
-  end
 
+    config.action_cable.mount_path = "/cable"
+  end
 end
