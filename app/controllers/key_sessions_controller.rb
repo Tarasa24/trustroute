@@ -16,7 +16,9 @@ class KeySessionsController < ApplicationController
         end
 
         @nonce = SecureRandom.hex(16)
-        session[:nonce] = @nonce
+        Trustroute.redis.with do |conn|
+          conn.set("signature_challenge:#{@key.uuid}", @nonce)
+        end
 
         render partial: "key_sessions/second_step", locals: {key: @key, nonce: @nonce}
       end
@@ -32,7 +34,7 @@ class KeySessionsController < ApplicationController
     #   or make the client redirect to the root path via action cable
 
     key = Key.find(params[:id])
-    nonce = session.delete(:nonce)
+    nonce = Trustroute.redis.with { |conn| conn.getdel("signature_challenge:#{key.uuid}") }
     signature = if request.content_type.include? "multipart/form-data" # form upload
       GPGME::Data.new params[:signature].read
     elsif request.content_type == "text/plain" # from curl or wget
