@@ -29,10 +29,6 @@ class KeySessionsController < ApplicationController
   end
 
   def signature_challenge
-    # Verify the signature using a service
-    # Then depending on the content type, either redirect to the root path
-    #   or make the client redirect to the root path via action cable
-
     key = Key.find(params[:id])
     nonce = Trustroute.redis.with { |conn| conn.getdel("signature_challenge:#{key.uuid}") }
     signature = if request.content_type.include? "multipart/form-data" # form upload
@@ -44,7 +40,8 @@ class KeySessionsController < ApplicationController
     end
 
     service = SignatureChallengeService.new(key, nonce, signature)
-    if service.call
+    service.call
+    if service.success?
       set_current_key(key)
     else
       flash[:notice] = "Signature verification failed."
