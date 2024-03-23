@@ -1,6 +1,6 @@
 class SignatureChallengeService < ApplicationService
   param :key # Key
-  param :nonce # String
+  param :nonce, type: proc(&:to_s) # String
   param :signature # GPGME::Data
 
   # Verifies that that key public key signed the nonce
@@ -27,7 +27,7 @@ class SignatureChallengeService < ApplicationService
       return error(:invalid_signature, "") unless signature.valid?
       return error(:invalid_signer, "") unless signature.fpr.upcase == key.fingerprint.to_s(16).upcase
     end
-    return error(:incorrect_nonce, "") unless signed_text&.include?(nonce)
+    return error(:incorrect_nonce, "") unless signed_text&.read&.include?(nonce)
 
     true
   end
