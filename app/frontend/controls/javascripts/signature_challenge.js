@@ -8,11 +8,22 @@ function formatOptionListener(event) {
   });
 }
 
+function autoSubmitForm(event) {
+  event.target.form.submit();
+}
+
+
 function registerListeners() {
   const formatSelector = document.getElementById('signature-challenge-format-selector');
-  if (!formatSelector) return;
+  if (formatSelector) {
+    formatSelector.addEventListener('change', formatOptionListener);
+  }
 
-  formatSelector.addEventListener('change', formatOptionListener);
+  const signatureChallengeUploadForm = document.getElementById('signature-challenge-upload-form');
+  if (signatureChallengeUploadForm) {
+    signatureChallengeUploadForm.querySelectorAll('input[type="file"]')[0]
+      .addEventListener('change', autoSubmitForm);
+  }
 }
 
 document.addEventListener('turbo:before-stream-render', ((event) => {

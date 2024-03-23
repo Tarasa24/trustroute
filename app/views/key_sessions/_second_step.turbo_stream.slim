@@ -17,7 +17,9 @@ ruby:
       .signature-challenge__option.signature-challenge__option--plain
         p.signature-challenge__nonce = nonce
 
-        = form_with url: signature_challenge_key_session_path(key), method: :post, class: 'signature-challenge__form' do
+        = form_with url: signature_challenge_key_session_path(key), method: :post,
+          class: 'signature-challenge__form', id: 'signature-challenge-upload-form',
+          multipart: true, action: :upload do
           = label_tag :signature, '' do
             .fa-solid.fa-upload.signature-challenge__upload-icon
             span Sign and upload the signature
