@@ -30,7 +30,7 @@ class KeySessionsController < ApplicationController
 
   def signature_challenge
     key = Key.find(params[:id])
-    nonce = redis.with { |conn| conn.getdel("signature_challenge:#{key.uuid}") }
+    nonce = redis.with { |conn| conn.get("signature_challenge:#{key.uuid}") }
     signature = if request.content_type.include? "multipart/form-data" # form upload
       GPGME::Data.new params[:signature].read
     elsif request.content_type == "text/plain" # from curl or wget
@@ -48,6 +48,7 @@ class KeySessionsController < ApplicationController
     end
 
     set_current_key(key)
+    redis.with { |conn| conn.del("signature_challenge:#{key.uuid}") }
     async_redirect(root_path, "signature_challenge:#{key.uuid}", flash: {notice: "Successfully signed in."})
   end
 

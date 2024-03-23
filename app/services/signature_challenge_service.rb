@@ -7,8 +7,6 @@ class SignatureChallengeService < ApplicationService
   # Returns true if the signature is valid, false otherwise
   def call
     full_signature_check || detached_signature_check
-  rescue GPGME::Error => e
-    error(:gpgme_error, e.message)
   end
 
   def detached_signature_check
@@ -19,6 +17,8 @@ class SignatureChallengeService < ApplicationService
     end
 
     true
+  rescue GPGME::Error
+    false
   end
 
   def full_signature_check
@@ -30,5 +30,7 @@ class SignatureChallengeService < ApplicationService
     return error(:incorrect_nonce, "") unless signed_text&.read&.include?(nonce)
 
     true
+  rescue GPGME::Error
+    false
   end
 end
