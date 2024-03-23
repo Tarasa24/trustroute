@@ -6,7 +6,6 @@ require "elasticsearch/model"
 class Key
   include ActiveGraph::Node
   include ActiveGraph::Timestamps
-  include Authenticationable
   include Elasticsearch::Model
 
   property :fingerprint, type: Integer
