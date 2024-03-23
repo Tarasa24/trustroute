@@ -16,7 +16,7 @@ class KeySessionsController < ApplicationController
         end
 
         @nonce = SecureRandom.hex(16)
-        Trustroute.redis.with do |conn|
+        redis.with do |conn|
           conn.set("signature_challenge:#{@key.uuid}", @nonce)
         end
 
@@ -30,7 +30,7 @@ class KeySessionsController < ApplicationController
 
   def signature_challenge
     key = Key.find(params[:id])
-    nonce = Trustroute.redis.with { |conn| conn.getdel("signature_challenge:#{key.uuid}") }
+    nonce = redis.with { |conn| conn.getdel("signature_challenge:#{key.uuid}") }
     signature = if request.content_type.include? "multipart/form-data" # form upload
       GPGME::Data.new params[:signature].read
     elsif request.content_type == "text/plain" # from curl or wget
