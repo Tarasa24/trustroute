@@ -31,7 +31,22 @@ class KeySessionsController < ApplicationController
     # Then depending on the content type, either redirect to the root path
     #   or make the client redirect to the root path via action cable
 
-    # set_current_key(@key)
+    key = Key.find(params[:id])
+    nonce = session.delete(:nonce)
+    signature = if request.content_type.include? "multipart/form-data" # form upload
+      GPGME::Data.new params[:signature].read
+    elsif request.content_type == "text/plain" # from curl or wget
+      GPGME::Data.new request.body.read
+    else
+      raise "Unsupported content type"
+    end
+
+    service = SignatureChallengeService.new(key, nonce, signature)
+    if service.call
+      set_current_key(key)
+    else
+      flash[:notice] = "Signature verification failed."
+    end
   end
 
   def destroy
