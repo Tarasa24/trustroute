@@ -15,7 +15,7 @@
         .fa-solid.fa-key
       span Import your public key
 
-    - if Rails.env.development?
-      h2 or
-      = link_to "Login as #{Key.first.sha}", set_development_key_key_sessions_path,
-          method: :post, data: { 'turbo-method': 'post' }, style: 'text-align: center; display: block;'
+  - if Rails.env.development?
+    h2 or
+    = link_to "Login as #{Key.first.sha}", set_development_key_key_sessions_path,
+        method: :post, data: { 'turbo-method': 'post' }, style: 'text-align: center; display: block;'
