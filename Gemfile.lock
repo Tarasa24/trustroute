@@ -114,6 +114,7 @@ GEM
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
     dry-cli (1.0.0)
+    dry-initializer (3.1.1)
     elasticsearch (7.17.10)
       elasticsearch-api (= 7.17.10)
       elasticsearch-transport (= 7.17.10)
@@ -394,7 +395,9 @@ DEPENDENCIES
   activegraph (~> 11.3)
   bootsnap
   byebug
+  connection_pool
   debug
+  dry-initializer
   elasticsearch-model
   elasticsearch-rails
   factory_bot_rails

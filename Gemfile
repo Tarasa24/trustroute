@@ -10,6 +10,9 @@ gem "puma", "~> 5.0"
 gem "rails", "~> 7.0.7"
 gem "sqlite3", "~> 1.4"
 gem "active_model_serializers"
+gem "redis", "~> 4.0"
+gem "connection_pool"
+gem "dry-initializer"
 
 # Assets
 gem "sassc-rails", "~> 2.1"
@@ -48,6 +51,3 @@ group :development do
   gem "web-console"
   gem "ruby-lsp-rails"
 end
-
-# Use Redis for Action Cable
-gem "redis", "~> 4.0"
