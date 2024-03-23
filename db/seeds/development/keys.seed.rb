@@ -20,7 +20,7 @@ def generate_keyring_entry(i)
       Name-Real: #{name}
       Name-Comment: Seed key #{i}
       Name-Email: #{email}
-      Passphrase: \"\"
+      Passphrase: 1234
     </GnupgKeyParms>
   "
 
