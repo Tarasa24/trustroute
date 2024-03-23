@@ -31,5 +31,9 @@ module Keyserver
     def search_by_email(email)
       raise NotImplementedError
     end
+
+    def self.to_s
+      name
+    end
   end
 end

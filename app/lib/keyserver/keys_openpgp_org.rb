@@ -14,6 +14,10 @@ module Keyserver
     alias_method :search_by_email, :search_by_query
     alias_method :search_by_fingerprint, :search_by_query
 
+    def self.to_s
+      "keys.openpgp.org"
+    end
+
     private
 
     # Import a key from a string into the local keyring
