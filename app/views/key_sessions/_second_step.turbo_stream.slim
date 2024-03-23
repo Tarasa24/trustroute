@@ -11,11 +11,12 @@ ruby:
           | plain
         option value="curl"
           | curl
-        option value="wget"
-          | wget
+        option value="email"
+          | email
 
       .signature-challenge__option.signature-challenge__option--plain
-        p.signature-challenge__nonce = nonce
+        p.signature-challenge__nonce
+          = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} > signature.asc"
 
         = form_with url: signature_challenge_key_session_path(key), method: :post,
           class: 'signature-challenge__form', id: 'signature-challenge-upload-form',
@@ -31,8 +32,30 @@ ruby:
           br
           = "  | curl -X POST -d @- \"#{signature_challenge_path}\" -H 'Content-Type: text/plain'"
 
-      .signature-challenge__option.signature-challenge__option--wget
-        p.signature-challenge__nonce
-          = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} \\"
-          br
-          = "  | wget --post-file=- --header='Content-Type: text/plain' \"#{signature_challenge_path}\" -O -"
+      .signature-challenge__option.signature-challenge__option--email
+        p.signature-challenge__nonce = nonce
+
+        ruby:
+          email_address = ENV.fetch("SIGNATURE_CHALLENGE_EMAIL_ADDRESS", "test@email.com")
+          email_subject = "[Trustroute] Signature challenge for #{key.sha} ::#{key.uuid}::"
+          email_body = "Sign the following string \"#{nonce}\" and reply to this email with the signature attached."
+          email_href = "mailto:#{email_address}?subject=#{email_subject}&body=#{email_body}"
+
+        p 
+          | Send signature of the above nonce to 
+          b = email_address
+          |  with the following subject and body.
+        table.signature-challenge__email
+          tr
+            td.subject
+              | Subject:
+            td.subject-value
+              = email_subject
+          tr
+            td.body
+              | Body:
+            td.body-value
+              = email_body
+
+        a href="#{h email_href}"
+          | Or simply click here

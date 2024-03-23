@@ -2,7 +2,7 @@ import * as channel from './channels/signature_challenge_redirect';
 
 function formatOptionListener(event) {
   const format = event.target.value;
-  const formats = ['plain', 'curl', 'wget'];
+  const formats = ['plain', 'curl', 'email'];
 
   formats.forEach((f) => {
     const element = document.querySelector(`.signature-challenge__option--${f}`);

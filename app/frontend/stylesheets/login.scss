@@ -89,7 +89,7 @@
 
     .signature-challenge__option {
       display: none;
-      font-size: 2rem;
+      font-size: 1rem;
 
       .signature-challenge__nonce {
         font-family: monospace;
@@ -107,12 +107,22 @@
 
     .signature-challenge__option--plain {
       display: block;
-      text-align: center;
     }
 
-    .signature-challenge__option--curl,
-    .signature-challenge__option--wget {
-      font-size: 1rem;
+    .signature-challenge__option--email {
+      text-align: center;
+      font-size: 2rem;
+
+      table {
+        font-size: 1rem;
+        text-align: left;
+        margin: 0 auto;
+      }
+    }
+
+    .signature-challenge__form {
+      display: block;
+      text-align: center;
     }
   }
 }
