@@ -41,11 +41,14 @@ class KeySessionsController < ApplicationController
 
     service = SignatureChallengeService.new(key, nonce, signature)
     service.call
-    if service.success?
-      set_current_key(key)
-    else
-      flash[:notice] = "Signature verification failed."
+    unless service.success?
+      return async_redirect(
+        new_key_session_path, "signature_challenge:#{key.uuid}", flash: {alert: service.error_message}
+      )
     end
+
+    set_current_key(key)
+    async_redirect(root_path, "signature_challenge:#{key.uuid}", flash: {notice: "Successfully signed in."})
   end
 
   def destroy

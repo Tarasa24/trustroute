@@ -5,7 +5,7 @@ ruby:
   = turbo_frame_tag :login, class: 'login' do
     h1 Signature challenge
 
-    .signature-challenge
+    .signature-challenge data-key-id=key.id
       select#signature-challenge-format-selector
         option value="plain" selected=true
           | plain

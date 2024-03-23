@@ -1,3 +1,5 @@
+import * as channel from './channels/signature_challenge_redirect';
+
 function formatOptionListener(event) {
   const format = event.target.value;
   const formats = ['plain', 'curl', 'wget'];
@@ -26,10 +28,19 @@ function registerListeners() {
   }
 }
 
+function connect() {
+  const container = document.querySelector('.signature-challenge');
+  if (!container) return;
+
+  const keyId = container.dataset.keyId;
+  if (keyId) channel.connect(keyId);
+}
+
 document.addEventListener('turbo:before-stream-render', ((event) => {
   const fallbackToDefaultActions = event.detail.render;
   event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     registerListeners();
+    connect();
   };
 }));
