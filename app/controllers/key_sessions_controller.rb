@@ -30,7 +30,7 @@ class KeySessionsController < ApplicationController
 
   def signature_challenge
     key = Key.find(params[:id])
-    nonce = redis.with { |conn| conn.get("signature_challenge:#{key.uuid}") }
+    nonce = redis.with { |conn| conn.getdel("signature_challenge:#{key.uuid}") }
     signature = if request.content_type.include? "multipart/form-data" # form upload
       GPGME::Data.new params[:signature].read
     elsif request.content_type == "text/plain" # from curl or wget
@@ -47,9 +47,30 @@ class KeySessionsController < ApplicationController
       )
     end
 
-    set_current_key(key)
-    redis.with { |conn| conn.del("signature_challenge:#{key.uuid}") }
-    async_redirect(root_path, "signature_challenge:#{key.uuid}", flash: {notice: "Successfully signed in."})
+    # Request to set current_key has to be initiated by the client but we can't trust the client not to tamper with the request
+    # So we generate a JWT token of the key id with a short expiry and after the client redirects back to us we verify the JWT
+    # and set the current_key if the JWT is valid
+    jwt = JWT.encode(
+      {key_id: key.id, exp: 1.minute.from_now.to_i},
+      Rails.application.credentials.secret_key_base, "HS256"
+    )
+    async_redirect(set_key_key_sessions_path(jwt:), "signature_challenge:#{key.uuid}")
+  end
+
+  def set_key
+    key_id = nil
+    begin
+      decoded_token = JWT.decode(params[:jwt], Rails.application.credentials.secret_key_base, "HS256")
+      key_id = decoded_token.first["key_id"]
+    rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
+      return redirect_to new_key_session_path, alert: "Invalid JWT."
+    end
+
+    key = Key.find(key_id)
+    return redirect_to new_key_session_path, alert: "Key not found." if key.nil?
+
+    set_current_key(Key.find(key_id))
+    redirect_to root_path, notice: "Key set successfully."
   end
 
   def destroy

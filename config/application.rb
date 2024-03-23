@@ -4,6 +4,7 @@ require "rails/all"
 require "active_graph/railtie"
 require "redis"
 require "connection_pool"
+require "jwt"
 
 Bundler.require(*Rails.groups)
 
