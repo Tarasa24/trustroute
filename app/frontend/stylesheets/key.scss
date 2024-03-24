@@ -8,6 +8,14 @@ $KEY_DUMP_PADDING: 20px;
   justify-content: space-between;
   height: 100%;
 
+  .profile__close-button {
+    position: absolute;
+    top: 2px;
+    right: 10px;
+    color: $TEXT_COLOR;
+    font-size: 2em;
+  }
+
   .profile__info {
     flex: 1;
 
