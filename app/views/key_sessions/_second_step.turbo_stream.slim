@@ -39,13 +39,23 @@ ruby:
           email_address = ENV.fetch("SIGNATURE_CHALLENGE_EMAIL_ADDRESS", "test@email.com")
           email_subject = "[Trustroute] Signature challenge for #{key.sha} ::#{key.uuid}::"
           email_body = "Sign the following string \"#{nonce}\" and reply to this email with the signature attached."
-          email_href = "mailto:#{email_address}?subject=#{email_subject}&body=#{email_body}"
+          email_href = "mailto:#{email_address}?subject=#{email_subject}&body=#{email_body}&from=#{key.email}"
 
         p 
           | Send signature of the above nonce to 
           b = email_address
           |  with the following subject and body.
         table.signature-challenge__email
+          tr
+            td.from
+              | From:
+            td.from-value
+              = key.email
+          tr
+            td.to
+              | To:
+            td.to-value
+              = email_address
           tr
             td.subject
               | Subject:
@@ -56,6 +66,11 @@ ruby:
               | Body:
             td.body-value
               = email_body
+          tr
+            td.attachment
+              | Attachment:
+            td.attachment-value
+              = "signature.asc"
 
         a href="#{h email_href}"
           | Or simply click here
