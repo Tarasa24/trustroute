@@ -1,4 +1,4 @@
-module Keyserver
+module Keyservers
   # Interface for keyserver implementations
   # All keyserver implementations should inherit from this class
   # and implement the following methods
@@ -30,6 +30,10 @@ module Keyserver
     # @raise [KeyserverError] if the keyserver returns an error
     def search_by_email(email)
       raise NotImplementedError
+    end
+
+    def self.to_s
+      name
     end
   end
 end

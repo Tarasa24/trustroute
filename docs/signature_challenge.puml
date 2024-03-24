@@ -1,0 +1,30 @@
+@startuml signature_challenge
+
+participant "Client" as C
+participant "Server" as S
+
+C -> S: Vist /key_sessions/new
+S -> S: Generate nonce
+S -> C: Return nonce for signing
+C -> C: Sign nonce
+
+C -> S: Connect to async redirect channel
+
+alt Upload signature as a file
+    C -> S: Upload signature file
+alt Pipe signature into curl
+    C -> S: Run provided terminal command
+else Email signature
+    C -> S: Email signature
+end
+
+S -> S: Verify signature
+S -> S: Craft JWT with key uuid
+S -> C: Async redirect to /key_sessions/set_key/:jwt
+
+C -> S: Visit /key_sessions/set_key/:jwt
+S -> S: Verify JWT
+S -> S: Set key as active in session
+S -> C: Redirect to /
+
+@enduml

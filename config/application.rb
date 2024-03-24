@@ -2,6 +2,9 @@ require_relative "boot"
 
 require "rails/all"
 require "active_graph/railtie"
+require "redis"
+require "connection_pool"
+require "jwt"
 
 Bundler.require(*Rails.groups)
 
@@ -14,5 +17,7 @@ module Trustroute
       g.factory_bot dir: "spec/factories"
       g.factory_bot suffix: "factory"
     end
+
+    config.action_cable.mount_path = "/cable"
   end
 end

@@ -6,7 +6,6 @@ require "elasticsearch/model"
 class Key
   include ActiveGraph::Node
   include ActiveGraph::Timestamps
-  include Authenticationable
   include Elasticsearch::Model
 
   property :fingerprint, type: Integer
@@ -37,7 +36,7 @@ class Key
     @keyring_entry ||= GPGME::Key.find(:public, email).first
   end
 
-  def self.create_from_keyserver!(query, keyserver = Keyserver::KeysOpenpgpOrg)
+  def self.create_from_keyserver!(query, keyserver = Keyservers::KeysOpenpgpOrg)
     return if Key.by_query(query).exists?
 
     build_from_keyring_entry(keyserver.new.search_by_query(query)).save!

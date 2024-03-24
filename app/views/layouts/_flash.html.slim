@@ -1,2 +1,3 @@
-- flash.each do |name, msg|
-  = content_tag :div, msg, class: "alert alert-#{name}"
+= turbo_frame_tag :flash do
+  - flash.each do |name, msg|
+    = content_tag :div, msg, class: "alert alert-#{name}"

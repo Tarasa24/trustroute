@@ -1,18 +1,26 @@
-= form_with url: keys_path do |f|
-  - # Dropdown to select keyserver
-  = f.label :keyserver
-  = f.select :keyserver, KEYSERVERS, required: true
+ruby:
+  keyservers = Keyservers.constants
+    .map(&Keyservers.method(:const_get))
+    .select { |constant| constant.is_a? Class }
+    .delete_if { |klass| klass == Keyservers::KeyserverBase }
+    .freeze
 
-  = f.label :identifier
-  = f.text_field :identifier, autofocus: true, required: true, placeholder: 'Public key hex (0x) or email address'
+.signup
 
-  = f.submit 'Import key'
+  h1 Sign up
+  = form_with url: keys_path, class: 'signup__form' do |f|
+    = f.text_field :identifier, autofocus: true, required: true, placeholder: 'Identifier'
+
+    .signup__form__submit-container
+      = f.select :keyserver, keyservers, required: true
+      = f.button :submit, class: 'login__form__submit' do
+        .fa-solid.fa-cloud-arrow-down
 
   h2 or
 
-= form_with url: keys_path do |f|
-  - # Upload asc public key file
-  = f.label :public_key_file
-  = f.file_field :public_key_file, accept: '.asc'
-
-  = f.submit 'Upload key'
+  = form_with url: new_key_path, class: 'signup__form' do |f|
+    = f.label :public_key, '' do
+      .signup__upload-icon
+        .fa-solid.fa-upload
+      span Upload your public key
+    = f.file_field :public_key, accept: 'application/pgp-keys', required: true

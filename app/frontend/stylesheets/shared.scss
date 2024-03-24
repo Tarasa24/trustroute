@@ -44,3 +44,14 @@
     text-decoration: none;
   }
 }
+
+@mixin icon-button($size) {
+  width: $size;
+  height: $size;
+  border: 1px solid $LINK_COLOR;
+  border-radius: 100%;
+  background-color: $BUTTON_COLOR;
+  color: $TEXT_COLOR;
+  cursor: pointer;
+  text-align: center;
+}

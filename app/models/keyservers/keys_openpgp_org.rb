@@ -1,4 +1,4 @@
-module Keyserver
+module Keyservers
   # Query mechanism for keys.openpgp.org
   # Implementation is done through http api, since this keyserver doesnt play well with gpgme
   # See https://keys.openpgp.org/about/api for more information
@@ -13,6 +13,10 @@ module Keyserver
     alias_method :search_by_key_id, :search_by_query
     alias_method :search_by_email, :search_by_query
     alias_method :search_by_fingerprint, :search_by_query
+
+    def self.to_s
+      "keys.openpgp.org"
+    end
 
     private
 

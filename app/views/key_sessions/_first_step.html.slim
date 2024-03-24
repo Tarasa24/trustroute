@@ -1,0 +1,21 @@
+.login
+  = turbo_frame_tag :login do
+    h1 Sign in
+
+    = form_with url: key_sessions_path, class: 'login__form', turbo: true do |f|
+      = f.text_field :identifier, autofocus: true, required: true, placeholder: 'Identifier',
+          value: params[:identifier]
+
+      = f.button :submit, class: 'login__form__submit' do
+        .fa-solid.fa-arrow-right
+
+    h2 or
+    .login__new-key__container
+      a href=new_key_path class='login__new-key__button' data-turbo-frame="_top"
+        .fa-solid.fa-key
+      span Import your public key
+
+    - if Rails.env.development?
+      h2 or
+      = link_to "Login as #{Key.first.sha}", set_development_key_key_sessions_path, method: :post,
+        data: { 'turbo-method': 'post', 'turbo-frame': '_top'}, style: 'text-align: center; display: block;'

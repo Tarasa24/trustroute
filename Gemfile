@@ -10,6 +10,10 @@ gem "puma", "~> 5.0"
 gem "rails", "~> 7.0.7"
 gem "sqlite3", "~> 1.4"
 gem "active_model_serializers"
+gem "redis", "~> 4.0"
+gem "connection_pool"
+gem "dry-initializer"
+gem "jwt"
 
 # Assets
 gem "sassc-rails", "~> 2.1"
@@ -19,6 +23,7 @@ gem "vite_rails", "~> 3.0"
 # View Extensions
 gem "jbuilder"
 gem "slim-rails", "~> 3.6"
+gem "turbo-rails"
 
 # Eco system
 gem "bootsnap", require: false
