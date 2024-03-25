@@ -32,8 +32,15 @@ class Key
     fingerprint.to_s(16).last(8)
   end
 
-  def keyring_entry
-    @keyring_entry ||= GPGME::Key.find(:public, email).first
+  def long_sha
+    fingerprint.to_s(16).last(16)
+  end
+
+  def keyring_entry(keylist_mode = GPGME::KEYLIST_MODE_LOCAL)
+    @keyring_entry ||= GPGME::Ctx.new do |ctx|
+      ctx.keylist_mode = keylist_mode
+      ctx.keys(fingerprint.to_s(16)).first
+    end
   end
 
   def self.create_from_keyserver!(query, keyserver = Keyservers::KeysOpenpgpOrg)
