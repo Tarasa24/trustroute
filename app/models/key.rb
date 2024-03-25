@@ -9,7 +9,6 @@ class Key
   include Elasticsearch::Model
 
   property :fingerprint, type: Integer
-  property :master, type: Boolean, default: false
   property :email, type: String
 
   validates :fingerprint, presence: true, uniqueness: true

@@ -35,7 +35,6 @@ end
 keys = []
 5.times do |i|
   key = Key.build_from_keyring_entry(generate_keyring_entry(i))
-  key.master = true
   key.save!
 
   Rails.logger.debug { "Generated key #{key.fingerprint}" }
