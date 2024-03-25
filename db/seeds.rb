@@ -4,6 +4,7 @@ seed_order = %w[
   keyring
   keys
   vouches_for_relationships
+  o_auth_identities
 ].freeze
 
 seed_order.each do |seed|
