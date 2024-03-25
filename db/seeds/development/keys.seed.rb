@@ -1,12 +1,3 @@
-# frozen_string_literal: true
-
-# Remove keyring
-home_dir = ENV.fetch("GNUPGHOME", Rails.root.join(".gnupg").to_s)
-FileUtils.rm_rf(home_dir)
-
-# Reinitialize keyring
-require Rails.root.join("config/initializers/pgpme.rb")
-
 # Remove all keys
 Key.destroy_all
 
@@ -20,7 +11,7 @@ def generate_keyring_entry(i)
       Name-Real: #{name}
       Name-Comment: Seed key #{i}
       Name-Email: #{email}
-      Passphrase: 1234
+      %no-protection
     </GnupgKeyParms>
   "
 
@@ -31,13 +22,15 @@ def generate_keyring_entry(i)
   GPGME::Key.find(:secret, email).first
 end
 
-# Generate new keys
-keys = []
+pool = Concurrent::CachedThreadPool.new
 5.times do |i|
-  key = Key.build_from_keyring_entry(generate_keyring_entry(i))
-  key.master = true
-  key.save!
+  pool.post do
+    key = Key.build_from_keyring_entry(generate_keyring_entry(i))
+    key.save!
 
-  Rails.logger.debug { "Generated key #{key.fingerprint}" }
-  keys << key
+    Rails.logger.debug { "Generated key #{key.fingerprint}" }
+  end
 end
+
+pool.shutdown
+pool.wait_for_termination
