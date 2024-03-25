@@ -10,18 +10,12 @@ def sign_key(from, to)
   end
 end
 
-pool = Concurrent::CachedThreadPool.new
 keys = Key.all.to_a
 
 keys.each do |from|
   keys.each do |to|
     next if from == to
 
-    pool.post do
-      sign_key(from, to)
-    end
+    sign_key(from, to)
   end
 end
-
-pool.shutdown
-pool.wait_for_termination
