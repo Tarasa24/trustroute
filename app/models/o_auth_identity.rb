@@ -3,6 +3,7 @@ class OAuthIdentity
   include ActiveGraph::Timestamps
 
   include PropertyEncryptable
+  include ElasticSearchable::Identities
 
   property :validated, type: Boolean, default: false
   property :uid, type: String
