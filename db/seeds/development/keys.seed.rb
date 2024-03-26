@@ -22,15 +22,7 @@ def generate_keyring_entry(i)
   GPGME::Key.find(:secret, email).first
 end
 
-pool = Concurrent::CachedThreadPool.new
 5.times do |i|
-  pool.post do
-    key = Key.build_from_keyring_entry(generate_keyring_entry(i))
-    key.save!
-
-    Rails.logger.debug { "Generated key #{key.fingerprint}" }
-  end
+  key = Key.build_from_keyring_entry(generate_keyring_entry(i))
+  key.save!
 end
-
-pool.shutdown
-pool.wait_for_termination

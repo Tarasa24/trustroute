@@ -9,5 +9,6 @@ seed_order = %w[
 ].freeze
 
 seed_order.each do |seed|
+  puts "Seeding #{seed}..."
   require Rails.root.join("db/seeds/#{Rails.env}/#{seed}.seed.rb")
 end
