@@ -27,4 +27,9 @@ class GraphController < ApplicationController
 
     render json: shortest_path
   end
+
+  def search
+    @query = params[:query]
+    @results = Key.search(@query).records
+  end
 end

@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   root "graph#index"
   get "graph/data", to: "graph#data"
   get "graph/path/:from/:to", to: "graph#path"
+  get "graph/search", to: "graph#search", as: :search
 
   get "oauth_identities/:provider/callback", to: "o_auth_identities#callback"
 end
