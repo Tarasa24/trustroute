@@ -5,6 +5,7 @@ seed_order = %w[
   keys
   vouches_for_relationships
   o_auth_identities
+  elastic_search_indices
 ].freeze
 
 seed_order.each do |seed|
