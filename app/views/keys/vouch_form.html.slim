@@ -1,0 +1,63 @@
+.vouch
+  select
+    option value="plain" selected=true
+      | plain
+    option value="curl"
+      | curl
+    option value="email"
+      | email
+
+  .vouch__option.vouch__option--plain
+    p.vouch__nonce
+      = "$ gpg -u #{current_key.sha} --sign-key #{@key.keyid} && gpg --armor --export #{@key.keyid} > #{@key.sha}.asc"
+    = form_with url: vouch_for_key_path(@key), method: :post,
+      class: 'vouch__form', id: 'vouch-upload-form',
+      multipart: true, action: :upload do
+      = label_tag :public_key_file, '' do
+        .fa-solid.fa-upload.vouch__upload-icon
+        span Vouch for the key
+      = file_field_tag :public_key_file, accept: 'application/pgp-keys', required: true
+      = submit_tag 'Vouch', class: 'vouch__form__submit'
+
+
+  .vouch__option.vouch__option--curl
+    p.vouch__nonce
+      = "$ gpg -u #{current_key.sha} --sign-key #{@key.keyid} \\"
+      br
+      = "  | curl -X POST -d @- \"#{vouch_for_key_path(@key)}\" -H 'Content-Type: text/plain'"
+
+  .vouch__option.vouch__option--email
+    ruby:
+      email_address = ENV.fetch("VOUCH_EMAIL_ADDRESS", "vouch@email.com")
+      email_subject = "[Trustroute] Vouch for #{@key.sha} ::#{@key.uuid}::"
+      email_body = "placeholder"
+      email_href = "mailto:#{email_address}?subject=#{email_subject}&body=#{email_body}&from=#{current_key.email}"
+
+    p 
+      | Send vouch of the above key to 
+      b = email_address
+      |  with the following subject and body.
+    table.vouch__email
+      tr
+        td.from
+          | From:
+        td.from-value
+          = current_key.email
+      tr
+        td.to
+          | To:
+        td.to-value
+          = email_address
+      tr
+        td.subject
+          | Subject:
+        td.subject-value
+          = email_subject
+      tr
+        td.body
+          | Body:
+        td.body-value
+          = email_body
+
+      a href="#{h email_href}"
+        | Or click here to send an email

@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   resources :keys, only: [:new, :create, :show, :edit, :update] do
     member do
       get :dump
+      get :vouch_checklist
+      get :vouch_form
+      post :vouch_for
     end
   end
 

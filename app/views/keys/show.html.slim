@@ -41,4 +41,4 @@
       - if current_key && @key != current_key
         .button
           .fa-solid.fa-handshake
-          a href="#" Vouch for this key 
+          = link_to 'Vouch for this key', vouch_checklist_key_path(@key)

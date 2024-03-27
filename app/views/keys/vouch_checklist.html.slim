@@ -1,0 +1,14 @@
+.vouch
+  h1 = "Vouch for #{@key.sha}"
+
+  = form_with url: vouch_form_key_path(@key), method: :get do |f|
+    = f.check_box :know, required: true, include_hidden: false
+    = f.label :know, 'I know this person'
+
+    = f.check_box :trust, required: true, include_hidden: false
+    = f.label :trust, 'I trust this person'
+
+    = f.check_box :verify, required: true, include_hidden: false
+    = f.label :verify, 'I have verified they still have access to their keys'
+
+    = f.submit 'Vouch'
