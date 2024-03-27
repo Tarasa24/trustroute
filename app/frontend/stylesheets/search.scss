@@ -31,30 +31,34 @@
 
   .search-bar__results {
     background-color: rgba(0, 0, 0, 0.5);
+    color: rgba($TEXT_COLOR, 0.5);
+
     border: 1px solid $TEXT_COLOR;
     border-top: none;
 
-    color: rgba($TEXT_COLOR, 0.5);
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
 
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style-type: none;
+    .search-bar__result {
+      padding: 0.5rem;
 
-      li {
-        padding: 0.5rem;
+      a {
+        color: $TEXT_COLOR;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
 
-        a {
-          color: $TEXT_COLOR;
-          text-decoration: none;
-          display: flex;
-          align-items: center;
+        &:hover {
+          text-decoration: underline;
+        }
 
-          &:hover {
-            text-decoration: underline;
-          }
+        .search-bar__result__identities {
+          margin-left: 0.5rem;
+          color: rgba($TEXT_COLOR, 0.5);
         }
       }
     }
+
   }
 }

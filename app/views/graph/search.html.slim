@@ -1,10 +1,12 @@
 = turbo_frame_tag "search_results", target: "_top"
   - if @results.present?
-    .search-bar__results
-      ul
-        - @results.each do |record|
-          li
-            a href=key_path(record)
-              .dot
-              = highlight("#{record.name} (#{record.email}) - #{record.sha}",
-                          [@query, @query.downcase, @query.upcase])
+    ul.search-bar__results
+      - @results.each do |record|
+        li.search-bar__result
+          a href=key_path(record)
+            .dot
+            = highlight("#{record.name} (#{record.email}) - #{record.sha}",
+                        [@query, @query.downcase, @query.upcase])
+            .search-bar__result__identities
+              - record.identities.each do |identity|
+                = identity_icon(identity)
