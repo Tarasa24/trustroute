@@ -144,5 +144,6 @@ $KEY_DUMP_PADDING: 20px;
     height: calc(100vh - $NAVBAR_HEIGHT - $TERMINAL_HEIGHT - 2 * $KEY_DUMP_PADDING);
     overflow: auto;
     word-wrap: break-word;
+    line-height: 1;
   }
 }

@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-require "elasticsearch/model"
-
 # Key model
 class Key
   include ActiveGraph::Node
   include ActiveGraph::Timestamps
-  include Elasticsearch::Model
+  include ElasticSearchable::Key
 
   property :fingerprint, type: Integer
   property :email, type: String
@@ -35,6 +33,10 @@ class Key
     fingerprint.to_s(16).last(16)
   end
 
+  def keyid
+    fingerprint.to_s(16)
+  end
+
   def keyring_entry(keylist_mode = GPGME::KEYLIST_MODE_LOCAL)
     @keyring_entry ||= GPGME::Ctx.new do |ctx|
       ctx.keylist_mode = keylist_mode
@@ -47,24 +49,6 @@ class Key
 
     build_from_keyring_entry(keyserver.new.search_by_query(query)).save!
   end
-
-  # region Elasticsearch
-  def as_indexed_json(_options = {})
-    {
-      "fingerprint" => fingerprint.to_s(16),
-      "sha" => sha,
-      "email" => email
-    }
-  end
-
-  settings index: {number_of_shards: 1} do
-    mappings dynamic: "false" do
-      indexes :fingerprint, type: :keyword
-      indexes :sha, type: :keyword
-      indexes :email, type: :text
-    end
-  end
-  # endregion Elasticsearch
 
   def aliases
     keyring_entry&.uids&.slice(1..-1)
