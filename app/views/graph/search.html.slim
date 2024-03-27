@@ -1,13 +1,10 @@
 = turbo_frame_tag "search_results", target: "_top"
-  ul
-    - @results.each do |record|
-      li
-        table
-          tbody
-            tr
-              td
-                = highlight(record.keyid, @query)
-              td
-                = highlight(record.email, @query)
-              td
-                = highlight(record.name, @query)
+  - if @results.present?
+    .search-bar__results
+      ul
+        - @results.each do |record|
+          li
+            a href=key_path(record)
+              .dot
+              = highlight("#{record.name} (#{record.email}) - #{record.sha}",
+                          [@query, @query.downcase, @query.upcase])
