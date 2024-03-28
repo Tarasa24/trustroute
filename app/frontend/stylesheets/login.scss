@@ -91,7 +91,6 @@
     }
 
     .signature-challenge__option {
-      display: none;
       font-size: 1rem;
 
       .signature-challenge__nonce {
@@ -105,21 +104,6 @@
         border-radius: 5px;
 
         white-space: break-spaces;
-      }
-    }
-
-    .signature-challenge__option--plain {
-      display: block;
-    }
-
-    .signature-challenge__option--email {
-      text-align: center;
-      font-size: 2rem;
-
-      table {
-        font-size: 1rem;
-        text-align: left;
-        margin: 0 auto;
       }
     }
 
