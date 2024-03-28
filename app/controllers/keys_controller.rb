@@ -52,6 +52,17 @@ class KeysController < ApplicationController
 
     service = VouchService.new(current_key, @key, public_key)
     service.call
+    if service.success?
+      async_redirect(
+        key_path(@key), "vouch:#{current_key.uuid}:#{@key.uuid}",
+        flash: {notice: "Key vouched for successfully"}
+      )
+    else
+      async_redirect(
+        vouch_checklist_key_path(@key), "vouch:#{current_key.uuid}:#{@key.uuid}",
+        flash: {alert: "#{service.error_key}: #{service.error_message}"}
+      )
+    end
   end
 
   private
