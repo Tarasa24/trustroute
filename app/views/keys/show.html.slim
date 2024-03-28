@@ -38,7 +38,7 @@
               .profile__identity__icon
                 .fa-solid.fa-plus
     .profile__management
-      - if @key != current_key
+      - if current_key.present? && @key != current_key
         .button
           .fa-solid.fa-handshake
           = link_to 'Vouch for this key', vouch_checklist_key_path(@key)
