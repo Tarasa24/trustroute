@@ -18,5 +18,12 @@ function connect() {
   if (keyId) channel.connect(`vouch:${document.current_key}:${keyId}`);
 }
 
+function beforeRedirectListener() {
+  if (!document.querySelector('.vouch')) return;
+
+  localStorage.removeItem('graph_data');
+}
+
 document.addEventListener('DOMContentLoaded', registerListeners);
 document.addEventListener('turbo:load', registerListeners);
+document.addEventListener('turbo:before-visit', beforeRedirectListener);
