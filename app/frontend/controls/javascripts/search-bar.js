@@ -14,6 +14,8 @@ function registerListeners() {
 
   // When clicking outside of .search-bar, clear the input and results
   document.addEventListener("click", (event) => {
+    if (!search) return;
+
     if (!event.target.closest(".search-bar")) {
       searchInput.value = "";
       document.querySelector(".search-bar .search-bar__results").outerHTML = "";
