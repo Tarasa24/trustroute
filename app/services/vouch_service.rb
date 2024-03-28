@@ -4,13 +4,8 @@ class VouchService < ApplicationService
   param :data # String
 
   def call
-    verified = if packets.public_key?
-      verify_public_key
-    elsif packets.signature?
-      verify_signature
-    end
-
-    return unless verified # Expect error to be set
+    return error(:key_id_mismatch, "Key ID mismatch") unless packets.public_key?
+    return unless verify_public_key # Expect error to be set
 
     VouchRelationship.create!(from_node: from_key, to_node: to_key)
   end
@@ -39,9 +34,5 @@ class VouchService < ApplicationService
   rescue GPGME::Error => e
     error(:gpg_error, e.message)
     false
-  end
-
-  def verify_signature
-    raise NotImplementedError
   end
 end
