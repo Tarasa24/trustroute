@@ -1,31 +1,9 @@
-import * as channel from './channels/signature_challenge_redirect';
-
-function formatOptionListener(event) {
-  const format = event.target.value;
-  const formats = ['plain', 'curl', 'email'];
-
-  formats.forEach((f) => {
-    const element = document.querySelector(`.signature-challenge__option--${f}`);
-    element.style.display = f === format ? 'block' : 'none';
-  });
-}
-
-function autoSubmitForm(event) {
-  event.target.form.submit();
-}
-
+import * as channel from './channels/async_redirect';
+import { registerFormatOptionListener, registerAutoSubmitForm } from './shared';
 
 function registerListeners() {
-  const formatSelector = document.getElementById('signature-challenge-format-selector');
-  if (formatSelector) {
-    formatSelector.addEventListener('change', formatOptionListener);
-  }
-
-  const signatureChallengeUploadForm = document.getElementById('signature-challenge-upload-form');
-  if (signatureChallengeUploadForm) {
-    signatureChallengeUploadForm.querySelectorAll('input[type="file"]')[0]
-      .addEventListener('change', autoSubmitForm);
-  }
+  registerFormatOptionListener();
+  registerAutoSubmitForm();
 }
 
 function connect() {
@@ -33,7 +11,7 @@ function connect() {
   if (!container) return;
 
   const keyId = container.dataset.keyId;
-  if (keyId) channel.connect(keyId);
+  if (keyId) channel.connect(`signature_challenge:${keyId}`);
 }
 
 document.addEventListener('turbo:before-stream-render', ((event) => {

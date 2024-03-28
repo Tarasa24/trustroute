@@ -15,5 +15,10 @@ export function registerFormatOptionListener() {
       }
     });
   });
+}
 
+export function registerAutoSubmitForm() {
+  document.querySelector('input[type="file"]').addEventListener('change', function (event) {
+    event.target.form.submit();
+  });
 }
