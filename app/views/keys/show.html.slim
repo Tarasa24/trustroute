@@ -4,7 +4,7 @@
       .fa-solid.fa-times
     .profile__info
       .profile__card
-        .dot.dot--profile
+        .dot class=(@key == current_key ? 'dot--self' : 'dot--profile')
         .profile__card__content
           h1 = @key.name
           - if @key.aliases.any?
@@ -38,7 +38,7 @@
               .profile__identity__icon
                 .fa-solid.fa-plus
     .profile__management
-      - if current_key && @key != current_key
+      - if @key != current_key
         .button
           .fa-solid.fa-handshake
           = link_to 'Vouch for this key', vouch_checklist_key_path(@key)

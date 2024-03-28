@@ -24,9 +24,16 @@ $KEY_DUMP_PADDING: 20px;
       flex-direction: row;
     }
 
-    .dot--profile {
+    .dot {
       @include dot(60px);
+    }
+
+    .dot--profile {
       background-color: $TARGET_NODE_COLOR;
+    }
+
+    .dot--self {
+      background-color: $SELF_NODE_COLOR;
     }
 
     .profile__card__content {
