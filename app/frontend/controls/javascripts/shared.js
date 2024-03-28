@@ -1,19 +1,23 @@
 export function registerFormatOptionListener() {
   const formatSelector = document.querySelector('.format-selector');
+  formatSelector.addEventListener('change', formatSelectorChange);
 
-  const options = formatSelector.querySelectorAll('option');
+  document.addEventListener('turbo:load', () => {
+    formatSelector.removeEventListener('change', formatSelectorChange);
+  });
+}
 
-  formatSelector.addEventListener('change', function (event) {
-    const selectedOption = options[formatSelector.selectedIndex];
-    const format = selectedOption.value;
+function formatSelectorChange(event) {
+  const formatSelector = event.target;
+  const selectedOption = formatSelector.options[formatSelector.selectedIndex];
+  const format = selectedOption.value;
 
-    document.querySelectorAll('.format-option').forEach(function (option) {
-      if (option.dataset.format === format) {
-        option.classList.remove('hidden');
-      } else {
-        option.classList.add('hidden');
-      }
-    });
+  document.querySelectorAll('.format-option').forEach(function (option) {
+    if (option.dataset.format === format) {
+      option.classList.remove('hidden');
+    } else {
+      option.classList.add('hidden');
+    }
   });
 }
 

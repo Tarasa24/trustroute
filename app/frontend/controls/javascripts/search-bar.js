@@ -13,14 +13,20 @@ function registerListeners() {
   });
 
   // When clicking outside of .search-bar, clear the input and results
-  document.addEventListener("click", (event) => {
-    if (!search) return;
+  document.addEventListener("click", clickOutsideSearchBar);
 
-    if (!event.target.closest(".search-bar")) {
-      searchInput.value = "";
-      document.querySelector(".search-bar .search-bar__results").outerHTML = "";
-    }
+  document.addEventListener("turbo:load", () => {
+    document.removeEventListener("click", clickOutsideSearchBar);
   });
+}
+
+function clickOutsideSearchBar(event) {
+  if (!search) return;
+
+  if (!event.target.closest(".search-bar")) {
+    searchInput.value = "";
+    document.querySelector(".search-bar .search-bar__results").outerHTML = "";
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => registerListeners());
