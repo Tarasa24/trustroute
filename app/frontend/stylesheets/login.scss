@@ -53,7 +53,7 @@
   .signature-challenge {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     gap: 10px;
 
@@ -68,7 +68,11 @@
     }
 
     .signature-challenge__form {
-      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      margin: 0 auto;
+      text-align: center;
 
       label {
         cursor: pointer;
@@ -76,6 +80,21 @@
 
       input[type="file"] {
         display: none;
+      }
+
+      textarea {
+        background-color: $ACCENT_BACKGROUND_COLOR;
+        color: $TEXT_COLOR;
+
+        border: 1px solid $LINK_COLOR;
+        border-radius: 5px;
+
+        padding: 10px;
+        margin: 0 auto;
+
+        width: 100%;
+        height: 100%;
+        resize: none;
       }
 
       .signature-challenge__upload-icon {
@@ -102,14 +121,36 @@
         padding: 5px;
         border: 1px solid $LINK_COLOR;
         border-radius: 5px;
+        width: 80%;
+        margin: 1em auto;
 
         white-space: break-spaces;
       }
-    }
 
-    .signature-challenge__form {
-      display: block;
-      text-align: center;
+      &[data-format="openkeychain"] {
+        .signature-challenge__nonce {
+          text-align: center;
+          font-size: 2rem;
+        }
+
+        .signature-challenge__tutorial {
+          display: flex;
+          gap: 10px;
+
+
+          form {
+            width: 100%;
+
+            .signature-challenge__submit {
+              background-color: transparent;
+              border: 0;
+              margin: 0 auto;
+              color: $TEXT_COLOR;
+              cursor: pointer;
+            }
+          }
+        }
+      }
     }
   }
 }
