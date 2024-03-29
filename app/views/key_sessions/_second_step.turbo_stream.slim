@@ -1,6 +1,3 @@
-ruby:
-  signature_challenge_path = "#{request.base_url}#{signature_challenge_key_session_path(key)}"
-
 = turbo_stream.replace :login do
   = turbo_frame_tag :login, class: 'login' do
     h1 Signature challenge
@@ -9,8 +6,6 @@ ruby:
       select.format-selector
         option value="plain" selected=true
           | plain
-        option value="curl"
-          | curl
 
       .format-option.signature-challenge__option data-format="plain"
         p.signature-challenge__nonce
@@ -22,7 +17,3 @@ ruby:
             .fa-solid.fa-upload.signature-challenge__upload-icon
             span Sign and upload the signature
           = file_field_tag :signature, accept: 'application/pgp-keys', required: true
-
-      .format-option.signature-challenge__option.hidden data-format="curl"
-        p.signature-challenge__nonce
-          = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} | curl -X POST -d @- \"#{signature_challenge_path}\" -H 'Content-Type: text/plain'"

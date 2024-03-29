@@ -43,27 +43,13 @@ class KeysController < ApplicationController
   end
 
   def vouch_for
-    public_key = if request.content_type.include? "multipart/form-data" # form upload
-      params[:public_key_file].read
-    elsif request.content_type == "text/plain" # from curl or wget
-      request.body.read
-    else
-      raise "Unsupported content type"
-    end
-
-    from_key = current_key || Key.find(params[:from_key])
-    service = VouchService.new(from_key, @key, public_key)
+    public_key = params[:public_key_file].read
+    service = VouchService.new(current_key, @key, public_key)
     service.call
     if service.success?
-      async_redirect(
-        key_path(@key), "vouch:#{from_key.uuid}:#{@key.uuid}",
-        flash: {notice: "Key vouched for successfully"}
-      )
+      redirect_to key_path(@key), notice: "Key vouched for successfully"
     else
-      async_redirect(
-        vouch_checklist_key_path(@key), "vouch:#{from_key.uuid}:#{@key.uuid}",
-        flash: {alert: "#{service.error_key}: #{service.error_message}"}
-      )
+      redirect_to vouch_form_key_path(@key), alert: "Vouch failed: #{service.error_key}: #{service.error_message}"
     end
   end
 

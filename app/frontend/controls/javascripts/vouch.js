@@ -1,5 +1,4 @@
 import { registerFormatOptionListener, registerAutoSubmitForm } from './shared';
-import * as channel from "./channels/async_redirect";
 
 function registerListeners() {
   const container = document.querySelector('.vouch');
@@ -7,15 +6,6 @@ function registerListeners() {
 
   registerFormatOptionListener();
   registerAutoSubmitForm();
-  connect();
-}
-
-function connect() {
-  const container = document.querySelector('.vouch');
-  if (!container) return;
-
-  const keyId = container.dataset.keyId;
-  if (keyId) channel.connect(`vouch:${document.current_key}:${keyId}`);
 }
 
 function beforeRedirectListener() {

@@ -13,7 +13,6 @@ gem "active_model_serializers"
 gem "redis", "~> 4.0"
 gem "connection_pool"
 gem "dry-initializer"
-gem "jwt"
 
 # Assets
 gem "sassc-rails", "~> 2.1"
