@@ -14,7 +14,7 @@ class SignatureChallengeService < ApplicationService
     return error(:incorrect_nonce, "") unless signed_text&.read&.include?(nonce)
 
     true
-  rescue GPGME::Error
-    error(:gpg_error, "")
+  rescue GPGME::Error => e
+    error(:gpg_error, e.message)
   end
 end

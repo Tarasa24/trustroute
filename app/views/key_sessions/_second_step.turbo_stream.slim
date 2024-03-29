@@ -30,7 +30,8 @@
             text x="210" y="130" font-size="8" font-family="monospace" fill="white" = nonce
             text x="410" y="130" font-size="8" font-family="monospace" fill="grey" = nonce
 
-          = form_with url: signature_challenge_key_session_path(key), method: :post, class: 'signature-challenge__form' do
+          = form_with url: signature_challenge_key_session_path(key), method: :post,
+            class: 'signature-challenge__form', data: { 'turbo-frame': '_top' } do
             = text_area_tag :signature, nil, required: true, placeholder: '-----BEGIN PGP SIGNATURE-----'
             button.signature-challenge__submit type="submit"
               .fa-solid.fa-upload.signature-challenge__upload-icon
