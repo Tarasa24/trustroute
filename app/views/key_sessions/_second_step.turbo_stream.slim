@@ -17,8 +17,7 @@ ruby:
           = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} > signature.asc"
 
         = form_with url: signature_challenge_key_session_path(key), method: :post,
-          class: 'signature-challenge__form', id: 'signature-challenge-upload-form',
-          multipart: true, action: :upload do
+          class: 'signature-challenge__form', multipart: true, action: :upload do
           = label_tag :signature, '' do
             .fa-solid.fa-upload.signature-challenge__upload-icon
             span Sign and upload the signature
@@ -26,6 +25,4 @@ ruby:
 
       .format-option.signature-challenge__option.hidden data-format="curl"
         p.signature-challenge__nonce
-          = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} \\"
-          br
-          = "  | curl -X POST -d @- \"#{signature_challenge_path}\" -H 'Content-Type: text/plain'"
+          = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} | curl -X POST -d @- \"#{signature_challenge_path}\" -H 'Content-Type: text/plain'"
