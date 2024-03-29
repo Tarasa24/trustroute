@@ -1,0 +1,26 @@
+ruby:
+  vouch_for_full_path = "#{request.base_url}#{vouch_for_key_path(@key, from_key: current_key)}"
+
+.vouch data-key-id=@key.id
+  h1 Vouch for #{@key.sha}
+
+  select.format-selector
+    option value="plain" selected=true
+      | plain
+    option value="curl"
+      | curl
+
+  .format-option data-format="plain"
+    p.vouch__mono
+      = "$ gpg -u #{current_key.sha} --sign-key #{@key.keyid} && gpg --armor --export #{@key.keyid} > #{@key.sha}.asc"
+    = form_with url: vouch_for_key_path(@key), method: :post, class: 'vouch__form',
+      multipart: true, action: :upload do
+      = label_tag :public_key_file, '' do
+        .fa-solid.fa-upload.vouch__upload-icon
+        span Vouch for the key
+      = file_field_tag :public_key_file, accept: 'application/pgp-keys', required: true
+
+
+  .format-option.hidden data-format="curl"
+    p.vouch__mono
+      = "$ gpg -u #{current_key.sha} --sign-key #{@key.keyid} && gpg --armor --export #{@key.keyid} | curl -X POST -d @- \"#{vouch_for_full_path}\" -H 'Content-Type: text/plain'"

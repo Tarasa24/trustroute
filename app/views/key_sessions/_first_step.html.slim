@@ -17,5 +17,5 @@
 
     - if Rails.env.development?
       h2 or
-      = link_to "Login as #{Key.first.sha}", set_development_key_key_sessions_path, method: :post,
+      = link_to "Login with devkey", set_development_key_key_sessions_path, method: :post,
         data: { 'turbo-method': 'post', 'turbo-frame': '_top'}, style: 'text-align: center; display: block;'

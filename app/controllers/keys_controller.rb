@@ -1,5 +1,6 @@
 class KeysController < ApplicationController
-  before_action :load_current_key, only: [:show, :edit, :dump]
+  before_action :load_key, only: %i[show edit dump vouch_checklist vouch_form vouch_for]
+  skip_before_action :verify_authenticity_token, only: [:vouch_for]
 
   def new
   end
@@ -30,9 +31,45 @@ class KeysController < ApplicationController
     @formatted_string = PGPDumpService.new(@key.keyring_entry).call
   end
 
+  def vouch_checklist
+  end
+
+  def vouch_form
+    return head :unauthorized unless current_key
+
+    unless params[:know] == "1" && params[:trust] == "1" && params[:verify] == "1"
+      redirect_to vouch_checklist_key_path(@key), alert: "You must check all boxes to vouch for a key"
+    end
+  end
+
+  def vouch_for
+    public_key = if request.content_type.include? "multipart/form-data" # form upload
+      params[:public_key_file].read
+    elsif request.content_type == "text/plain" # from curl or wget
+      request.body.read
+    else
+      raise "Unsupported content type"
+    end
+
+    from_key = current_key || Key.find(params[:from_key])
+    service = VouchService.new(from_key, @key, public_key)
+    service.call
+    if service.success?
+      async_redirect(
+        key_path(@key), "vouch:#{from_key.uuid}:#{@key.uuid}",
+        flash: {notice: "Key vouched for successfully"}
+      )
+    else
+      async_redirect(
+        vouch_checklist_key_path(@key), "vouch:#{from_key.uuid}:#{@key.uuid}",
+        flash: {alert: "#{service.error_key}: #{service.error_message}"}
+      )
+    end
+  end
+
   private
 
-  def load_current_key
+  def load_key
     @key = Key.find_by(uuid: params[:id])
 
     if @key.nil?

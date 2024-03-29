@@ -4,6 +4,7 @@ import fetchGraphData, { fetchLocalGraphData, saveLocalGraphData } from './graph
 async function renderGraph() {
   const container = document.getElementById('chart');
   if (container === null) return;
+  container.innerHTML = '';
 
   const data = await fetchGraphData();
   if (data === null) return;

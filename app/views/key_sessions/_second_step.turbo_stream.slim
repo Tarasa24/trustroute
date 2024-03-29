@@ -6,71 +6,23 @@ ruby:
     h1 Signature challenge
 
     .signature-challenge data-key-id=key.id
-      select#signature-challenge-format-selector
+      select.format-selector
         option value="plain" selected=true
           | plain
         option value="curl"
           | curl
-        option value="email"
-          | email
 
-      .signature-challenge__option.signature-challenge__option--plain
+      .format-option.signature-challenge__option data-format="plain"
         p.signature-challenge__nonce
           = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} > signature.asc"
 
         = form_with url: signature_challenge_key_session_path(key), method: :post,
-          class: 'signature-challenge__form', id: 'signature-challenge-upload-form',
-          multipart: true, action: :upload do
+          class: 'signature-challenge__form', multipart: true, action: :upload do
           = label_tag :signature, '' do
             .fa-solid.fa-upload.signature-challenge__upload-icon
             span Sign and upload the signature
           = file_field_tag :signature, accept: 'application/pgp-keys', required: true
 
-      .signature-challenge__option.signature-challenge__option--curl
+      .format-option.signature-challenge__option.hidden data-format="curl"
         p.signature-challenge__nonce
-          = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} \\"
-          br
-          = "  | curl -X POST -d @- \"#{signature_challenge_path}\" -H 'Content-Type: text/plain'"
-
-      .signature-challenge__option.signature-challenge__option--email
-        p.signature-challenge__nonce = nonce
-
-        ruby:
-          email_address = ENV.fetch("SIGNATURE_CHALLENGE_EMAIL_ADDRESS", "test@email.com")
-          email_subject = "[Trustroute] Signature challenge for #{key.sha} ::#{key.uuid}::"
-          email_body = "Sign the following string \"#{nonce}\" and reply to this email with the signature attached."
-          email_href = "mailto:#{email_address}?subject=#{email_subject}&body=#{email_body}&from=#{key.email}"
-
-        p 
-          | Send signature of the above nonce to 
-          b = email_address
-          |  with the following subject and body.
-        table.signature-challenge__email
-          tr
-            td.from
-              | From:
-            td.from-value
-              = key.email
-          tr
-            td.to
-              | To:
-            td.to-value
-              = email_address
-          tr
-            td.subject
-              | Subject:
-            td.subject-value
-              = email_subject
-          tr
-            td.body
-              | Body:
-            td.body-value
-              = email_body
-          tr
-            td.attachment
-              | Attachment:
-            td.attachment-value
-              = "signature.asc"
-
-        a href="#{h email_href}"
-          | Or simply click here
+          = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} | curl -X POST -d @- \"#{signature_challenge_path}\" -H 'Content-Type: text/plain'"

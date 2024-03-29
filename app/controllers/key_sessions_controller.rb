@@ -88,7 +88,7 @@ class KeySessionsController < ApplicationController
   end
 
   def set_development_key
-    set_current_key(Key.first)
+    set_current_key Key.order(:created_at).first
 
     redirect_to root_path
   end

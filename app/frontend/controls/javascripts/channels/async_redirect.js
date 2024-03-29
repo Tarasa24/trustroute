@@ -1,10 +1,10 @@
 import consumer from "./consumer";
 
-export function connect(key_uuid) {
+export function connect(identifier) {
   consumer.subscriptions.create(
     {
       channel: "AsyncRedirectChannel",
-      identifier: `signature_challenge:${key_uuid}`,
+      identifier: identifier,
     },
     {
       received(data) {
