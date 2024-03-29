@@ -27,8 +27,19 @@ class KeysController < ApplicationController
   end
 
   def dump
-    @filename = "#{@key.sha}.asc"
-    @formatted_string = PGPDumpService.new(@key.keyring_entry).call
+    respond_to do |format|
+      format.html do
+        @filename = "#{@key.sha}.asc"
+        @formatted_string = PGPDumpService.new(@key.keyring_entry).call
+
+        render "dump"
+      end
+
+      format.asc do
+        data = @key.keyring_entry.export(armor: true)
+        send_data data, filename: @key.sha + ".asc"
+      end
+    end
   end
 
   def vouch_checklist
