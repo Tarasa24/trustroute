@@ -1,0 +1,43 @@
+.vouch-checklist {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding-bottom: $NAVBAR_HEIGHT;
+
+  h1 {
+    text-align: center;
+  }
+
+  .vouch-checklist__form {
+    width: 50%;
+    margin: 0 auto;
+
+    .vouch-checklist__form__field {
+      display: flex;
+      align-items: center;
+
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    input[type="checkbox"] {
+      width: 25px;
+      height: 25px;
+    }
+
+    .vouch-checklist__form__submit {
+      width: 100%;
+      text-align: center;
+      margin-top: 3rem;
+
+      button {
+        @include icon-button(75px);
+        font-size: 3rem;
+        margin: 0 auto;
+      }
+    }
+  }
+}
