@@ -133,7 +133,7 @@ $KEY_DUMP_PADDING: 20px;
   }
 }
 
-.key_dump {
+.key-dump {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -143,11 +143,11 @@ $KEY_DUMP_PADDING: 20px;
   padding: $KEY_DUMP_PADDING;
   background-color: $ACCENT_BACKGROUND_COLOR;
 
-  .key_dump__terminal {
+  .key-dump__terminal {
     height: $TERMINAL_HEIGHT
   }
 
-  .key_dump__output {
+  .key-dump__output {
     height: calc(100vh - $NAVBAR_HEIGHT - $TERMINAL_HEIGHT - 2 * $KEY_DUMP_PADDING);
     overflow: auto;
     word-wrap: break-word;

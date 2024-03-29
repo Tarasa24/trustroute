@@ -1,3 +1,17 @@
-.key_dump
-  code.key_dump__terminal = "$ pgpdump #{@filename}"
-  code.key_dump__output = simple_format(@formatted_string, {}, wrapper_tag: 'pre')
+.key-dump
+  .key-dump__header
+    h1 Key dump for #{@key.name}
+
+    span Fingerprint: #{@key.keyid}
+
+    .key-dump__qr
+      = RQRCode::QRCode.new("OPENPGP4FPR:#{@key.keyid.upcase}").as_svg.html_safe
+
+    .key-dump__actions
+      = link_to 'Raw', dump_key_path(@key, format: :txt), class: 'button'
+      = link_to 'Download', dump_key_path(@key, format: :txt, download: true), class: 'button'
+
+ 
+  .key-dump__terminal
+  code.key-dump__terminal = "$ pgpdump #{@filename}"
+  code.key-dump__output = simple_format(@formatted_string, {}, wrapper_tag: 'pre')
