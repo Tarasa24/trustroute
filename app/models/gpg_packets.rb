@@ -1,5 +1,6 @@
 class GPGPackets
   def initialize(gpg)
+    gpg = gpg.gsub("-----BEGIN PGP PUBLIC KEY BLOCK-----", "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\n")
     IO.popen("gpg --list-packets", "r+") do |pipe|
       pipe.write(gpg)
       pipe.close_write

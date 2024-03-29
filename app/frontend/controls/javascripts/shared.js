@@ -1,10 +1,8 @@
 export function registerFormatOptionListener() {
   const formatSelector = document.querySelector('.format-selector');
-  formatSelector.addEventListener('change', formatSelectorChange);
+  if (!formatSelector) return;
 
-  document.addEventListener('turbo:load', () => {
-    formatSelector.removeEventListener('change', formatSelectorChange);
-  });
+  formatSelector.addEventListener('change', formatSelectorChange);
 }
 
 function formatSelectorChange(event) {

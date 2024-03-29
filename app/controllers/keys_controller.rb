@@ -1,5 +1,6 @@
 class KeysController < ApplicationController
   before_action :load_key, only: %i[show edit dump vouch_checklist vouch_form vouch_for]
+  skip_before_action :verify_authenticity_token, only: [:vouch_for]
 
   def new
   end
@@ -50,16 +51,17 @@ class KeysController < ApplicationController
       raise "Unsupported content type"
     end
 
-    service = VouchService.new(current_key, @key, public_key)
+    from_key = current_key || Key.find(params[:from_key])
+    service = VouchService.new(from_key, @key, public_key)
     service.call
     if service.success?
       async_redirect(
-        key_path(@key), "vouch:#{current_key.uuid}:#{@key.uuid}",
+        key_path(@key), "vouch:#{from_key.uuid}:#{@key.uuid}",
         flash: {notice: "Key vouched for successfully"}
       )
     else
       async_redirect(
-        vouch_checklist_key_path(@key), "vouch:#{current_key.uuid}:#{@key.uuid}",
+        vouch_checklist_key_path(@key), "vouch:#{from_key.uuid}:#{@key.uuid}",
         flash: {alert: "#{service.error_key}: #{service.error_message}"}
       )
     end

@@ -1,3 +1,6 @@
+ruby:
+  vouch_for_full_path = "#{request.base_url}#{vouch_for_key_path(@key, from_key: current_key)}"
+
 .vouch data-key-id=@key.id
   select.format-selector
     option value="plain" selected=true
@@ -20,6 +23,6 @@
 
   .format-option.hidden data-format="curl"
     p.vouch__nonce
-      = "$ gpg -u #{current_key.sha} --sign-key #{@key.keyid} \\"
+      = "$ gpg -u #{current_key.sha} --sign-key #{@key.keyid} && gpg --armor --export #{@key.keyid} \\"
       br
-      = "  | curl -X POST -d @- \"#{vouch_for_key_path(@key)}\" -H 'Content-Type: text/plain'"
+      = "  | curl -X POST -d @- \"#{vouch_for_full_path}\" -H 'Content-Type: text/plain'"
