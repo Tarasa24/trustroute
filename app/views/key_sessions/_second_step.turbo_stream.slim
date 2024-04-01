@@ -18,7 +18,7 @@
           = label_tag :signature, '' do
             .fa-solid.fa-upload.signature-challenge__upload-icon
             span Sign and upload the signature
-          = file_field_tag :signature, accept: 'application/pgp-keys', required: true
+          = file_field_tag :signature_file, accept: 'application/pgp-keys', required: true
 
       .format-option.signature-challenge__option.hidden data-format="openkeychain"
         p.signature-challenge__nonce
@@ -26,7 +26,7 @@
 
         .signature-challenge__tutorial
           svg width="100%" height="100%" viewBox="0 0 600 400"
-            image href="/img/openkeychain__vouch_tutorial.png" width="100%"
+            image href="/img/openkeychain_auth_tutorial.png" width="100%"
             text x="210" y="130" font-size="8" font-family="monospace" fill="white" = nonce
             text x="410" y="130" font-size="8" font-family="monospace" fill="grey" = nonce
 

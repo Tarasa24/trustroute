@@ -5,7 +5,7 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  padding-bottom: $NAVBAR_HEIGHT;
+  align-self: center;
 
   h1 {
     font-size: 4rem;
@@ -82,21 +82,6 @@
         display: none;
       }
 
-      textarea {
-        background-color: $ACCENT_BACKGROUND_COLOR;
-        color: $TEXT_COLOR;
-
-        border: 1px solid $LINK_COLOR;
-        border-radius: 5px;
-
-        padding: 10px;
-        margin: 0 auto;
-
-        width: 100%;
-        height: 100%;
-        resize: none;
-      }
-
       .signature-challenge__upload-icon {
         @include icon-button(100px);
 
@@ -137,9 +122,23 @@
           display: flex;
           gap: 10px;
 
-
           form {
             width: 100%;
+
+            textarea {
+              background-color: $ACCENT_BACKGROUND_COLOR;
+              color: $TEXT_COLOR;
+
+              border: 1px solid $LINK_COLOR;
+              border-radius: 5px;
+
+              padding: 10px;
+              margin: 0 auto;
+
+              width: 100%;
+              height: 100%;
+              resize: none;
+            }
 
             .signature-challenge__submit {
               background-color: transparent;
