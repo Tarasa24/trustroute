@@ -13,7 +13,7 @@ module ElasticSearchable::Key
       as_json(
         root: false,
         except: %i[fingerprint],
-        methods: %i[name sha long_sha keyid],
+        methods: %i[name email sha long_sha keyid],
         include: {identities: {only: %i[info provider]}}
       )
     end
