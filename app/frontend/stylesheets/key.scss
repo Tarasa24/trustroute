@@ -1,6 +1,3 @@
-$TERMINAL_HEIGHT: 35px;
-$KEY_DUMP_PADDING: 20px;
-
 .profile {
   padding: 2em;
   display: flex;
@@ -133,24 +130,73 @@ $KEY_DUMP_PADDING: 20px;
   }
 }
 
-.key_dump {
+.key-dump {
   display: flex;
-  flex-direction: column;
-  width: 50%;
-  margin: 0 auto;
-  border: 1px solid $BORDER_COLOR;
-  border-radius: 20px;
-  padding: $KEY_DUMP_PADDING;
-  background-color: $ACCENT_BACKGROUND_COLOR;
+  flex-direction: row;
+  gap: 5%;
+  margin: 0 5%;
 
-  .key_dump__terminal {
-    height: $TERMINAL_HEIGHT
+  .key-dump__terminal {
+    width: 75%;
+    background-color: $ACCENT_BACKGROUND_COLOR;
+    padding-left: 1em;
+    border: 1px solid $BORDER_COLOR;
+    border-radius: 10px;
+
+    code:nth-child(1) {
+      display: flex;
+      align-items: center;
+      height: 3em;
+    }
+
+    code:nth-child(2) {
+      display: block;
+      overflow: auto;
+      height: calc(100vh - 7em);
+
+      pre {
+        line-height: 1;
+      }
+    }
   }
 
-  .key_dump__output {
-    height: calc(100vh - $NAVBAR_HEIGHT - $TERMINAL_HEIGHT - 2 * $KEY_DUMP_PADDING);
-    overflow: auto;
-    word-wrap: break-word;
-    line-height: 1;
+  .key-dump__info {
+    h1 {
+      text-align: center;
+    }
+
+    .key-dump__qr {
+      background-color: white;
+      padding: 1em;
+      border-radius: 10px;
+      color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .key-dump__actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 1em;
+
+      margin-top: 1em;
+
+      a {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+
+        text-decoration: none;
+        color: $TEXT_COLOR;
+        background-color: $ACCENT_BACKGROUND_COLOR;
+
+        padding: 0.5em 1em;
+        border-radius: 10px;
+        box-shadow: 0 0 5px 0 $BORDER_COLOR;
+
+      }
+    }
   }
 }

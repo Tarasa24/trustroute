@@ -13,7 +13,6 @@ gem "active_model_serializers"
 gem "redis", "~> 4.0"
 gem "connection_pool"
 gem "dry-initializer"
-gem "jwt"
 
 # Assets
 gem "sassc-rails", "~> 2.1"
@@ -36,6 +35,7 @@ gem "omniauth-twitter2"
 gem "omniauth-discord"
 gem "elasticsearch-rails"
 gem "elasticsearch-model"
+gem "rqrcode"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]

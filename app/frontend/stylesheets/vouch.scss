@@ -5,7 +5,7 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  padding-bottom: $NAVBAR_HEIGHT;
+  align-self: center;
 
   h1 {
     text-align: center;
@@ -47,7 +47,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
   width: 80%;
   margin: 0 auto;
   padding-bottom: $NAVBAR_HEIGHT;
@@ -62,39 +61,92 @@
     margin: 0 auto;
   }
 
-  .vouch__mono {
-    font-family: monospace;
+  .vouch__option {
+    width: 100%;
 
-    background-color: $ACCENT_BACKGROUND_COLOR;
-    color: $TEXT_COLOR;
+    .vouch__mono {
+      font-family: monospace;
 
-    padding: 5px;
-    border: 1px solid $LINK_COLOR;
-    border-radius: 5px;
+      background-color: $ACCENT_BACKGROUND_COLOR;
+      color: $TEXT_COLOR;
 
-    white-space: break-spaces;
-  }
+      padding: 5px;
+      border: 1px solid $LINK_COLOR;
+      border-radius: 5px;
 
-  .vouch__form {
-    text-align: center;
-
-    label {
-      cursor: pointer;
+      white-space: break-spaces;
     }
 
-    input[type="file"] {
-      display: none;
+    .vouch__form {
+      text-align: center;
+
+      label {
+        cursor: pointer;
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .vouch__upload-icon {
+        @include icon-button(100px);
+
+        margin: 0 auto;
+        font-size: 3rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
 
-    .vouch__upload-icon {
-      @include icon-button(100px);
+    &[data-format="openkeychain"] {
+      text-align: center;
 
-      margin: 0 auto;
-      font-size: 3rem;
+      svg {
+        margin: 2rem auto;
+        width: 60%;
+      }
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      .vouch__form {
+        width: 100%;
+        height: 100%;
+        display: flex;
+
+
+        textarea {
+          background-color: $ACCENT_BACKGROUND_COLOR;
+          color: $TEXT_COLOR;
+
+          border: 1px solid $LINK_COLOR;
+          border-radius: 5px;
+
+          padding: 10px;
+          margin: 0 auto;
+
+          width: 100%;
+          resize: none;
+        }
+
+        .vouch__submit {
+          background-color: transparent;
+          border: 0;
+          margin: 0 auto;
+          color: $TEXT_COLOR;
+          cursor: pointer;
+
+          .vouch__upload-icon {
+            @include icon-button(100px);
+
+            margin: 0 auto;
+            font-size: 3rem;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+      }
     }
   }
 }

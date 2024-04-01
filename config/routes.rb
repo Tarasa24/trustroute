@@ -12,7 +12,6 @@ Rails.application.routes.draw do
     collection do
       delete :destroy
       post :set_development_key, if: -> { Rails.env.development? }
-      get :set_key
     end
     member do
       post :signature_challenge

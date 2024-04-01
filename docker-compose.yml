@@ -1,6 +1,4 @@
-version: '3.1'
 name: trustroute
-
 services:
   neo4j:
     image: neo4j:latest
@@ -31,6 +29,8 @@ services:
       - cluster.routing.allocation.disk.threshold_enabled=false
     ports:
       - 9200:9200
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
 
   redis:
     image: redis:latest
@@ -39,3 +39,4 @@ services:
       - 6379:6379
 volumes:
   neo4j-data:
+  esdata:
