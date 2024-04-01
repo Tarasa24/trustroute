@@ -16,11 +16,11 @@ class GPGPackets
   end
 
   def public_key?
-    @packets.first.start_with?(":public key packet:")
+    @packets.first&.start_with?(":public key packet:")
   end
 
   def signature?
-    @packets.first.start_with?(":signature packet:")
+    @packets.first&.start_with?(":signature packet:")
   end
 
   def signature_packets
