@@ -54,13 +54,14 @@ class KeysController < ApplicationController
   end
 
   def vouch_for
-    public_key = params[:public_key_file].read
+    public_key = params[:public_key_file]&.read || params[:public_key]
     service = VouchService.new(current_key, @key, public_key)
     service.call
     if service.success?
       redirect_to key_path(@key), notice: "Key vouched for successfully"
     else
-      redirect_to vouch_form_key_path(@key), alert: "Vouch failed: #{service.error_key}: #{service.error_message}"
+      redirect_to vouch_form_key_path(@key, know: "1", trust: "1", verify: "1"),
+        alert: "Vouch failed: #{service.error_key}: #{service.error_message}"
     end
   end
 

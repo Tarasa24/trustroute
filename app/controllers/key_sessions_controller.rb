@@ -35,7 +35,7 @@ class KeySessionsController < ApplicationController
       return redirect_to new_key_session_path, alert: "Nonce not found or expired, please try again."
     end
 
-    signature = GPGME::Data.new(params[:signature].is_a?(String) ? params[:signature] : params[:signature].read)
+    signature = GPGME::Data.new(params[:signature_file]&.read || params[:signature])
     service = SignatureChallengeService.new(key, nonce, signature)
     service.call
     if service.success?
