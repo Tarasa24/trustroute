@@ -15,7 +15,7 @@
 
         = form_with url: signature_challenge_key_session_path(key), method: :post,
           class: 'signature-challenge__form', multipart: true, action: :upload do
-          = label_tag :signature, '' do
+          = label_tag :signature_file, '' do
             .fa-solid.fa-upload.signature-challenge__upload-icon
             span Sign and upload the signature
           = file_field_tag :signature_file, accept: 'application/pgp-keys', required: true
