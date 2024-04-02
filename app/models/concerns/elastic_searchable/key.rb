@@ -13,8 +13,8 @@ module ElasticSearchable::Key
       as_json(
         root: false,
         except: %i[fingerprint],
-        methods: %i[name email sha long_sha keyid],
-        include: {identities: {only: %i[info provider]}}
+        methods: %i[name sha long_sha keyid],
+        include: {identities: {only: %i[info provider email]}}
       )
     end
 
@@ -42,7 +42,6 @@ module ElasticSearchable::Key
         }
       } do
       mappings dynamic: false do
-        indexes :email, type: :text, analyzer: "edge_ngram_analyzer", search_analyzer: "standard"
         indexes :name, type: :text, analyzer: "edge_ngram_analyzer", search_analyzer: "standard"
         indexes :sha, type: :keyword, fields: {prefix: {type: :text, analyzer: "prefix_analyzer"}}
         indexes :long_sha, type: :keyword, fields: {prefix: {type: :text, analyzer: "prefix_analyzer"}}
@@ -50,6 +49,7 @@ module ElasticSearchable::Key
         indexes :identities do
           indexes :provider, type: :keyword
           indexes :info, type: :object, dynamic: true
+          indexes :email, type: :text, analyzer: "edge_ngram_analyzer", search_analyzer: "standard"
         end
       end
     end

@@ -1,6 +1,8 @@
 class EmailVerificationMailer < ApplicationMailer
-  def send(email, pin)
-    @pin = pin
-    mail(to: email, subject: "TrustRoute Email Verification")
+  default template_path: "email_identities"
+
+  def verification_email
+    @pin = params[:pin]
+    mail(to: params[:email], subject: "TrustRoute Email Verification")
   end
 end

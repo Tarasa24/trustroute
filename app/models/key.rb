@@ -23,8 +23,8 @@ class Key
     where(fingerprint: fingerprints.map { |f| f.to_i(16) })
   end
 
-  def email
-    query_as(:k).match("(k)-[:has_identity]->(i:EmailIdentity)").order("i.created_at DESC").limit(1).pluck("i.email").first
+  def email_identities
+    query_as(:k).match("(k)-[:has_identity]->(i:EmailIdentity)").pluck(:i)
   end
 
   def sha

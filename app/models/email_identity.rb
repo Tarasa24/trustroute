@@ -12,9 +12,11 @@ class EmailIdentity
   has_one :in, :key, type: :has_identity, model_class: :Key
 
   def send_verification_email
-    email_verification_pin = Redis.current
-      .setex("email_verification_pin_#{id}", 1.hour, SecureRandom.random_number(10**6).to_s.rjust(6, "0"))
-    EmailVerificationMailer.send(email, email_verification_pin).deliver_now
+    return if validated
+
+    email_verification_pin = SecureRandom.random_number(10**6).to_s.rjust(6, "0")
+    redis.setex("email_verification_pin_#{id}", 1.hour, email_verification_pin)
+    EmailVerificationMailer.with(email:, pin: email_verification_pin).verification_email.deliver_now
   end
 
   def validate_email(pin)
@@ -26,6 +28,6 @@ class EmailIdentity
   private
 
   def email_verification_pin
-    Redis.current.getdel("email_verification_pin_#{id}")
+    redis.getdel("email_verification_pin_#{id}")
   end
 end

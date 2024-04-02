@@ -23,9 +23,14 @@
       .profile__emails
         .fa-solid.fa-envelope
         ul
-          li = @key.email
-          - @key.aliases.each do |uid|
-            li = uid.email
+          - @key.email_identities.each do |identity|
+            li
+              span = identity.email
+              - if identity.validated?
+                .fa-solid.fa-check-circle
+              - elsif @key == current_key
+                a.profile__email__verify href=edit_email_identity_path(identity)
+                  .fa-solid.fa-certificate
 
       ruby:
         non_email_identities = @key.identities.to_a.reject {|i| i.is_a? EmailIdentity }
