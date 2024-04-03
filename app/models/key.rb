@@ -84,6 +84,8 @@ class Key
       raise "Expected GPGME::Key, got #{keyring_entry.class}"
     end
 
+    @keyring_entry = keyring_entry
+
     key = Key.new
     key.fingerprint = keyring_entry.fingerprint.to_i(16)
 
