@@ -28,9 +28,6 @@
               span = identity.email
               - if identity.validated?
                 .fa-solid.fa-check-circle
-              - elsif @key == current_key
-                a.profile__email__verify href=edit_email_identity_path(identity)
-                  .fa-solid.fa-certificate
 
       ruby:
         non_email_identities = @key.identities.to_a.reject {|i| i.is_a? EmailIdentity }
@@ -39,7 +36,7 @@
           li = render 'identity', identity:
         - if current_key && @key == current_key
           li
-            a.profile__identity.profile__identity--add href="#"
+            a.profile__identity.profile__identity--add href=edit_key_path(@key)
               .profile__identity__icon
                 .fa-solid.fa-plus
     .profile__management

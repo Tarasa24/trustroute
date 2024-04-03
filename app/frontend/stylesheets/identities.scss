@@ -1,0 +1,51 @@
+.identities {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .identities__variants {
+    display: flex;
+    gap: 1rem;
+
+    h2 {
+      .fa-plus {
+        margin-right: 0.5rem;
+      }
+    }
+
+
+    ul {
+      padding: 0;
+      margin: 0;
+
+      li {
+        list-style: none;
+      }
+    }
+
+    .button {
+      background-color: $BUTTON_COLOR;
+      color: $TEXT_COLOR;
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+
+      &:disabled {
+        background-color: $NODE_COLOR;
+        color: black;
+      }
+    }
+
+    input[type="text"] {
+      background-color: $ACCENT_BACKGROUND_COLOR;
+      color: $TEXT_COLOR;
+      border: 1px solid $BORDER_COLOR;
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+  }
+}
