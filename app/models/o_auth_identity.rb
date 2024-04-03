@@ -21,4 +21,10 @@ class OAuthIdentity
   validates :expires_at, presence: true, if: -> { encrypted_refresh_token.present? }
 
   has_one :in, :key, type: :has_identity, model_class: :Key
+
+  %i[name nickname].each do |method|
+    define_method(method) do
+      info&.with_indifferent_access&.[](method.to_s)
+    end
+  end
 end

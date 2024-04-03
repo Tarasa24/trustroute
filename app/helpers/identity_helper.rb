@@ -8,14 +8,23 @@ module IdentityHelper
   end
 
   def identity_name(identity)
-    identity.info["name"]
+    identity.name
   end
 
   def identity_supliment(identity)
-    identity.info["nickname"]
+    identity.nickname
   end
 
   def identity_link(identity)
-    "#"
+    case identity.provider
+    when :github
+      "https://github.com/#{identity.nickname}"
+    when :twitter2
+      "https://twitter.com/#{identity.nickname}"
+    when :discord
+      ""
+    else
+      "#"
+    end
   end
 end

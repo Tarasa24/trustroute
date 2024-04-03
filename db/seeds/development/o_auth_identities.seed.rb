@@ -7,10 +7,10 @@ Key.all.to_a.each do |key|
     uid: SecureRandom.hex(16),
     encrypted_token: SecureRandom.hex(16),
     info: {
-      name: FFaker::Name.name,
-      nickname: FFaker::Internet.user_name,
-      email: FFaker::Internet.email
+      name: key.name,
+      nickname: FFaker::Internet.user_name
     },
-    key: key
+    key: key,
+    validated: true
   )
 end
