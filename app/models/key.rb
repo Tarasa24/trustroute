@@ -16,6 +16,7 @@ class Key
   after_create :create_email_identity
 
   delegate :name, to: :keyring_entry
+  delegate :email, to: :keyring_entry
   delegate :comment, to: :keyring_entry
 
   scope :by_query, ->(query) do
@@ -23,8 +24,20 @@ class Key
     where(fingerprint: fingerprints.map { |f| f.to_i(16) })
   end
 
+  def oauth_identities
+    query_as(:k).match("(k)-[:has_identity]->(i:OAuthIdentity)").pluck(:i).sort_by(&:created_at)
+  end
+
   def email_identities
-    query_as(:k).match("(k)-[:has_identity]->(i:EmailIdentity)").pluck(:i)
+    query_as(:k).match("(k)-[:has_identity]->(i:EmailIdentity)").pluck(:i).sort do |a, b|
+      if a.validated? && !b.validated?
+        -1
+      elsif !a.validated? && b.validated?
+        1
+      else
+        a.created_at <=> b.created_at
+      end
+    end
   end
 
   def sha
