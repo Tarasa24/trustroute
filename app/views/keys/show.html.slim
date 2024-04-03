@@ -25,9 +25,10 @@
         ul
           - @key.email_identities.each do |identity|
             li
-              span = identity.email
+              = content_tag identity.validated? ? :a : :span, href: "mailto:#{identity.email}"
+                = identity.email
               - if identity.validated?
-                .fa-solid.fa-check-circle
+                .fa-solid.fa-check-circle title="Validated"
 
       ruby:
         non_email_identities = @key.identities.to_a.reject {|i| i.is_a? EmailIdentity }
