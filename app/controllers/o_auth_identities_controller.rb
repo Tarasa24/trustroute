@@ -11,17 +11,16 @@ class OAuthIdentitiesController < ApplicationController
       identity.refresh_token = user_info.credentials.refresh_token
     end
 
-    puts user_info.info.to_h
-    identity.info = user_info.info.to_h.slice("nickname", "name", "description")
+    identity.info = user_info.info.to_json
+    identity.uid = user_info.uid
     identity.validated = true
 
     unless identity.valid?
-      flash[:error] = identity.errors.full_messages.join(", ")
-      return redirect_to oauth_identities_new_path
+      return redirect_to edit_key_path(current_key),
+        flash: {error: "Failed to save identity #{identity.errors.full_messages.join(", ")}"}
     end
 
-    return redirect_to oauth_identities_new_path, flash: {error: "Failed to save identity"} unless identity.save
-
-    redirect_to root_path
+    identity.save!
+    redirect_to key_path(current_key)
   end
 end
