@@ -8,5 +8,5 @@
             = highlight("#{record.name} (#{record.email}) - #{record.sha}",
                         [@query, @query.downcase, @query.upcase])
             .search-bar__result__identities
-              - record.identities.each do |identity|
+              - record.oauth_identities.each do |identity|
                 = identity_icon(identity)

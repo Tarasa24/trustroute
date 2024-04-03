@@ -1,5 +1,5 @@
 # Remove all keys
-Key.delete_all
+Key.destroy_all
 
 def generate_keyring_entry(i)
   name = FFaker::Name.name

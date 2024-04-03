@@ -7,22 +7,37 @@ class Key
   include ElasticSearchable::Key
 
   property :fingerprint, type: Integer
-  property :email, type: String
-
   validates :fingerprint, presence: true, uniqueness: true
-  validates :email, presence: true, uniqueness: true
 
   has_many :out, :vouches_for, rel_class: :VouchRelationship
-  has_many :out, :identities, rel_class: :HasIdentityRelationship
+  has_many :out, :identities, rel_class: :HasIdentityRelationship, dependent: :destroy
 
   after_destroy :remove_from_keyring!
+  after_create :create_email_identity
 
   delegate :name, to: :keyring_entry
+  delegate :email, to: :keyring_entry
   delegate :comment, to: :keyring_entry
 
   scope :by_query, ->(query) do
     fingerprints = GPGME::Key.find(:public, query).map(&:fingerprint)
     where(fingerprint: fingerprints.map { |f| f.to_i(16) })
+  end
+
+  def oauth_identities
+    query_as(:k).match("(k)-[:has_identity]->(i:OAuthIdentity)").pluck(:i).sort_by(&:created_at)
+  end
+
+  def email_identities
+    query_as(:k).match("(k)-[:has_identity]->(i:EmailIdentity)").pluck(:i).sort do |a, b|
+      if a.validated? && !b.validated?
+        -1
+      elsif !a.validated? && b.validated?
+        1
+      else
+        a.created_at <=> b.created_at
+      end
+    end
   end
 
   def sha
@@ -69,9 +84,10 @@ class Key
       raise "Expected GPGME::Key, got #{keyring_entry.class}"
     end
 
+    @keyring_entry = keyring_entry
+
     key = Key.new
     key.fingerprint = keyring_entry.fingerprint.to_i(16)
-    key.email = keyring_entry.email
 
     key
   end
@@ -80,5 +96,12 @@ class Key
 
   def remove_from_keyring!
     keyring_entry&.delete!
+  end
+
+  def create_email_identity
+    # Initial email identities from the key's UIDs
+    keyring_entry.uids.each do |uid|
+      EmailIdentity.create!(email: uid.email, key: self) if uid.email.present?
+    end
   end
 end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :keys, only: [:new, :create, :show, :edit, :update] do
+  resources :keys, only: %i[new create show edit update] do
     member do
       get :dump
       get :vouch_checklist
@@ -8,13 +8,19 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :key_sessions, only: [:new, :create] do
+  resources :key_sessions, only: %i[new create] do
     collection do
       delete :destroy
       post :set_development_key, if: -> { Rails.env.development? }
     end
     member do
       post :signature_challenge
+    end
+  end
+
+  resources :email_identities, only: %i[edit create] do
+    member do
+      patch :validate
     end
   end
 

@@ -1,16 +1,45 @@
+.identities
+  h1 Manage identities for #{@key.name}
 
-h2 
-  = "Edit key #{@key.sha}"
+  .identities__variants
+    .identitites__variant
+      h2
+        .fa-solid.fa-plus
+        | oAuth
 
-- if Rails.env.development?
-  = form_tag('/oauth_identities/developer', method: 'post', data: {turbo: false}) do 
-    button type="submit" class="btn btn-primary" Add Developer Identity
+      ul
+        li
+          = form_tag('/oauth_identities/github', method: 'post', data: {turbo: false}) do 
+            button.button type="submit"
+              .fa-brands.fa-github
+              | GitHub Identity
+        li 
+          = form_tag('/oauth_identities/twitter2', method: 'post', data: {turbo: false}) do 
+            button.button type="submit"
+              .fa-brands.fa-x-twitter
+              | Twitter Identity
+        li 
+          = form_tag('/oauth_identities/discord', method: 'post', data: {turbo: false}) do 
+            button.button type="submit"
+              .fa-brands.fa-discord
+              | Discord Identity
+        li
+          button.button type="button" disabled="disabled" TBA
+    .identitites__variant.identitites__variant--email
+      h2
+        .fa-solid.fa-plus
+        | Email
 
-= form_tag('/oauth_identities/github', method: 'post', data: {turbo: false}) do 
-  button type="submit" class="btn btn-primary" Add GitHub Identity
+      = form_with url: email_identities_path, method: :post do |f|
+        = f.text_field :email, placeholder: "Email", required: true
+        = f.submit "Create", class: "button"
 
-= form_tag('/oauth_identities/twitter2', method: 'post', data: {turbo: false}) do 
-  button type="submit" class="btn btn-primary" Add Twitter Identity
+      hr
 
-= form_tag('/oauth_identities/discord', method: 'post', data: {turbo: false}) do 
-  button type="submit" class="btn btn-primary" Add Discord Identity
+      ul
+        - @key.email_identities.each do |identity|
+          - next if identity.validated?
+          li
+            .button
+              .fa-solid.fa-envelope
+              = link_to "Validate #{identity.email}", edit_email_identity_path(identity)

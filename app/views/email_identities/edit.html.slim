@@ -1,0 +1,6 @@
+.email-verification
+  h1 Verification email has been sent to #{@identity.email}
+
+  = form_with url: validate_email_identity_path(id: @identity.id), method: :patch do |f|
+    = f.text_field :pin, placeholder: 'PIN', maxlength: 6, minlength: 6, required: true
+    = f.submit 'Verify'

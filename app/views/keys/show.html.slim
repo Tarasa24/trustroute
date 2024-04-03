@@ -23,20 +23,22 @@
       .profile__emails
         .fa-solid.fa-envelope
         ul
-          li = @key.email
-          - @key.aliases.each do |uid|
-            li = uid.email
+          - @key.email_identities.each do |identity|
+            li
+              = content_tag identity.validated? ? :a : :span, href: "mailto:#{identity.email}"
+                = identity.email
+              - if identity.validated?
+                .fa-solid.fa-check-circle title="Validated"
 
       ruby:
-        non_email_identities = @key.identities.to_a.reject {|i| i.is_a? EmailIdentity }
       ul.profile__identities
-        - non_email_identities.each do |identity|
+        - @key.oauth_identities.each do |identity|
           li = render 'identity', identity:
         - if current_key && @key == current_key
           li
-            a.profile__identity.profile__identity--add href="#"
+            a.profile__identity.profile__identity--add href=edit_key_path(@key)
               .profile__identity__icon
-                .fa-solid.fa-plus
+                .fa-solid.fa-edit
     .profile__management
       - if current_key.present? && @key != current_key
         .button

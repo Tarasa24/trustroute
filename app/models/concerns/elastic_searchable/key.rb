@@ -14,8 +14,25 @@ module ElasticSearchable::Key
         root: false,
         except: %i[fingerprint],
         methods: %i[name sha long_sha keyid],
-        include: {identities: {only: %i[info provider]}}
+        include: {
+          indexable_oauth_identities: {
+            only: %i[info provider]
+          },
+          indexable_email_identities: {
+            only: %i[email]
+          }
+        }
       )
+    end
+
+    private
+
+    def indexable_oauth_identities
+      oauth_identities.select(&:validated?)
+    end
+
+    def indexable_email_identities
+      email_identities.select(&:validated?)
     end
 
     settings index: {number_of_shards: 1},
@@ -42,14 +59,16 @@ module ElasticSearchable::Key
         }
       } do
       mappings dynamic: false do
-        indexes :email, type: :text, analyzer: "edge_ngram_analyzer", search_analyzer: "standard"
         indexes :name, type: :text, analyzer: "edge_ngram_analyzer", search_analyzer: "standard"
         indexes :sha, type: :keyword, fields: {prefix: {type: :text, analyzer: "prefix_analyzer"}}
         indexes :long_sha, type: :keyword, fields: {prefix: {type: :text, analyzer: "prefix_analyzer"}}
         indexes :keyid, type: :keyword, fields: {prefix: {type: :text, analyzer: "prefix_analyzer"}}
-        indexes :identities do
+        indexes :indexable_oauth_identities do
           indexes :provider, type: :keyword
           indexes :info, type: :object, dynamic: true
+        end
+        indexes :indexable_email_identities do
+          indexes :email, type: :text, analyzer: "edge_ngram_analyzer", search_analyzer: "standard"
         end
       end
     end
