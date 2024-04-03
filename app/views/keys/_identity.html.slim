@@ -1,7 +1,10 @@
-a.profile__identity href=identity_link(identity)
-  .profile__identity__icon 
+= content_tag (identity_link(identity).present? ? :a : :span), class: 'profile__identity', href: identity_link(identity), target: '_blank' do
+  .profile__identity__icon
     = identity_icon(identity)
   .profile__identity__content
     .profile__identity__name
       = identity_name(identity)
-    .profile__identity__supliment == identity_supliment(identity)
+    .profile__identity__supliment
+      == identity_supliment(identity)
+  - if identity.validated?
+    .fa-solid.fa-check-circle title="Validated"
