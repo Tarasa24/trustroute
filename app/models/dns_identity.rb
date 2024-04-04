@@ -14,6 +14,24 @@ class DNSIdentity
 
   before_create :generate_txt_record
 
+  def validate
+    return true if validated?
+
+    # Check DNS TXT record for the domain
+    Resolv::DNS.open do |dns|
+      byebug
+      txt = dns.getresources("_trustroute-challenge.#{domain}", Resolv::DNS::Resource::IN::TXT).map(&:data).join
+      return false if txt != txt_record
+    end
+
+    update(validated: true)
+  ensure
+    unless validated?
+      generate_txt_record
+      save
+    end
+  end
+
   private
 
   def generate_txt_record

@@ -1,0 +1,24 @@
+.dns-verification
+  h1 Please verify your DNS identity for #{@identity.domain}
+
+  span Send a DNS TXT record with the following content
+
+  table
+    tr
+      td
+        | Type
+      td
+        | Name
+      td
+        | Content
+    tr
+      td
+        | TXT
+      td
+        | _trustroute-challenge.#{@identity.domain}
+      td
+        | #{@identity.txt_record}
+
+  .button
+    .fa-solid.fa-check-to-slot
+    = link_to 'I have added the record', validate_dns_identity_path(@identity), data: { 'turbo-method': 'patch' }

@@ -24,6 +24,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :dns_identities, only: %i[edit create] do
+    member do
+      patch :validate
+    end
+  end
+
   root "graph#index"
   get "graph/data", to: "graph#data"
   get "graph/path/:from/:to", to: "graph#path"
