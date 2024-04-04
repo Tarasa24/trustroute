@@ -1,0 +1,50 @@
+.dns-verification {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0 auto;
+
+  table {
+    border: 1px solid $TEXT_COLOR;
+    margin: 20px 0;
+
+    td {
+      padding: 10px;
+    }
+  }
+}
+
+.email-verification {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0 auto;
+
+  form {
+    text-align: center;
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+
+      border: 1px solid $TEXT_COLOR;
+      border-radius: 5px;
+      background-color: $ACCENT_BACKGROUND_COLOR;
+
+      font-size: 2rem;
+      color: $TEXT_COLOR;
+    }
+
+    button[type="submit"] {
+      @include icon-button(60px);
+      font-size: 2rem;
+
+      margin: 10px auto;
+    }
+  }
+}
