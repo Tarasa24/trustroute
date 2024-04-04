@@ -24,8 +24,5 @@ class DNSIdentity
     end
 
     update(validated: true)
-  ensure
-    # Reset the txt_record challenge if validation failed
-    update(txt_record: SecureRandom.hex(32)) unless validated?
   end
 end
