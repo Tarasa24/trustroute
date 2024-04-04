@@ -22,5 +22,6 @@ class DNSIdentitiesController < ApplicationController
     @identity = DNSIdentity.find(params[:id])
 
     redirect_to key_path(current_key), alert: "Identity not found" unless @identity && @identity.key == current_key
+    redirect_to key_path(current_key), alert: "Identity already verified" if @identity.validated?
   end
 end

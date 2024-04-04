@@ -6,17 +6,16 @@ class DNSIdentity
 
   property :validated, type: Boolean, default: false
   property :domain, type: String
-  property :txt_record, type: String
+  property :txt_record, type: String, default: -> { SecureRandom.hex(32) }
 
   validates :domain, presence: true, uniqueness: true
+  validates :txt_record, presence: true
 
   has_one :in, :key, type: :has_identity, model_class: :Key
 
-  before_create :generate_txt_record
-
   def validate
     return true if validated?
-    return update(validated: true) if Rails.env.test? && domain.end_with?(".test")
+    return update(validated: true) if Rails.env.development? && domain.end_with?(".test")
 
     # Check DNS TXT record for the domain
     Resolv::DNS.open do |dns|
@@ -26,15 +25,7 @@ class DNSIdentity
 
     update(validated: true)
   ensure
-    unless validated?
-      generate_txt_record
-      save
-    end
-  end
-
-  private
-
-  def generate_txt_record
-    self.txt_record = SecureRandom.hex(32)
+    # Reset the txt_record challenge if validation failed
+    update(txt_record: SecureRandom.hex(32)) unless validated?
   end
 end
