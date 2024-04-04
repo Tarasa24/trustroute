@@ -16,6 +16,8 @@
   OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
 - 'CREATE CONSTRAINT `constraint_3a5a7e3a` FOR (n:`Key`) REQUIRE (n.`uuid`) IS UNIQUE
   OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
+- 'CREATE CONSTRAINT `constraint_516aa0bf` FOR (n:`DNSIdentity`) REQUIRE (n.`uuid`)
+  IS UNIQUE OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
 - 'CREATE CONSTRAINT `constraint_53288765` FOR (n:`EmailIdentity`) REQUIRE (n.`uuid`)
   IS UNIQUE OPTIONS {indexConfig: {}, indexProvider: ''range-1.0''}'
 - 'CREATE CONSTRAINT `constraint_b11a67e4` FOR (n:`OAuthIdentity`) REQUIRE (n.`uuid`)
@@ -31,3 +33,4 @@
 - '20240221212919'
 - '20240221212930'
 - '20240221213649'
+- '20240403234800'

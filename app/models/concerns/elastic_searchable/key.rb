@@ -20,6 +20,9 @@ module ElasticSearchable::Key
           },
           indexable_email_identities: {
             only: %i[email]
+          },
+          indexable_dns_identities: {
+            only: %i[domain]
           }
         }
       )
@@ -33,6 +36,10 @@ module ElasticSearchable::Key
 
     def indexable_email_identities
       email_identities.select(&:validated?)
+    end
+
+    def indexable_dns_identities
+      dns_identities.select(&:validated?)
     end
 
     settings index: {number_of_shards: 1},
@@ -69,6 +76,9 @@ module ElasticSearchable::Key
         end
         indexes :indexable_email_identities do
           indexes :email, type: :text, analyzer: "edge_ngram_analyzer", search_analyzer: "standard"
+        end
+        indexes :indexable_dns_identities do
+          indexes :domain, type: :text, analyzer: "edge_ngram_analyzer", search_analyzer: "standard"
         end
       end
     end

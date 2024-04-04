@@ -23,6 +23,7 @@ gem "vite_rails", "~> 3.0"
 gem "jbuilder"
 gem "slim-rails", "~> 3.6"
 gem "turbo-rails"
+gem "rqrcode"
 
 # Eco system
 gem "bootsnap", require: false
@@ -35,7 +36,7 @@ gem "omniauth-twitter2"
 gem "omniauth-discord"
 gem "elasticsearch-rails"
 gem "elasticsearch-model"
-gem "rqrcode"
+gem "resolv"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]

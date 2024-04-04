@@ -40,6 +40,10 @@ class Key
     end
   end
 
+  def dns_identities
+    query_as(:k).match("(k)-[:has_identity]->(i:DNSIdentity)").pluck(:i).sort_by(&:created_at)
+  end
+
   def sha
     fingerprint.to_s(16).last(8)
   end

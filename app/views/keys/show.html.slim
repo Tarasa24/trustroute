@@ -32,7 +32,7 @@
 
       ruby:
       ul.profile__identities
-        - @key.oauth_identities.each do |identity|
+        - (@key.oauth_identities + @key.dns_identities).each do |identity|
           li = render 'identity', identity:
         - if current_key && @key == current_key
           li

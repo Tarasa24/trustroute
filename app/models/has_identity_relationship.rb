@@ -4,5 +4,5 @@ class HasIdentityRelationship
   type "has_identity"
 
   from_class :Key
-  to_class %i[OAuthIdentity EmailIdentity]
+  to_class %i[OAuthIdentity EmailIdentity DNSIdentity]
 end

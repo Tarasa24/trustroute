@@ -25,6 +25,7 @@
               | Discord Identity
         li
           button.button type="button" disabled="disabled" TBA
+
     .identitites__variant.identitites__variant--email
       h2
         .fa-solid.fa-plus
@@ -35,7 +36,6 @@
         = f.submit "Create", class: "button"
 
       hr
-
       ul
         - @key.email_identities.each do |identity|
           - next if identity.validated?
@@ -43,3 +43,20 @@
             .button
               .fa-solid.fa-envelope
               = link_to "Validate #{identity.email}", edit_email_identity_path(identity)
+    .identitites__variant
+      h2
+        .fa-solid.fa-plus
+        | DNS
+
+      = form_with url: dns_identities_path, method: :post do |f|
+        = f.text_field :domain, placeholder: "Domain", required: true
+        = f.submit "Create", class: "button"
+
+      hr
+      ul
+        - @key.dns_identities.each do |identity|
+          - next if identity.validated?
+          li
+            .button
+              .fa-solid.fa-globe
+              = link_to "Validate #{identity.domain}", edit_dns_identity_path(identity)
