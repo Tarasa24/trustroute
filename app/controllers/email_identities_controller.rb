@@ -12,7 +12,9 @@ class EmailIdentitiesController < ApplicationController
   end
 
   def validate
-    redirect_to key_path(current_key), flash: {error: "Invalid pin"} unless @identity.validate_email(params[:pin])
+    unless @identity.validate_email(params[:pin])
+      return redirect_to edit_email_identity_path(@identity), flash: {error: "Invalid PIN"}
+    end
 
     redirect_to key_path(current_key), flash: {success: "Email validated"}
   end
