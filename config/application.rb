@@ -5,6 +5,7 @@ require "active_graph/railtie"
 require "redis"
 require "connection_pool"
 require "rqrcode"
+require "resolv"
 
 Bundler.require(*Rails.groups)
 

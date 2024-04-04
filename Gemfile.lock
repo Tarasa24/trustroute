@@ -278,6 +278,7 @@ GEM
     regexp_parser (2.9.0)
     reline (0.3.7)
       io-console (~> 0.5)
+    resolv (0.4.0)
     rexml (3.2.6)
     rqrcode (2.2.0)
       chunky_png (~> 1.0)
@@ -420,6 +421,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails (~> 7.0.7)
   redis (~> 4.0)
+  resolv
   rqrcode
   rspec-rails (~> 6.0.0)
   rubocop
