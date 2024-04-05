@@ -22,18 +22,15 @@ class OAuthIdentity
 
   has_one :in, :key, type: :has_identity, model_class: :Key
 
-  def info
-    return super&.with_indifferent_access if super.is_a?(Hash)
-
-    super
-  end
-
   def name
-    info[:name]
+    info.with_indifferent_access[:name] ||
+      info.with_indifferent_access[:global_name]
   end
 
   def nickname
-    info[:nickname] || info[:login]
+    info.with_indifferent_access[:nickname] ||
+      info.with_indifferent_access[:login] ||
+      info.with_indifferent_access[:username]
   end
 
   def perform_token_refresh
