@@ -14,10 +14,6 @@ function registerListeners() {
         searchInput.closest("form").requestSubmit();
     }, 100);
   });
-
-  document.addEventListener("turbo:load", () => {
-    document.removeEventListener("click", clickOutsideSearchBar);
-  });
 }
 
 document.addEventListener("DOMContentLoaded", () => registerListeners());
