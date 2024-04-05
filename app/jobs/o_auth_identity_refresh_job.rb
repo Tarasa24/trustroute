@@ -1,4 +1,4 @@
-class OAuthRefreshJob < ApplicationJob
+class OAuthIdentityRefreshJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
