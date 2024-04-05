@@ -1,3 +1,8 @@
 = turbo_frame_tag :flash do
   - flash.each do |name, msg|
-    = content_tag :div, msg, class: "alert alert-#{name}"
+    .flash class="flash--#{name}"
+      .flash__content
+        .fa-solid class=flash_icon(name)
+        p = msg
+      button class="flash__close" aria-label="Close" onclick="this.parentElement.remove();"
+        .fa-solid.fa-times
