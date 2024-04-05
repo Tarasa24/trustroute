@@ -6,7 +6,6 @@ ruby:
     .freeze
 
 .signup
-
   h1 Sign up
   = form_with url: keys_path, class: 'signup__form' do |f|
     = f.text_field :identifier, autofocus: true, required: true, placeholder: 'Identifier'
@@ -18,7 +17,7 @@ ruby:
 
   h2 or
 
-  = form_with url: new_key_path, class: 'signup__form' do |f|
+  = form_with url: keys_path, class: 'signup__form' do |f|
     = f.label :public_key, '' do
       .signup__upload-icon
         .fa-solid.fa-upload
