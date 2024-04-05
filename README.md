@@ -1,5 +1,5 @@
 <center>
-<img align="left" src="https://github.com/Tarasa24/trustroute/blob/master/public/img/logo_400x400.png?raw=true" height="128">
+<img align="left" src="https://github.com/Tarasa24/trustroute/blob/main/public/img/logo_400x400.png?raw=true" height="128">
 <h1>Trustroute</h1>
 Ruby on Rails application for visualizing and managing web of trust of PGP public keys.
 </center>
