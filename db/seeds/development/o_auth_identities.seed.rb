@@ -11,6 +11,6 @@ Key.all.to_a.each do |key|
       nickname: FFaker::Internet.user_name
     },
     key: key,
-    validated: true
+    validated: false
   )
 end
