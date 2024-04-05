@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# Key model
 class Key
   include ActiveGraph::Node
   include ActiveGraph::Timestamps

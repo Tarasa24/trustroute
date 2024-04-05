@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # PORO to represent graph data
 # It ensures that provided keys have their corresponding links
 # @see GraphDataSerializer

@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# Who vouches for whom and with what signature?
 class VouchRelationship
   include ActiveGraph::Relationship
 
