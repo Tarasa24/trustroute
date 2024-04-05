@@ -20,9 +20,21 @@ nav {
 
     &:first-child {
       a {
-        line-height: 0;
-        font-size: 0;
-        color: transparent;
+        display: flex;
+        align-items: center;
+
+        h1 {
+          margin: 0;
+          margin-left: 0.5rem;
+        }
+      }
+
+      .fa-solid {
+        font-size: calc($NAVBAR_HEIGHT - 10px);
+      }
+
+      .fa-circle-nodes {
+        transform: rotate(-10deg);
       }
     }
   }
@@ -30,5 +42,13 @@ nav {
   a {
     text-decoration: none;
     color: $TEXT_COLOR;
+
+    .fa-solid {
+      margin-left: 0.5rem;
+    }
+  }
+
+  .logo {
+    height: calc($NAVBAR_HEIGHT - 2px);
   }
 }

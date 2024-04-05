@@ -5,20 +5,13 @@
   justify-content: space-between;
   height: 100%;
 
-  .profile__close-button {
-    position: absolute;
-    top: 2px;
-    right: 10px;
-    color: $TEXT_COLOR;
-    font-size: 2em;
-  }
-
   .profile__info {
     flex: 1;
 
     .profile__card {
       display: flex;
       flex-direction: row;
+      align-items: center;
     }
 
     .dot {
@@ -175,7 +168,7 @@
       display: block;
       overflow: scroll;
       overflow-x: hidden;
-      height: calc(100vh - 7em);
+      height: calc(100vh - 8rem);
 
       pre {
         line-height: 1;

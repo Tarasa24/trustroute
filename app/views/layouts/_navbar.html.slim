@@ -1,10 +1,19 @@
 nav
   ul
     li
-      = link_to "Home", root_path, class: "dot dot--large", data: { turbo: false }
+      a href=root_path data= { turbo: false }
+        - if current_page?(root_path)
+          = image_tag "/img/logo.svg", alt: "Logo", class: "logo"
+          h1 Trustroute
+        - else
+          .fa-solid.fa-circle-nodes
     - if current_key
       li
-        = link_to "Log out", key_sessions_path, data: { "turbo-method": :delete }
+        a href=key_sessions_path data= { "turbo-method": :delete }
+          | Log out
+          .fa-solid.fa-sign-out-alt
     - elsif !current_page?(new_key_session_path)
       li
-        = link_to "Log in", new_key_session_path
+        a href=new_key_session_path
+          | Log in
+          .fa-solid.fa-sign-in-alt

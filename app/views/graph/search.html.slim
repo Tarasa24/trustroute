@@ -1,6 +1,6 @@
 = turbo_frame_tag "search_results", target: "_top"
-  - if @results.present?
-    ul.search-bar__results
+  ul.search-bar__results
+    - if @results.present?
       - @results.each do |record|
         li.search-bar__result
           a href=key_path(record)
@@ -10,3 +10,7 @@
             .search-bar__result__identities
               - (record.oauth_identities + record.dns_identities).each do |identity|
                 = identity_icon(identity)
+    - else
+      li.search-bar__result.search-bar__result--empty
+        .fa-solid.fa-search
+        | No results found.
