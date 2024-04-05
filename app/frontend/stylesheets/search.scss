@@ -6,13 +6,13 @@
   width: 60%;
   z-index: 1;
 
-  margin-top: 0.5rem;
-  background-color: $ACCENT_BACKGROUND_COLOR;
+  margin-top: 1.15rem;
 
   .search-bar__input {
     padding: 0.5rem;
-    border: 1px solid $TEXT_COLOR;
+    border: 1px solid $LINK_COLOR;
     border-radius: 0.5rem;
+    background-color: $ACCENT_BACKGROUND_COLOR;
 
     input {
       background-color: transparent;
@@ -30,14 +30,15 @@
   }
 
   .search-bar__results {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: rgba($TEXT_COLOR, 0.5);
+    background-color: rgba($ACCENT_BACKGROUND_COLOR, 0.5);
 
-    border: 1px solid $TEXT_COLOR;
+    border: 1px solid $LINK_COLOR;
     border-top: none;
+    border-radius: 0 0 0.5rem 0.5rem;
 
-    margin: 0;
+    margin-top: -0.5rem;
     padding: 0;
+    padding-top: 0.5rem;
     list-style-type: none;
 
     .search-bar__result {
@@ -50,12 +51,20 @@
         align-items: center;
 
         &:hover {
-          text-decoration: underline;
+          .dot {
+            background-color: $TARGET_NODE_COLOR;
+          }
         }
 
         .search-bar__result__identities {
           margin-left: 0.5rem;
           color: rgba($TEXT_COLOR, 0.5);
+        }
+      }
+
+      &--empty {
+        .fa-solid {
+          margin-right: 0.5rem;
         }
       }
     }

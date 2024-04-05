@@ -7,6 +7,10 @@
   width: 100%;
   align-self: center;
 
+  >turbo-frame {
+    width: 100%;
+  }
+
   h1 {
     font-size: 4rem;
     margin: 0 0 10px 0;
@@ -18,17 +22,18 @@
   }
 
   .login__form {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
+    margin: 0 auto;
+    text-align: center;
 
     input[type="text"] {
       border: 1px solid $LINK_COLOR;
       border-radius: 5px;
-      padding: 10px;
+      padding: 20px 10px;
       background-color: $ACCENT_BACKGROUND_COLOR;
       font-size: 2rem;
       color: $TEXT_COLOR;
+      width: 60%;
+      margin-right: 10px;
     }
 
     button[type="submit"] {

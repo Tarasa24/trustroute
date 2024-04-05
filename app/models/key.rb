@@ -64,9 +64,13 @@ class Key
   end
 
   def self.create_from_keyserver!(query, keyserver = Keyservers::KeysOpenpgpOrg)
-    return if Key.by_query(query).exists?
+    key = Key.by_query(query)
+    return key.first if key.exists?
 
-    build_from_keyring_entry(keyserver.new.search_by_query(query)).save!
+    key = build_from_keyring_entry(keyserver.new.search_by_query(query))
+    key.save!
+
+    key
   end
 
   def aliases
@@ -78,9 +82,13 @@ class Key
     imported = GPGME::Key.import(file.read).imports.first
     raise "Key import failed" unless imported
 
-    return if Key.find_by(fingerprint: imported.fpr.to_i(16))
+    key = Key.find_by(fingerprint: imported.fpr.to_i(16))
+    return key if key.present?
 
-    build_from_keyring_entry(GPGME::Key.find(:public, imported.fpr).first).save!
+    key = build_from_keyring_entry(GPGME::Key.find(:public, imported.fpr).first)
+    key.save!
+
+    key
   end
 
   def self.build_from_keyring_entry(keyring_entry)
