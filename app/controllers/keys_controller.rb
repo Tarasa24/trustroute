@@ -6,13 +6,13 @@ class KeysController < ApplicationController
   end
 
   def create
-    if params[:public_key_file]
+    key = if params[:public_key_file]
       Key.create_from_file!(params[:public_key_file])
     else
       Key.create_from_keyserver!(params[:identifier])
     end
 
-    redirect_to new_key_session_path(identifier: params[:identifier]), notice: "Key was successfully created."
+    redirect_to new_key_session_path(identifier: key.keyid), notice: "Key was successfully created."
   rescue => e
     redirect_to new_key_path, alert: "Key creation failed: #{e.message} (#{e.class})"
   end
