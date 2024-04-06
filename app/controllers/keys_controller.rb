@@ -65,7 +65,7 @@ class KeysController < ApplicationController
         flash: {success: t("keys.vouch_for.success")}
     else
       redirect_to vouch_form_key_path(@key, know: "1", trust: "1", verify: "1"),
-        flash: {error: t("keys.vouch_for.error", error: service.error)}
+        flash: {error: t("keys.vouch_for.error", error: service.error_message)}
     end
   end
 

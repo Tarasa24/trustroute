@@ -46,7 +46,7 @@ class KeySessionsController < ApplicationController
       redirect_to root_path, flash: {success: t("key_sessions.signature_challenge.success")}
     else
       redirect_to new_key_session_path,
-        flash: {error: t("key_sessions.signature_challenge.error", error: service.error)}
+        flash: {error: t("key_sessions.signature_challenge.error", error: service.error_message)}
     end
   end
 
