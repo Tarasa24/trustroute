@@ -5,7 +5,7 @@ class VouchService < ApplicationService
 
   def call
     unless packets.public_key?
-      return error(:not_a_public_key, t("services.vouch_service.not_a_public_key"))
+      return error(:not_a_public_key, I18n.t("services.vouch_service.not_a_public_key"))
     end
     return unless verify_public_key # Expect error to be set
 
@@ -20,12 +20,12 @@ class VouchService < ApplicationService
 
   def verify_public_key
     unless packets.public_key_packet.key_id.downcase == to_key.long_sha.downcase
-      error(:key_id_mismatch, t("services.vouch_service.key_id_mismatch"))
+      error(:key_id_mismatch, I18n.t("services.vouch_service.key_id_mismatch"))
       return false
     end
 
     unless packets.signature_packets.any? { |packet| packet.key_id.downcase == from_key.long_sha.downcase }
-      error(:signature_not_found, t("services.vouch_service.signature_not_found"))
+      error(:signature_not_found, I18n.t("services.vouch_service.signature_not_found"))
       return false
     end
 

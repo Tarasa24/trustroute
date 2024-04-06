@@ -9,15 +9,15 @@ class SignatureChallengeService < ApplicationService
     crypto = GPGME::Crypto.new
     signed_text = crypto.verify(signature) do |signature|
       unless signature.valid?
-        return error(:invalid_signature, t("services.signature_challenge_service.invalid_signature"))
+        return error(:invalid_signature, I18n.t("services.signature_challenge_service.invalid_signature"))
       end
       unless signature.fpr.upcase == key.fingerprint.to_s(16).upcase
-        return error(:invalid_signer, t("services.signature_challenge_service.invalid_signer"))
+        return error(:invalid_signer, I18n.t("services.signature_challenge_service.invalid_signer"))
       end
     end
 
     unless signed_text&.read&.include?(nonce)
-      return error(:incorrect_nonce, t("services.signature_challenge_service.incorrect_nonce"))
+      return error(:incorrect_nonce, I18n.t("services.signature_challenge_service.incorrect_nonce"))
     end
 
     true
