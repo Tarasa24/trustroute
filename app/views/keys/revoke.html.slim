@@ -7,10 +7,10 @@
 
   .format-option.revoke__option data-format="gpg"
     p.revoke__mono
-      = "$ gpg --gen-revoke #{@key.keyid} > #{@key.sha}.revoke.asc"
+      = "$ gpg --armor --gen-revoke #{@key.keyid} > #{@key.sha}.revoke.asc"
     = form_with url: key_path(@key), method: :delete, class: "revoke__form",
       multipart: true, action: :upload do |f|
       = label_tag :signature_file, "" do
         .fa-solid.fa-upload.revoke__upload-icon
-        span = t(".upload_revoke")
+        span = t(".upload_revoke_certificate")
       = file_field_tag :signature_file, accept: "application/pgp-keys", required: true, onchange: "this.form.submit();"
