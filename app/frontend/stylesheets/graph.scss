@@ -36,8 +36,8 @@
 
 .legend {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: $FOOTER_HEIGHT;
+  left: 0.5em;
 
   li {
     list-style: none;

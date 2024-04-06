@@ -1,0 +1,16 @@
+footer
+  span
+    = t('.source_code_on')
+    a href="https://github.com/tarasa24/trustroute" target="_blank"
+      i.fa-brands.fa-github
+      | GitHub
+
+  span
+    = t('.made_with')
+    i.fa-solid.fa-heart
+    = t('.by')
+    = link_to 'Tarasa24', 'https://tarasa24.dev', target: '_blank'
+
+  = form_tag url_for(locale: nil), method: :get, class: 'language-switcher'
+    = select_tag :locale, options_for_select(I18n.available_locales.map { |l| [I18n.t("languages.#{l}"), l] }, I18n.locale),
+      onchange: 'this.form.submit()'

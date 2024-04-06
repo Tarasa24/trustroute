@@ -1,10 +1,17 @@
 en:
+  languages:
+    en: "🇬🇧 English"
+    cs: "🇨🇿 Czech"
   buttons:
     create: "Create"
   layouts:
     navbar:
       log_out: "Log out"
       log_in: "Log in"
+    footer:
+      source_code_on: "Source code on"
+      made_with: "Made with"
+      by: "by"
   graph:
     index:
       search_placeholder: "key id, email, name, ..."
