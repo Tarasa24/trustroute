@@ -21,11 +21,33 @@ function createSimulation(svg) {
   const svgLinks = svg.selectAll(".link");
   const svgNodes = svg.selectAll(".node");
 
+  const boxingForce = () => {
+    const nodes = svgNodes.data();
+    const WIDTH = width(svg);
+    const HEIGHT = height(svg);
+    const padding = 20;
+
+    for (const node of nodes) {
+      if (node.x - padding < -WIDTH / 2) {
+        node.x = -WIDTH / 2 + padding;
+      } else if (node.x + padding > WIDTH / 2) {
+        node.x = WIDTH / 2 - padding;
+      }
+
+      if (node.y - padding < -HEIGHT / 2) {
+        node.y = -HEIGHT / 2 + padding;
+      } else if (node.y + padding > HEIGHT / 2) {
+        node.y = HEIGHT / 2 - padding;
+      }
+    }
+  };
+
   const simulation = d3.forceSimulation(svgNodes.data())
-    .force("link", d3.forceLink(svgLinks.data()).strength(1e-3).id(d => d.id))
-    .force("charge", d3.forceManyBody().strength(-400))
-    .force("x", d3.forceX())
-    .force("y", d3.forceY());
+    .force("link", d3.forceLink(svgLinks.data()).id(d => d.id).distance(200))
+    .force("charge", d3.forceManyBody().strength(-800).distanceMax(300))
+    .force("collision", d3.forceCollide().radius(20))
+    .force("bounds", boxingForce)
+    .force("center", d3.forceCenter(width(svg) / 2, height(svg) / 2));
 
   simulation.on("tick", () => {
     const WIDTH = width(svg);
