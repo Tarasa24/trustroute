@@ -1,5 +1,5 @@
 .vouch data-key-id=@key.id
-  h1 = t('.title', sha: @key.sha)
+  h1 = t(".title", sha: @key.sha)
 
   select.format-selector
     option value="gpg" selected=true
@@ -10,12 +10,12 @@
   .format-option.vouch__option data-format="gpg"
     p.vouch__mono
       = "$ gpg -u #{current_key.sha} --sign-key #{@key.keyid} && gpg --armor --export #{@key.keyid} > #{@key.sha}.asc"
-    = form_with url: vouch_for_key_path(@key), method: :post, class: 'vouch__form',
+    = form_with url: vouch_for_key_path(@key), method: :post, class: "vouch__form",
       multipart: true, action: :upload do
-      = label_tag :public_key_file, '' do
+      = label_tag :public_key_file, "" do
         .fa-solid.fa-upload.vouch__upload-icon
-        span = t('.upload_signature')
-      = file_field_tag :public_key_file, accept: 'application/pgp-keys', required: true
+        span = t(".upload_signature")
+      = file_field_tag :public_key_file, accept: "application/pgp-keys", required: true
 
   .format-option.hidden.vouch__option data-format="openkeychain"
     svg viewBox="0 0 600 300"
@@ -25,8 +25,8 @@
       text x="17" y="220" font-size="6" font-family="monospace" fill="white" = @key.name
 
       text x="165" y="105" font-size="8" font-family="monospace" fill="white"
-        tspan = @key.keyid.to_s[0..19].scan(/.{1,4}/).join(' ')
-        tspan x="165" dy="10" = @key.keyid.to_s[20..-1].scan(/.{1,4}/).join(' ')
+        tspan = @key.keyid.to_s[0..19].scan(/.{1,4}/).join(" ")
+        tspan x="165" dy="10" = @key.keyid.to_s[20..-1].scan(/.{1,4}/).join(" ")
 
       text x="320" y="87" font-size="7" font-family="monospace" fill="white" = @key.name
       text x="320" y="95" font-size="6" font-family="monospace" fill="white" = @key.email
@@ -40,8 +40,8 @@
 
 
     = form_with url: vouch_for_key_path(@key), method: :post,
-      class: 'vouch__form', data: { 'turbo-frame': '_top' } do
-      = text_area_tag :public_key, nil, required: true, placeholder: '-----BEGIN PGP SIGNATURE-----'
+      class: "vouch__form", data: { "turbo-frame": "_top" } do
+      = text_area_tag :public_key, nil, required: true, placeholder: "-----BEGIN PGP SIGNATURE-----"
       button.vouch__submit type="submit"
         .fa-solid.fa-upload.vouch__upload-icon
-        span = t('.upload_signature')
+        span = t(".upload_signature")

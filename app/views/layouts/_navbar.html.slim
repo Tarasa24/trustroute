@@ -10,10 +10,10 @@ nav
     - if current_key
       li
         a href=key_sessions_path data= { "turbo-method": :delete }
-          = t('.log_out')
+          = t(".log_out")
           .fa-solid.fa-sign-out-alt
     - elsif !current_page?(new_key_session_path)
       li
         a href=new_key_session_path
-          = t('.log_in')
+          = t(".log_in")
           .fa-solid.fa-sign-in-alt

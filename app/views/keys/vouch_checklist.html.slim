@@ -1,17 +1,17 @@
 .vouch-checklist
-  h1 = t('.title', sha: @key.sha)
+  h1 = t(".title", sha: @key.sha)
 
   .vouch-checklist__form
     = form_with url: vouch_form_key_path(@key), method: :get do |f|
       .vouch-checklist__form__field
         = f.check_box :know, required: true, include_hidden: false
-        = f.label :know, t('.know')
+        = f.label :know, t(".know")
       .vouch-checklist__form__field
         = f.check_box :trust, required: true, include_hidden: false
-        = f.label :trust, t('.trust')
+        = f.label :trust, t(".trust")
       .vouch-checklist__form__field
         = f.check_box :verify, required: true, include_hidden: false
-        = f.label :verify, t('.verify')
+        = f.label :verify, t(".verify")
 
       .vouch-checklist__form__submit
         button type="submit"

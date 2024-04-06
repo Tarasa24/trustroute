@@ -1,13 +1,13 @@
-= render layout: 'shared/graph_template' do
+= render layout: "shared/graph_template" do
   .profile
     .profile__info
       .profile__card
-        .dot class=(@key == current_key ? 'dot--self' : 'dot--profile')
+        .dot class=(@key == current_key ? "dot--self" : "dot--profile")
         .profile__card__content
           h1 = @key.name
           - if @key.aliases.any?
             span
-              .card__aka = t('keys.show.aka')
+              .card__aka = t("keys.show.aka")
               ul.profile__aliases
                 - @key.aliases.each do |uid|
                   li = uid.name
@@ -15,7 +15,7 @@
       .profile__fingerprint
         .fa-solid.fa-fingerprint
         a href=dump_key_path(@key)
-          = @key.sha.upcase.insert(4, ' ')
+          = @key.sha.upcase.insert(4, " ")
           sup.fa-solid.fa-arrow-up-right-from-square
 
       .profile__emails
@@ -26,12 +26,12 @@
               = content_tag identity.validated? ? :a : :span, href: "mailto:#{identity.email}"
                 = identity.email
               - if identity.validated?
-                .fa-solid.fa-check-circle title=t('keys.show.validated')
+                .fa-solid.fa-check-circle title=t("keys.show.validated")
 
       ruby:
       ul.profile__identities
         - (@key.oauth_identities + @key.dns_identities).each do |identity|
-          li = render 'identity', identity:
+          li = render "identity", identity:
         - if current_key && @key == current_key
           li
             a.profile__identity.profile__identity--add href=edit_key_path(@key)
@@ -41,4 +41,4 @@
       - if current_key.present? && @key != current_key
         .button
           .fa-solid.fa-handshake
-          = link_to t('keys.show.vouch'), vouch_checklist_key_path(@key)
+          = link_to t("keys.show.vouch"), vouch_checklist_key_path(@key)

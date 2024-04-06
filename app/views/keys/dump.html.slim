@@ -1,10 +1,10 @@
 .key-dump
   .key-dump__terminal
     code = "$ pgpdump #{@filename}"
-    code = simple_format(@formatted_string, {}, wrapper_tag: 'pre')
+    code = simple_format(@formatted_string, {}, wrapper_tag: "pre")
 
   .key-dump__info
-    h1 = t('.title', name: @key.name)
+    h1 = t(".title", name: @key.name)
 
     .key-dump__qr
       = RQRCode::QRCode.new("OPENPGP4FPR:#{@key.keyid.upcase}").as_svg.html_safe
@@ -13,4 +13,4 @@
     .key-dump__actions
       a href=dump_key_path(@key, format: :asc)
         .fa-solid.fa.fa-download
-        = t('.download_asc')
+        = t(".download_asc")
