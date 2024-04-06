@@ -38,10 +38,14 @@
               .profile__identity__icon
                 .fa-solid.fa-edit
     .profile__management
-      - if current_key.present? && @key != current_key
+      - if should_show_vouch_button(@key)
         .button
           .fa-solid.fa-handshake
           = link_to t("keys.show.vouch"), vouch_checklist_key_path(@key)
+      - elsif current_key&.vouches_for?(@key)
+        .button
+          .fa-solid.fa-check
+          = t("keys.show.vouched")
       - if @key == current_key
         .button.button--danger
           .fa-solid.fa-ban

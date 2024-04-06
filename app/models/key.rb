@@ -101,6 +101,11 @@ class Key
     key
   end
 
+  def vouches_for?(key)
+    query_as(:k).match("(k)-[:vouches_for]->(v:Key)")
+      .where("v.uuid": key.uuid).pluck(:v).any?
+  end
+
   private
 
   def remove_from_keyring!
