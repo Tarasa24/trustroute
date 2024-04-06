@@ -9,8 +9,9 @@ footer
     = t('.made_with')
     i.fa-solid.fa-heart
     = t('.by')
-    = link_to 'Tarasa24', 'https://tarasa24.dev', target: '_blank'
+    = link_to t('.me'), 'https://tarasa24.dev', target: '_blank'
 
-  = form_tag set_locale_path, method: :post, class: 'language-switcher'
-    = select_tag :locale, options_for_select(I18n.available_locales.map { |l| [I18n.t("languages.#{l}"), l] }, I18n.locale),
-      onchange: 'this.form.submit()'
+  span
+    = form_tag set_locale_path, method: :post, data: { turbo: false } do
+      = select_tag :locale, options_for_select(I18n.available_locales.map { |l| [I18n.t("languages.#{l}"), l] }, I18n.locale),
+        onchange: 'this.form.submit()'

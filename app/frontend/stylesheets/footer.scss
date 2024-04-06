@@ -8,7 +8,7 @@ footer {
   justify-content: space-between;
   align-items: center;
 
-  color: white;
+  color: gray;
 
   a {
     color: inherit;
@@ -30,6 +30,6 @@ footer {
     padding: 5px;
     border-radius: 5px;
 
-    font-size: calc(($FOOTER_HEIGHT / 2) - 5px);
+    font-size: calc($FOOTER_HEIGHT / 2);
   }
 }

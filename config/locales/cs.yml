@@ -66,8 +66,9 @@ cs:
     en: "🇬🇧 Anglicky"
   layouts:
     footer:
-      by: od
+      by: 'od'
       made_with: Vyrobeno s
+      me: Petra Gajdošíka
       source_code_on: Zdrojový kód na
     navbar:
       log_in: Přihlásit se
