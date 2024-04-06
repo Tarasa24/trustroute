@@ -10,17 +10,31 @@ cs:
       submit: Nastavil jsem záznam
       title: Prosím ověřte svou DNS identitu pro %{domain}
       type: Typ
+    load_identity:
+      already_validated: Identita již byla ověřena
+    validate:
+      validation_fail: Ověření selhalo
+      validation_success: Identita ověřena
   email_identities:
     edit:
       title: Verifikační email byl odeslán na %{email}
+    validate:
+      invalid_pin: Neplatný PIN
+      success: Email ověřen
     verification_email:
       instructions: Váš ověřovací kód je %{pin}
+  errors:
+    forbidden: Zakázáno
+    not_found: Nenalezeno
+    something_went_wrong: Něco se pokazilo
   graph:
     index:
       search_placeholder: key id, email, jméno, ...
     search:
       no_results: Žádné výsledky
   key_sessions:
+    create:
+      not_found: Klíč nenalezen
     first_step:
       identifier_placeholder: key ID, email, jméno, ...
       import_key: Importujte svůj veřejný klíč
@@ -31,7 +45,14 @@ cs:
       sign_and_upload_signature: Podepište a nahrajte podpis
       title: Podpisový challenge pro %{sha}
       upload_signature: Nahrajte podpis
+    signature_challenge:
+      error: Podpisový challenge selhal s chybou %{error}
+      nonce_expired: Nonce vypršel
+      success: Klíč byl úspěšně nastaven
   keys:
+    create:
+      error: Vytvoření klíče selhalo s chybou %{error}
+      success: Klíč byl úspěšně vytvořen
     dump:
       download_asc: Stáhnout ASCII armored
       title: Key dump pro %{name}
@@ -59,7 +80,11 @@ cs:
       title: Zaručit se za klíč %{sha}
       trust: Důvěřuji této osobě
       verify: Ověřil jsem, že stále má přístup ke svým klíčům
+    vouch_for:
+      error: Zaručení se za klíč selhalo s chybou %{error}
+      success: Klíč byl úspěšně zaručen
     vouch_form:
+      checklist_incomplete: Musíte zaškrtnout všechny políčka pro zaručení se za klíč
       title: Zaručit se za klíč %{sha}
       upload_signature: Nahrajte podpis
   languages:
@@ -74,6 +99,18 @@ cs:
     navbar:
       log_in: Přihlásit se
       log_out: Odhlásit se
+  o_auth_identities:
+    callback:
+      failed: Ukládání identity selhalo s chybou %{error}
+  services:
+    signature_challenge_service:
+      incorrect_nonce: Nesprávný nonce
+      invalid_signature: Neplatný podpis
+      invalid_signer: Neplatný signatář
+    vouch_service:
+      key_id_mismatch: Nesouhlasí ID klíče
+      not_a_public_key: Není veřejný klíč
+      signature_not_found: Podpis nenalezen
   shared:
     graph:
       current_key: Vlastní klíč
