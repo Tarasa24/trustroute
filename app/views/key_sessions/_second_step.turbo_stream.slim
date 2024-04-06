@@ -1,6 +1,6 @@
 = turbo_stream.replace :login do
-  = turbo_frame_tag :login, class: 'login' do
-    h1 = t('key_sessions.second_step.title', sha: key.sha)
+  = turbo_frame_tag :login, class: "login" do
+    h1 = t("key_sessions.second_step.title", sha: key.sha)
 
     .signature-challenge data-key-id=key.id
       select.format-selector
@@ -14,11 +14,11 @@
           = "$ echo #{nonce} | gpg --sign --armor -u #{key.sha} > signature.asc"
 
         = form_with url: signature_challenge_key_session_path(key), method: :post,
-          class: 'signature-challenge__form', multipart: true, action: :upload do
-          = label_tag :signature_file, '' do
+          class: "signature-challenge__form", multipart: true, action: :upload do
+          = label_tag :signature_file, "" do
             .fa-solid.fa-upload.signature-challenge__upload-icon
-            span = t('key_sessions.second_step.sign_and_upload_signature')
-          = file_field_tag :signature_file, accept: 'application/pgp-keys', required: true
+            span = t("key_sessions.second_step.sign_and_upload_signature")
+          = file_field_tag :signature_file, accept: "application/pgp-keys", required: true
 
       .format-option.signature-challenge__option.hidden data-format="openkeychain"
         p.signature-challenge__nonce
@@ -31,8 +31,8 @@
             text x="410" y="130" font-size="8" font-family="monospace" fill="grey" = nonce
 
           = form_with url: signature_challenge_key_session_path(key), method: :post,
-            class: 'signature-challenge__form', data: { 'turbo-frame': '_top' } do
-            = text_area_tag :signature, nil, required: true, placeholder: '-----BEGIN PGP SIGNATURE-----'
+            class: "signature-challenge__form", data: { "turbo-frame": "_top" } do
+            = text_area_tag :signature, nil, required: true, placeholder: "-----BEGIN PGP SIGNATURE-----"
             button.signature-challenge__submit type="submit"
               .fa-solid.fa-upload.signature-challenge__upload-icon
-              span = t('key_sessions.second_step.upload_signature')
+              span = t("key_sessions.second_step.upload_signature")

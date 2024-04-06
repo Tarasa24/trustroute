@@ -6,21 +6,21 @@ ruby:
     .freeze
 
 .signup
-  h1 = t('.title')
-  = form_with url: keys_path, class: 'signup__form' do |f|
-    = f.text_field :identifier, autofocus: true, required: true, placeholder: t('.identifier_placeholder'),
+  h1 = t(".title")
+  = form_with url: keys_path, class: "signup__form" do |f|
+    = f.text_field :identifier, autofocus: true, required: true, placeholder: t(".identifier_placeholder"),
         value: params[:identifier]
 
     .signup__form__submit-container
       = f.select :keyserver, keyservers, required: true
-      = f.button :submit, class: 'login__form__submit' do
+      = f.button :submit, class: "login__form__submit" do
         .fa-solid.fa-cloud-arrow-down
 
   h2 or
 
-  = form_with url: keys_path, class: 'signup__form' do |f|
-    = f.label :public_key_file, '' do
+  = form_with url: keys_path, class: "signup__form" do |f|
+    = f.label :public_key_file, "" do
       .signup__upload-icon
         .fa-solid.fa-upload
-      span = t('.upload_public_key')
-    = f.file_field :public_key_file, accept: 'application/pgp-keys', required: true
+      span = t(".upload_public_key")
+    = f.file_field :public_key_file, accept: "application/pgp-keys", required: true
