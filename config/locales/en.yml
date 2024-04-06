@@ -102,6 +102,15 @@ en:
   o_auth_identities:
     callback:
       failed: Failed to save identity %{errors}
+  services:
+    signature_challenge_service:
+      incorrect_nonce: Incorrect nonce
+      invalid_signature: Invalid signature
+      invalid_signer: Invalid signer
+    vouch_service:
+      key_id_mismatch: Key ID mismatch
+      not_a_public_key: Not a public key
+      signature_not_found: Signature not found
   shared:
     graph:
       current_key: Current Key
