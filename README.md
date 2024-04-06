@@ -111,10 +111,48 @@ docker compose -f docker/docker-compose.yml up
 
 ## How to use
 
-...
+### Sign up flow
+
+1. Have a PGP keypair
+2. Import the public key into the application `/keys/new`
+3. Sign in using signature challenge `/key_sessions/new`
+
+### Managing identities flow
+1. Navigate to identities management page `/keys/:uuid/edit`
+2. Add oAuth idenity using one of the providers
+3. Add and verify email address
+4. Add and verify DNS record
+
+### Vouching flow
+1. Navigate to the key you want to vouch for `/keys/:uuid`
+2. Click on the `Vouch` button
+3. Confirm vouching checklist
+4. Create key signature using and upload it to the application
+
+### Revoking key flow
+1. Navigate to your key `/keys/:uuid`
+2. Click on the `Revoke` button
+3. Create and upload revocation certificate
+
+### Searchign flow
+1. Navigate to the root page `/`
+2. Use the search bar to find the key you are interested in (e.g. by email address, DNS record, etc.)
+3. Click on the key to see the details
+
+### Trust checking flow
+1. Navigate to the key you want to trust `/keys/:uuid`
+2. Using the visuaisation check the path of trust from your key to the key you want to trust
+3. Consider key's identities and vouches and optionally contact intermediaries
 
 ## Technologies
 
 - Ruby on Rails
+- gpgme
+- neo4j
+- ElasticSearch
+- Vite
+- Scss
+- Docker
+- NixOS
 
 ...
