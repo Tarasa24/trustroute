@@ -48,6 +48,7 @@ group :development, :test do
   gem "ffaker"
   gem "rubocop"
   gem "rubocop-rails"
+  gem "i18n-tasks"
 end
 
 group :development do
