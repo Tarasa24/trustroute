@@ -53,6 +53,9 @@ cs:
     create:
       error: Vytvoření klíče selhalo s chybou - %{error}
       success: Klíč byl úspěšně vytvořen
+    destroy:
+      error: Zničení klíče selhalo s chybou - %{error}
+      success: Klíč byl úspěšně zničen
     dump:
       download_asc: Stáhnout ASCII armored
       title: Key dump pro %{name}
@@ -71,10 +74,16 @@ cs:
       identifier_placeholder: Importovat pomocí pgp identifikátoru
       title: Registrace
       upload_public_key: Nahrajte svůj veřejný klíč
+    revoke:
+      title: Zrušení klíče %{sha}
+      upload_revoke_certificate: Nahrajte rušící certifikát
     show:
       aka: alias
+      revoke: Zrušit tento klíč
+      revoke_confirm: Opravdu chcete zrušit tento klíč?
       validated: Validováno
       vouch: Zaručit se za tento klíč
+      vouched: Zaručeno
     vouch_checklist:
       know: Znám tuto osobu
       title: Zaručit se za klíč %{sha}
@@ -103,6 +112,10 @@ cs:
     callback:
       failed: Ukládání identity selhalo s chybou - %{error}
   services:
+    revoke_service:
+      key_id_mismatch: Nesouhlasí ID klíče
+      not_a_revocation_signature: Nejedná se o rušící podpis
+      not_a_signature: Nejedná se o podpis
     signature_challenge_service:
       incorrect_nonce: Nesprávný nonce
       invalid_signature: Neplatný podpis

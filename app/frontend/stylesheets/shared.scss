@@ -48,6 +48,10 @@
   }
 }
 
+.button--danger {
+  background-color: $DANGER_COLOR;
+}
+
 @mixin icon-button($size) {
   width: $size;
   height: $size;

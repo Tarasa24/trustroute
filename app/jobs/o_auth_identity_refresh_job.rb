@@ -42,7 +42,6 @@ class OAuthIdentityRefreshJob < ApplicationJob
     else
       raise ArgumentError, "Unsupported provider: #{identity.provider}"
     end
-    byebug if identity.provider == :discord
     return unless response.success?
 
     body = JSON.parse(response.body)

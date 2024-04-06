@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       get :vouch_checklist
       get :vouch_form
       post :vouch_for
+      get :revoke
+      delete :destroy
     end
   end
 

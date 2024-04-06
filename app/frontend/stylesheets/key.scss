@@ -216,3 +216,63 @@
     }
   }
 }
+
+.revoke-key {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  padding-bottom: $NAVBAR_HEIGHT;
+
+  select {
+    border: 1px solid $LINK_COLOR;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: $ACCENT_BACKGROUND_COLOR;
+    font-size: 2rem;
+    color: $TEXT_COLOR;
+    margin: 0 auto;
+  }
+
+  .revoke__option {
+    width: 100%;
+
+    .revoke__mono {
+      font-family: monospace;
+
+      background-color: $ACCENT_BACKGROUND_COLOR;
+      color: $TEXT_COLOR;
+
+      padding: 5px;
+      border: 1px solid $LINK_COLOR;
+      border-radius: 5px;
+
+      white-space: break-spaces;
+    }
+
+    .revoke__form {
+      text-align: center;
+
+      label {
+        cursor: pointer;
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .revoke__upload-icon {
+        @include icon-button(100px);
+
+        margin: 0 auto;
+        font-size: 3rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}

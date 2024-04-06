@@ -53,6 +53,9 @@ en:
     create:
       error: Key creation failed with error - %{error}
       success: Key was successfully created
+    destroy:
+      error: Key destruction failed with error - %{error}
+      success: Key was successfully destroyed
     dump:
       download_asc: Download ASCII armored
       title: Key dump for %{name}
@@ -71,10 +74,16 @@ en:
       identifier_placeholder: Import using pgp identifier
       title: Sign up
       upload_public_key: Upload your public key
+    revoke:
+      title: Revoke key %{sha}
+      upload_revoke_certificate: Upload the revoke certificate
     show:
       aka: aka
+      revoke: Revoke this key
+      revoke_confirm: Are you sure you want to revoke this key?
       validated: Validated
       vouch: Vouch for this key
+      vouched: Vouched
     vouch_checklist:
       know: I know this person
       title: Vouch for %{sha}
@@ -103,6 +112,10 @@ en:
     callback:
       failed: Failed to save identity %{errors}
   services:
+    revoke_service:
+      key_id_mismatch: Key ID mismatch
+      not_a_revocation_signature: Not a revocation signature
+      not_a_signature: Not a signature
     signature_challenge_service:
       incorrect_nonce: Incorrect nonce
       invalid_signature: Invalid signature
