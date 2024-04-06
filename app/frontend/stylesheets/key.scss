@@ -168,7 +168,7 @@
       display: block;
       overflow: scroll;
       overflow-x: hidden;
-      height: calc(100vh - 8rem);
+      height: calc(100vh - $NAVBAR_HEIGHT - 6rem);
 
       pre {
         line-height: 1;

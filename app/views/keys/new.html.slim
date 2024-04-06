@@ -6,9 +6,10 @@ ruby:
     .freeze
 
 .signup
-  h1 Sign up
+  h1 = t('.title')
   = form_with url: keys_path, class: 'signup__form' do |f|
-    = f.text_field :identifier, autofocus: true, required: true, placeholder: 'Identifier'
+    = f.text_field :identifier, autofocus: true, required: true, placeholder: t('.identifier_placeholder'),
+        value: params[:identifier]
 
     .signup__form__submit-container
       = f.select :keyserver, keyservers, required: true
@@ -21,5 +22,5 @@ ruby:
     = f.label :public_key_file, '' do
       .signup__upload-icon
         .fa-solid.fa-upload
-      span Upload your public key
+      span = t('.upload_public_key')
     = f.file_field :public_key_file, accept: 'application/pgp-keys', required: true

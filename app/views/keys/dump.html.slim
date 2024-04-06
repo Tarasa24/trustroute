@@ -4,7 +4,7 @@
     code = simple_format(@formatted_string, {}, wrapper_tag: 'pre')
 
   .key-dump__info
-    h1 Key dump for #{@key.name}
+    h1 = t('.title', name: @key.name)
 
     .key-dump__qr
       = RQRCode::QRCode.new("OPENPGP4FPR:#{@key.keyid.upcase}").as_svg.html_safe
@@ -13,4 +13,4 @@
     .key-dump__actions
       a href=dump_key_path(@key, format: :asc)
         .fa-solid.fa.fa-download
-        | Download ASCII armored
+        = t('.download_asc')

@@ -1,33 +1,118 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
+---
 en:
-  hello: "Hello world"
+  buttons:
+    create: Create
+  dns_identities:
+    edit:
+      content: Content
+      name: Name
+      set_dns_record: 'Set a DNS TXT record with the following content:'
+      submit: I have added the record
+      title: Please verify your DNS identity for %{domain}
+      type: Type
+    load_identity:
+      already_validated: Identity already validated
+    validate:
+      validation_fail: Validation failed
+      validation_success: Identity validated
+  email_identities:
+    edit:
+      title: Verification email has been sent to %{email}
+    validate:
+      invalid_pin: Invalid PIN
+      success: Email validated
+    verification_email:
+      instructions: Your verification code is %{pin}
+  errors:
+    forbidden: Forbidden
+    not_found: Not found
+    something_went_wrong: Something went wrong
+  graph:
+    index:
+      search_placeholder: key id, email, name, ...
+    search:
+      no_results: No results found
+  key_sessions:
+    create:
+      not_found: Key not found
+    first_step:
+      identifier_placeholder: key ID, email, name, ...
+      import_key: Import your public key
+      login_with_devkey: Login with DevKey
+      or: or
+      title: Sign in
+    second_step:
+      sign_and_upload_signature: Sign and upload the signature
+      title: Signature challenge for %{sha}
+      upload_signature: Upload the signature
+    signature_challenge:
+      error: Signature challenge failed with error - %{error}
+      nonce_expired: Nonce expired
+      success: Key set successfully
+  keys:
+    create:
+      error: Key creation failed with error - %{error}
+      success: Key was successfully created
+    dump:
+      download_asc: Download ASCII armored
+      title: Key dump for %{name}
+    edit:
+      coming_soon: TBA
+      discord_identity: Discord identity
+      domain: Domain
+      github_identity: GitHub identity
+      title: Manage identity for %{name}
+      twitter_identity: Twitter identity
+      validate_domain: Validate %{domain}
+      validate_email: Validate %{email}
+    identity:
+      validated: Validated
+    new:
+      identifier_placeholder: Import using pgp identifier
+      title: Sign up
+      upload_public_key: Upload your public key
+    show:
+      aka: aka
+      validated: Validated
+      vouch: Vouch for this key
+    vouch_checklist:
+      know: I know this person
+      title: Vouch for %{sha}
+      trust: I trust this person
+      verify: I have verified they still have access to their keys
+    vouch_for:
+      error: Vouching for key failed with error - %{error}
+      success: Key vouched for successfully
+    vouch_form:
+      checklist_incomplete: You must check all boxes to vouch for a key
+      title: Vouch for %{sha}
+      upload_signature: Upload the signature
+  languages:
+    cs: "🇨🇿 Czech"
+    en: "🇬🇧 English"
+  layouts:
+    footer:
+      by: by
+      made_with: Made with
+      me: Petr Gajdošík
+      source_code_on: Source code on
+    navbar:
+      log_in: Log in
+      log_out: Log out
+  o_auth_identities:
+    callback:
+      failed: Failed to save identity %{errors}
+  services:
+    signature_challenge_service:
+      incorrect_nonce: Incorrect nonce
+      invalid_signature: Invalid signature
+      invalid_signer: Invalid signer
+    vouch_service:
+      key_id_mismatch: Key ID mismatch
+      not_a_public_key: Not a public key
+      signature_not_found: Signature not found
+  shared:
+    graph:
+      current_key: Current Key
+      path_of_trust: Path of Trust
+      selected_key: Selected Key

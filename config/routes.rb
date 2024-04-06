@@ -36,4 +36,6 @@ Rails.application.routes.draw do
   get "graph/search", to: "graph#search", as: :search
 
   get "oauth_identities/:provider/callback", to: "o_auth_identities#callback"
+
+  post "change_lang", to: "application#change_locale", as: :set_locale
 end

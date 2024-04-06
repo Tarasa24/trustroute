@@ -14,6 +14,7 @@ gem "redis", "~> 4.0"
 gem "connection_pool"
 gem "dry-initializer"
 gem "whenever", require: false
+gem "rails-i18n", "~> 7.0.0"
 
 # Assets
 gem "sassc-rails", "~> 2.1"
@@ -47,6 +48,7 @@ group :development, :test do
   gem "ffaker"
   gem "rubocop"
   gem "rubocop-rails"
+  gem "i18n-tasks"
 end
 
 group :development do

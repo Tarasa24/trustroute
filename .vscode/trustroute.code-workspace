@@ -5,7 +5,10 @@
 		}
 	],
 	"settings": {
-		"rubyLsp.formatter": "auto"
+		"rubyLsp.formatter": "auto",
+		"i18n-ally.localesPaths": [
+			"config/locales"
+		]
 	},
 	"extensions": {
 		"recommendations": [
