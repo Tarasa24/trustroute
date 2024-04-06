@@ -1,80 +1,79 @@
+---
 en:
-  languages:
-    en: "🇬🇧 English"
-    cs: "🇨🇿 Czech"
   buttons:
-    create: "Create"
-  layouts:
-    navbar:
-      log_out: "Log out"
-      log_in: "Log in"
-    footer:
-      source_code_on: "Source code on"
-      made_with: "Made with"
-      by: "by"
-  graph:
-    index:
-      search_placeholder: "key id, email, name, ..."
-    search:
-      no_results: "No results found"
-  shared:
-    graph:
-      current_key: "Current Key"
-      selected_key: "Selected Key"
-      path_of_trust: "Path of Trust"
-  key_sessions:
-    first_step:
-      title: "Sign in"
-      identifier_placeholder: "key ID, email, name, ..."
-      import_key: "Import your public key"
-      login_with_devkey: "Login with DevKey"
-    second_step:
-      title: "Signature challenge for %{sha}"
-      sign_and_upload_signature: "Sign and upload the signature"
-      upload_signature: "Upload the signature"
-  keys:
-    new:
-      title: "Sign up"
-      identifier_placeholder: "Import using pgp identifier"
-      upload_public_key: "Upload your public key"
-    show:
-      aka: "aka"
-      validated: "Validated"
-      vouch: "Vouch for this key"
-    identity:
-      validated: "Validated"
-    dump:
-      title: "Key dump for %{name}"
-      download_asc: "Download ASCII armored"
-    vouch_checklist:
-      title: "Vouch for %{sha}"
-      know: "I know this person"
-      trust: "I trust this person"
-      verify: "I have verified they still have access to their keys"
-    edit:
-      title: "Manage identity for %{name}"
-      github_identity: "GitHub identity"
-      twitter_identity: "Twitter identity"
-      discord_identity: "Discord identity"
-      coming_soon: "TBA"
-      create: "Create"
-      domain: "Domain"
-      validate_email: "Validate %{email}"
-      validate_domain: "Validate %{domain}"
-    vouch_form:
-      title: "Vouch for %{sha}"
-      upload_signature: "Upload the signature"
+    create: Create
   dns_identities:
     edit:
-      title: "Please verify your DNS identity for %{domain}"
-      set_dns_record: "Set a DNS TXT record with the following content:"
-      type: "Type"
-      name: "Name"
-      content: "Content"
-      submit: "I have added the record"
+      content: Content
+      name: Name
+      set_dns_record: 'Set a DNS TXT record with the following content:'
+      submit: I have added the record
+      title: Please verify your DNS identity for %{domain}
+      type: Type
   email_identities:
     edit:
-      title: "Verification email has been sent to %{email}"
+      title: Verification email has been sent to %{email}
     verification_email:
-      instructions: "Your verification code is %{pin}"
-  
+      instructions: Your verification code is %{pin}
+  graph:
+    index:
+      search_placeholder: key id, email, name, ...
+    search:
+      no_results: No results found
+  key_sessions:
+    first_step:
+      identifier_placeholder: key ID, email, name, ...
+      import_key: Import your public key
+      login_with_devkey: Login with DevKey
+      title: Sign in
+    second_step:
+      sign_and_upload_signature: Sign and upload the signature
+      title: Signature challenge for %{sha}
+      upload_signature: Upload the signature
+  keys:
+    dump:
+      download_asc: Download ASCII armored
+      title: Key dump for %{name}
+    edit:
+      coming_soon: TBA
+      discord_identity: Discord identity
+      domain: Domain
+      github_identity: GitHub identity
+      title: Manage identity for %{name}
+      twitter_identity: Twitter identity
+      validate_domain: Validate %{domain}
+      validate_email: Validate %{email}
+    identity:
+      validated: Validated
+    new:
+      identifier_placeholder: Import using pgp identifier
+      title: Sign up
+      upload_public_key: Upload your public key
+    show:
+      aka: aka
+      validated: Validated
+      vouch: Vouch for this key
+    vouch_checklist:
+      know: I know this person
+      title: Vouch for %{sha}
+      trust: I trust this person
+      verify: I have verified they still have access to their keys
+    vouch_form:
+      title: Vouch for %{sha}
+      upload_signature: Upload the signature
+  languages:
+    cs: "🇨🇿 Czech"
+    en: "🇬🇧 English"
+  layouts:
+    footer:
+      by: by
+      made_with: Made with
+      source_code_on: Source code on
+    navbar:
+      log_in: Log in
+      log_out: Log out
+  shared:
+    graph:
+      current_key: Current Key
+      path_of_trust: Path of Trust
+      selected_key: Selected Key
