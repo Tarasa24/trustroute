@@ -1,1 +1,79 @@
+---
 cs:
+  buttons:
+    create: Vytvořit
+  dns_identities:
+    edit:
+      content: Hodnota
+      name: Klíč
+      set_dns_record: 'Nastavte DNS TXT záznam s následujícím obsahem:'
+      submit: Nastavil jsem záznam
+      title: Prosím ověřte svou DNS identitu pro %{domain}
+      type: Typ
+  email_identities:
+    edit:
+      title: Verifikační email byl odeslán na %{email}
+    verification_email:
+      instructions: Váš ověřovací kód je %{pin}
+  graph:
+    index:
+      search_placeholder: key id, email, jméno, ...
+    search:
+      no_results: Žádné výsledky
+  key_sessions:
+    first_step:
+      identifier_placeholder: key ID, email, jméno, ...
+      import_key: Importujte svůj veřejný klíč
+      login_with_devkey: Přihlásit se pomocí DevKey
+      title: Přihlášení
+    second_step:
+      sign_and_upload_signature: Podepište a nahrajte podpis
+      title: Podpisový challenge pro %{sha}
+      upload_signature: Nahrajte podpis
+  keys:
+    dump:
+      download_asc: Stáhnout ASCII armored
+      title: Key dump pro %{name}
+    edit:
+      coming_soon: TBA
+      discord_identity: Discord identita
+      domain: Doména
+      github_identity: GitHub identita
+      title: Spravujte identitu pro %{name}
+      twitter_identity: Twitter identita
+      validate_domain: Validovat %{domain}
+      validate_email: Validovat %{email}
+    identity:
+      validated: Validováno
+    new:
+      identifier_placeholder: Importovat pomocí pgp identifikátoru
+      title: Registrace
+      upload_public_key: Nahrajte svůj veřejný klíč
+    show:
+      aka: alias
+      validated: Validováno
+      vouch: Zaručit se za tento klíč
+    vouch_checklist:
+      know: Znám tuto osobu
+      title: Zaručit se za klíč %{sha}
+      trust: Důvěřuji této osobě
+      verify: Ověřil jsem, že stále má přístup ke svým klíčům
+    vouch_form:
+      title: Zaručit se za klíč %{sha}
+      upload_signature: Nahrajte podpis
+  languages:
+    cs: "🇨🇿 Česky"
+    en: "🇬🇧 Anglicky"
+  layouts:
+    footer:
+      by: od
+      made_with: Vyrobeno s
+      source_code_on: Zdrojový kód na
+    navbar:
+      log_in: Přihlásit se
+      log_out: Odhlásit se
+  shared:
+    graph:
+      current_key: Vlastní klíč
+      path_of_trust: Cesta důvěry
+      selected_key: Vybraný klíč
