@@ -25,6 +25,7 @@ en:
       identifier_placeholder: key ID, email, name, ...
       import_key: Import your public key
       login_with_devkey: Login with DevKey
+      or: or
       title: Sign in
     second_step:
       sign_and_upload_signature: Sign and upload the signature

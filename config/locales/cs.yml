@@ -25,6 +25,7 @@ cs:
       identifier_placeholder: key ID, email, jméno, ...
       import_key: Importujte svůj veřejný klíč
       login_with_devkey: Přihlásit se pomocí DevKey
+      or: nebo
       title: Přihlášení
     second_step:
       sign_and_upload_signature: Podepište a nahrajte podpis
@@ -66,7 +67,7 @@ cs:
     en: "🇬🇧 Anglicky"
   layouts:
     footer:
-      by: 'od'
+      by: od
       made_with: Vyrobeno s
       me: Petra Gajdošíka
       source_code_on: Zdrojový kód na
