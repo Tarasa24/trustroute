@@ -5,14 +5,14 @@ section.legend
       li
         a href=key_path(current_key)
           .dot.dot--current
-          span Current key
+          span = t('.current_key')
     - if params[:controller] == 'keys' && (!current_key || !current_page?(key_path(current_key)))
       li
         span
           .dot.dot--selected
-          span Selected key
+          span = t('.selected_key')
       - if current_key
         li
           span
             .line.line--path
-            span Path of Trust
+            span = t('.path_of_trust')

@@ -1,16 +1,16 @@
 .dns-verification
-  h1 Please verify your DNS identity for #{@identity.domain}
+  h1 = t('.title', domain: @identity.domain)
 
-  span Set a DNS TXT record with the following content:
+  span = t('.set_dns_record')
 
   table
     tr
       td
-        | Type
+        = t('.type')
       td
-        | Name
+        = t('.name')
       td
-        | Content
+        = t('.content')
     tr
       td
         | TXT
@@ -21,4 +21,4 @@
 
   .button
     .fa-solid.fa-check-to-slot
-    = link_to 'I have added the record', validate_dns_identity_path(@identity), data: { 'turbo-method': 'patch' }
+    = link_to t('.submit'), validate_dns_identity_path(@identity), data: { 'turbo-method': 'patch' }

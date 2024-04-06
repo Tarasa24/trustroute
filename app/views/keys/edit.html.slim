@@ -1,5 +1,5 @@
 .identities
-  h1 Manage identities for #{@key.name}
+  h1 = t('.title', name: @key.name)
 
   .identities__variants
     .identitites__variant
@@ -12,19 +12,19 @@
           = form_tag('/oauth_identities/github', method: 'post', data: {turbo: false}) do 
             button.button type="submit"
               .fa-brands.fa-github
-              | GitHub Identity
+              = t('.github_identity')
         li 
           = form_tag('/oauth_identities/twitter2', method: 'post', data: {turbo: false}) do 
             button.button type="submit"
               .fa-brands.fa-x-twitter
-              | Twitter Identity
+              = t('.twitter_identity')
         li 
           = form_tag('/oauth_identities/discord', method: 'post', data: {turbo: false}) do 
             button.button type="submit"
               .fa-brands.fa-discord
-              | Discord Identity
+              = t('.discord_identity')
         li
-          button.button type="button" disabled="disabled" TBA
+          button.button type="button" disabled="disabled" = t('.coming_soon')
 
     .identitites__variant.identitites__variant--email
       h2
@@ -33,7 +33,7 @@
 
       = form_with url: email_identities_path, method: :post do |f|
         = f.text_field :email, placeholder: "Email", required: true
-        = f.submit "Create", class: "button"
+        = f.submit t('buttons.create'), class: "button"
 
       hr
       ul
@@ -42,15 +42,15 @@
           li
             .button
               .fa-solid.fa-envelope
-              = link_to "Validate #{identity.email}", edit_email_identity_path(identity)
+              = link_to t('.validate_email', email: identity.email), edit_email_identity_path(identity)
     .identitites__variant
       h2
         .fa-solid.fa-plus
         | DNS
 
       = form_with url: dns_identities_path, method: :post do |f|
-        = f.text_field :domain, placeholder: "Domain", required: true
-        = f.submit "Create", class: "button"
+        = f.text_field :domain, placeholder: t('.domain'), required: true
+        = f.submit t("buttons.create"), class: "button"
 
       hr
       ul
@@ -59,4 +59,4 @@
           li
             .button
               .fa-solid.fa-globe
-              = link_to "Validate #{identity.domain}", edit_dns_identity_path(identity)
+              = link_to t('.validate_domain', domain: identity.domain) , edit_dns_identity_path(identity)

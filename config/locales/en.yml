@@ -1,1 +1,73 @@
 en:
+  buttons:
+    create: "Create"
+  layouts:
+    navbar:
+      log_out: "Log out"
+      log_in: "Log in"
+  graph:
+    index:
+      search_placeholder: "key id, email, name, ..."
+    search:
+      no_results: "No results found"
+  shared:
+    graph:
+      current_key: "Current Key"
+      selected_key: "Selected Key"
+      path_of_trust: "Path of Trust"
+  key_sessions:
+    first_step:
+      title: "Sign in"
+      identifier_placeholder: "key ID, email, name, ..."
+      import_key: "Import your public key"
+      login_with_devkey: "Login with DevKey"
+    second_step:
+      title: "Signature challenge for %{sha}"
+      sign_and_upload_signature: "Sign and upload the signature"
+      upload_signature: "Upload the signature"
+  keys:
+    new:
+      title: "Sign up"
+      identifier_placeholder: "Import using pgp identifier"
+      upload_public_key: "Upload your public key"
+    show:
+      aka: "aka"
+      validated: "Validated"
+      vouch: "Vouch for this key"
+    identity:
+      validated: "Validated"
+    dump:
+      title: "Key dump for %{name}"
+      download_asc: "Download ASCII armored"
+    vouch_checklist:
+      title: "Vouch for %{sha}"
+      know: "I know this person"
+      trust: "I trust this person"
+      verify: "I have verified they still have access to their keys"
+    edit:
+      title: "Manage identity for %{name}"
+      github_identity: "GitHub identity"
+      twitter_identity: "Twitter identity"
+      discord_identity: "Discord identity"
+      coming_soon: "TBA"
+      create: "Create"
+      domain: "Domain"
+      validate_email: "Validate %{email}"
+      validate_domain: "Validate %{domain}"
+    vouch_form:
+      title: "Vouch for %{sha}"
+      upload_signature: "Upload the signature"
+  dns_identities:
+    edit:
+      title: "Please verify your DNS identity for %{domain}"
+      set_dns_record: "Set a DNS TXT record with the following content:"
+      type: "Type"
+      name: "Name"
+      content: "Content"
+      submit: "I have added the record"
+  email_identities:
+    edit:
+      title: "Verification email has been sent to %{email}"
+    verification_email:
+      instructions: "Your verification code is %{pin}"
+  

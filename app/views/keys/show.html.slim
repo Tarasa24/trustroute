@@ -7,7 +7,7 @@
           h1 = @key.name
           - if @key.aliases.any?
             span
-              .card__aka aka.
+              .card__aka = t('keys.show.aka')
               ul.profile__aliases
                 - @key.aliases.each do |uid|
                   li = uid.name
@@ -26,7 +26,7 @@
               = content_tag identity.validated? ? :a : :span, href: "mailto:#{identity.email}"
                 = identity.email
               - if identity.validated?
-                .fa-solid.fa-check-circle title="Validated"
+                .fa-solid.fa-check-circle title=t('keys.show.validated')
 
       ruby:
       ul.profile__identities
@@ -41,4 +41,4 @@
       - if current_key.present? && @key != current_key
         .button
           .fa-solid.fa-handshake
-          = link_to 'Vouch for this key', vouch_checklist_key_path(@key)
+          = link_to t('keys.show.vouch'), vouch_checklist_key_path(@key)

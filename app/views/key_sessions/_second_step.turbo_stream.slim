@@ -1,6 +1,6 @@
 = turbo_stream.replace :login do
   = turbo_frame_tag :login, class: 'login' do
-    h1 Signature challenge
+    h1 = t('key_sessions.second_step.title', sha: key.sha)
 
     .signature-challenge data-key-id=key.id
       select.format-selector
@@ -17,7 +17,7 @@
           class: 'signature-challenge__form', multipart: true, action: :upload do
           = label_tag :signature_file, '' do
             .fa-solid.fa-upload.signature-challenge__upload-icon
-            span Sign and upload the signature
+            span = t('key_sessions.second_step.sign_and_upload_signature')
           = file_field_tag :signature_file, accept: 'application/pgp-keys', required: true
 
       .format-option.signature-challenge__option.hidden data-format="openkeychain"
@@ -35,4 +35,4 @@
             = text_area_tag :signature, nil, required: true, placeholder: '-----BEGIN PGP SIGNATURE-----'
             button.signature-challenge__submit type="submit"
               .fa-solid.fa-upload.signature-challenge__upload-icon
-              span Submit the signature
+              span = t('key_sessions.second_step.upload_signature')
