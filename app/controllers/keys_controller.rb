@@ -12,9 +12,11 @@ class KeysController < ApplicationController
       Key.create_from_keyserver!(params[:identifier])
     end
 
-    redirect_to new_key_session_path(identifier: key.keyid), notice: "Key was successfully created."
+    redirect_to new_key_session_path(identifier: key.keyid),
+      flash: {success: t("keys.create.success")}
   rescue => e
-    redirect_to new_key_path, alert: "Key creation failed: #{e.message} (#{e.class})"
+    redirect_to new_key_path,
+      flash: {alert: t("keys.create.error", error: e.message)}
   end
 
   def show
@@ -22,7 +24,7 @@ class KeysController < ApplicationController
 
   def edit
     if @key.nil? || @key != current_key
-      redirect_to root_path, alert: "Key not found"
+      redirect_to root_path, flash: {alert: t("errors.not_found")}
     end
   end
 
@@ -49,7 +51,8 @@ class KeysController < ApplicationController
     return head :unauthorized unless current_key
 
     unless params[:know] == "1" && params[:trust] == "1" && params[:verify] == "1"
-      redirect_to vouch_checklist_key_path(@key), alert: "You must check all boxes to vouch for a key"
+      redirect_to vouch_checklist_key_path(@key),
+        flash: {alert: t("keys.vouch_form.checklist_incomplete")}
     end
   end
 
@@ -58,10 +61,11 @@ class KeysController < ApplicationController
     service = VouchService.new(current_key, @key, public_key)
     service.call
     if service.success?
-      redirect_to key_path(@key), notice: "Key vouched for successfully"
+      redirect_to key_path(@key),
+        flash: {notice: t("keys.vouch_for.success")}
     else
       redirect_to vouch_form_key_path(@key, know: "1", trust: "1", verify: "1"),
-        alert: "Vouch failed: #{service.error_key}: #{service.error_message}"
+        flash: {alert: t("keys.vouch_for.error", error: service.error)}
     end
   end
 
@@ -71,7 +75,7 @@ class KeysController < ApplicationController
     @key = Key.find_by(uuid: params[:id])
 
     if @key.nil?
-      redirect_to root_path, alert: "Key not found"
+      redirect_to root_path, flash: {alert: t("errors.not_found")}
     end
   end
 end

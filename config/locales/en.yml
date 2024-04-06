@@ -10,17 +10,31 @@ en:
       submit: I have added the record
       title: Please verify your DNS identity for %{domain}
       type: Type
+    load_identity:
+      already_validated: Identity already validated
+    validate:
+      validation_fail: Validation failed
+      validation_success: Identity validated
   email_identities:
     edit:
       title: Verification email has been sent to %{email}
+    validate:
+      invalid_pin: Invalid PIN
+      success: Email validated
     verification_email:
       instructions: Your verification code is %{pin}
+  errors:
+    forbidden: Forbidden
+    not_found: Not found
+    something_went_wrong: Something went wrong
   graph:
     index:
       search_placeholder: key id, email, name, ...
     search:
       no_results: No results found
   key_sessions:
+    create:
+      not_found: Key not found
     first_step:
       identifier_placeholder: key ID, email, name, ...
       import_key: Import your public key
@@ -31,7 +45,14 @@ en:
       sign_and_upload_signature: Sign and upload the signature
       title: Signature challenge for %{sha}
       upload_signature: Upload the signature
+    signature_challenge:
+      error: Signature challenge failed with error %{error}
+      nonce_expired: Nonce expired
+      success: Key set successfully
   keys:
+    create:
+      error: Key creation failed with error %{error}
+      success: Key was successfully created
     dump:
       download_asc: Download ASCII armored
       title: Key dump for %{name}
@@ -59,7 +80,11 @@ en:
       title: Vouch for %{sha}
       trust: I trust this person
       verify: I have verified they still have access to their keys
+    vouch_for:
+      error: Vouching for key failed with error %{error}
+      success: Key vouched for successfully
     vouch_form:
+      checklist_incomplete: You must check all boxes to vouch for a key
       title: Vouch for %{sha}
       upload_signature: Upload the signature
   languages:
@@ -74,6 +99,9 @@ en:
     navbar:
       log_in: Log in
       log_out: Log out
+  o_auth_identities:
+    callback:
+      failed: Failed to save identity %{errors}
   shared:
     graph:
       current_key: Current Key
