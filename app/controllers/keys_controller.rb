@@ -1,6 +1,5 @@
 class KeysController < ApplicationController
-  before_action :load_key, only: %i[show edit dump vouch_checklist vouch_form vouch_for]
-  skip_before_action :verify_authenticity_token, only: [:vouch_for]
+  before_action :load_key, only: %i[show edit dump vouch_checklist vouch_form vouch_for revoke]
 
   def new
   end
@@ -67,6 +66,9 @@ class KeysController < ApplicationController
       redirect_to vouch_form_key_path(@key, know: "1", trust: "1", verify: "1"),
         flash: {error: t("keys.vouch_for.error", error: service.error_message)}
     end
+  end
+
+  def revoke
   end
 
   private

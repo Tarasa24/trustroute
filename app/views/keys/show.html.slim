@@ -42,3 +42,7 @@
         .button
           .fa-solid.fa-handshake
           = link_to t("keys.show.vouch"), vouch_checklist_key_path(@key)
+      - if @key == current_key
+        .button.button--danger
+          .fa-solid.fa-ban
+          = link_to t("keys.show.revoke"), revoke_key_path(@key), data: { "turbo-confirm": t("keys.show.revoke_confirm") }

@@ -75,6 +75,8 @@ en:
       aka: aka
       validated: Validated
       vouch: Vouch for this key
+      revoke: Revoke this key
+      revoke_confirm: Are you sure you want to revoke this key?
     vouch_checklist:
       know: I know this person
       title: Vouch for %{sha}
