@@ -28,6 +28,35 @@ module ElasticSearchable::Key
       )
     end
 
+    def self.search(query)
+      __elasticsearch__.search(
+        {
+          query: {
+            bool: {
+              should: [
+                {
+                  multi_match: {
+                    query: query,
+                    fields: [
+                      "name", "sha", "long_sha", "keyid",
+                      "indexable_oauth_identities.provider", "indexable_oauth_identities.info",
+                      "indexable_email_identities.email",
+                      "indexable_dns_identities.domain"
+                    ]
+                  }
+                },
+                {
+                  wildcard: {
+                    name: "*#{query}*"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      )
+    end
+
     private
 
     def indexable_oauth_identities
@@ -48,7 +77,7 @@ module ElasticSearchable::Key
           remove_spaces: {type: "pattern_replace", pattern: " ", replacement: ""}
         },
         analyzer: {
-          edge_ngram_analyzer: {tokenizer: "edge_ngram_tokenizer"},
+          edge_ngram_analyzer: {tokenizer: "edge_ngram_tokenizer", filter: %w[lowercase]},
           prefix_analyzer: {
             tokenizer: "keyword", filter: %w[lowercase prefix_filter], char_filter: %w[remove_spaces]
           }
