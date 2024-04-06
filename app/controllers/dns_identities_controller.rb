@@ -13,11 +13,11 @@ class DNSIdentitiesController < ApplicationController
   def validate
     unless @identity.validate
       return redirect_to edit_dns_identity_path(@identity),
-        flash: { alert: t("dns_identities.validate.validation_fail") }
+        flash: {error: t("dns_identities.validate.validation_fail")}
     end
 
     redirect_to key_path(current_key),
-      flash: { notice: t("dns_identities.validate.validation_success") }
+      flash: {success: t("dns_identities.validate.validation_success")}
   end
 
   private
@@ -26,12 +26,12 @@ class DNSIdentitiesController < ApplicationController
     @identity = DNSIdentity.find(params[:id])
 
     unless @identity && @identity.key == current_key
-      redirect_to key_path(current_key), flash: { alert: t("errors.not_found") }
+      redirect_to key_path(current_key), flash: {error: t("errors.not_found")}
     end
 
     if @identity.validated?
       redirect_to key_path(current_key),
-        flash: { notice: t("dns_identities.load_identity.already_validated") }
+        flash: {notice: t("dns_identities.load_identity.already_validated")}
     end
   end
 end

@@ -16,7 +16,7 @@ class KeysController < ApplicationController
       flash: {success: t("keys.create.success")}
   rescue => e
     redirect_to new_key_path,
-      flash: {alert: t("keys.create.error", error: e.message)}
+      flash: {error: t("keys.create.error", error: e.message)}
   end
 
   def show
@@ -24,7 +24,7 @@ class KeysController < ApplicationController
 
   def edit
     if @key.nil? || @key != current_key
-      redirect_to root_path, flash: {alert: t("errors.not_found")}
+      redirect_to root_path, flash: {errror: t("errors.not_found")}
     end
   end
 
@@ -62,10 +62,10 @@ class KeysController < ApplicationController
     service.call
     if service.success?
       redirect_to key_path(@key),
-        flash: {notice: t("keys.vouch_for.success")}
+        flash: {success: t("keys.vouch_for.success")}
     else
       redirect_to vouch_form_key_path(@key, know: "1", trust: "1", verify: "1"),
-        flash: {alert: t("keys.vouch_for.error", error: service.error)}
+        flash: {error: t("keys.vouch_for.error", error: service.error)}
     end
   end
 
@@ -75,7 +75,7 @@ class KeysController < ApplicationController
     @key = Key.find_by(uuid: params[:id])
 
     if @key.nil?
-      redirect_to root_path, flash: {alert: t("errors.not_found")}
+      redirect_to root_path, flash: {error: t("errors.not_found")}
     end
   end
 end

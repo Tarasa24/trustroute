@@ -12,7 +12,7 @@ class KeySessionsController < ApplicationController
           return render turbo_stream: [
             turbo_stream.replace(:login, partial: "key_sessions/first_step"),
             turbo_stream.append(:flash, partial: "layouts/flash",
-              locals: {flash: {alert: t("key_sessions.create.not_found")}})
+              locals: {flash: {error: t("key_sessions.create.not_found")}})
           ]
         end
 
@@ -25,7 +25,7 @@ class KeySessionsController < ApplicationController
       end
       format.html do
         redirect_to new_key_session_path,
-          flash: {notice: t("errors.something_went_wrong")}
+          flash: {error: t("errors.something_went_wrong")}
       end
     end
   end
