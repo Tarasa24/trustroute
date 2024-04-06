@@ -9,6 +9,10 @@ footer {
   align-items: center;
 
   color: gray;
+  background-color: $BACKGROUND_COLOR;
+
+  position: fixed;
+  bottom: 0;
 
   a {
     color: inherit;
