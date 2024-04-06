@@ -46,12 +46,12 @@ cs:
       title: Podpisový challenge pro %{sha}
       upload_signature: Nahrajte podpis
     signature_challenge:
-      error: Podpisový challenge selhal s chybou %{error}
+      error: Podpisový challenge selhal s chybou - %{error}
       nonce_expired: Nonce vypršel
       success: Klíč byl úspěšně nastaven
   keys:
     create:
-      error: Vytvoření klíče selhalo s chybou %{error}
+      error: Vytvoření klíče selhalo s chybou - %{error}
       success: Klíč byl úspěšně vytvořen
     dump:
       download_asc: Stáhnout ASCII armored
@@ -81,7 +81,7 @@ cs:
       trust: Důvěřuji této osobě
       verify: Ověřil jsem, že stále má přístup ke svým klíčům
     vouch_for:
-      error: Zaručení se za klíč selhalo s chybou %{error}
+      error: Zaručení se za klíč selhalo s chybou - %{error}
       success: Klíč byl úspěšně zaručen
     vouch_form:
       checklist_incomplete: Musíte zaškrtnout všechny políčka pro zaručení se za klíč
@@ -101,7 +101,7 @@ cs:
       log_out: Odhlásit se
   o_auth_identities:
     callback:
-      failed: Ukládání identity selhalo s chybou %{error}
+      failed: Ukládání identity selhalo s chybou - %{error}
   services:
     signature_challenge_service:
       incorrect_nonce: Nesprávný nonce

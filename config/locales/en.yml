@@ -46,12 +46,12 @@ en:
       title: Signature challenge for %{sha}
       upload_signature: Upload the signature
     signature_challenge:
-      error: Signature challenge failed with error %{error}
+      error: Signature challenge failed with error - %{error}
       nonce_expired: Nonce expired
       success: Key set successfully
   keys:
     create:
-      error: Key creation failed with error %{error}
+      error: Key creation failed with error - %{error}
       success: Key was successfully created
     dump:
       download_asc: Download ASCII armored
@@ -81,7 +81,7 @@ en:
       trust: I trust this person
       verify: I have verified they still have access to their keys
     vouch_for:
-      error: Vouching for key failed with error %{error}
+      error: Vouching for key failed with error - %{error}
       success: Key vouched for successfully
     vouch_form:
       checklist_incomplete: You must check all boxes to vouch for a key
