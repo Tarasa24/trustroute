@@ -1,6 +1,5 @@
 class GPGPackets
   def initialize(gpg)
-    gpg = gpg.gsub("-----BEGIN PGP PUBLIC KEY BLOCK-----", "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\n")
     IO.popen("gpg --list-packets", "r+") do |pipe|
       pipe.write(gpg)
       pipe.close_write
@@ -43,6 +42,10 @@ class GPGPackets
 
     def key_id
       @key_id ||= @packet.match(/keyid\s+([0-9A-F]+)/)[1]
+    end
+
+    def sigclass
+      @sigclass ||= @packet.match(/sigclass\s(0x[0-9]+)/)[1]
     end
   end
 

@@ -1,5 +1,5 @@
 class KeysController < ApplicationController
-  before_action :load_key, only: %i[show edit dump vouch_checklist vouch_form vouch_for revoke]
+  before_action :load_key, only: %i[show edit dump vouch_checklist vouch_form vouch_for revoke destroy]
 
   def new
   end
@@ -69,6 +69,22 @@ class KeysController < ApplicationController
   end
 
   def revoke
+  end
+
+  def destroy
+    if @key != current_key
+      redirect_to root_path, flash: {error: t("errors.not_found")}
+    end
+
+    signature = params[:signature_file]&.read || params[:signature]
+    service = RevokeService.new(@key, GPGME::Data.new(signature))
+    service.call
+
+    if service.success?
+      redirect_to root_path, flash: {success: t("keys.destroy.success")}
+    else
+      redirect_to key_path(@key), flash: {error: t("keys.destroy.error", error: service.error_message)}
+    end
   end
 
   private

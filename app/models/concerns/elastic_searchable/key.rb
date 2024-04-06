@@ -6,8 +6,8 @@ module ElasticSearchable::Key
   included do
     include Elasticsearch::Model
 
-    after_save { __elasticsearch__.index_document }
-    after_destroy { __elasticsearch__.delete_document }
+    after_save { __elasticsearch__.index_document ignore: 404 }
+    after_destroy { __elasticsearch__.delete_document ignore: 404 }
 
     def as_indexed_json(_options = {})
       as_json(

@@ -104,7 +104,7 @@ class Key
   private
 
   def remove_from_keyring!
-    keyring_entry&.delete!
+    keyring_entry&.delete!(Rails.env.development?) # Allow secret key deletion in development
   end
 
   def create_email_identity
