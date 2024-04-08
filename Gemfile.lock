@@ -460,7 +460,7 @@ DEPENDENCIES
   sassc-rails (~> 2.1)
   slim-rails (~> 3.6)
   sprockets-rails
-  sqlite3 (~> 1.4)
+  sqlite3 (~> 1.5)
   turbo-rails
   vite_rails (~> 3.0)
   web-console
