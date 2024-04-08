@@ -82,6 +82,8 @@ docker compose up
 overmind start
 ```
 
+6. App is now running on `localhost:3000`
+
 ## How to deploy
 
 1. Create following oAuth applications
@@ -117,6 +119,8 @@ docker compose -f docker/docker-compose.yaml up
 docker compose -f docker/docker-compose.yaml exec app bundle exec rake neo4j:migrate
 docker compose -f docker/docker-compose.yaml exec app bundle exec rake db:seed
 ```
+
+7. App is now running on `localhost:3000`
 
 ## How to use
 
