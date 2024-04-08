@@ -100,11 +100,14 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: ENV.fetch("SMTP_ADDRESS", ""),
-    port: ENV.fetch("SMTP_PORT", 587),
+    port: ENV.fetch("SMTP_PORT", 465),
     domain: ENV.fetch("SMTP_DOMAIN", ""),
     user_name: ENV.fetch("SMTP_USER_NAME", ""),
     password: ENV.fetch("SMTP_PASSWORD", ""),
-    authentication: "plain",
-    enable_starttls_auto: true
+    ssl: ActiveModel::Type::Boolean.new.cast(ENV.fetch("SMTP_SSL", true)),
+    tls: ActiveModel::Type::Boolean.new.cast(ENV.fetch("SMTP_TLS", true)),
+    authentication: ENV.fetch("SMTP_AUTHENTICATION", "login"),
+    read_timeout: 15,
+    open_timeout: 15
   }
 end

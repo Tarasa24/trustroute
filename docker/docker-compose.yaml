@@ -44,9 +44,12 @@ services:
       - 3000:3000
     env_file:
       - .env
+    volumes:
+      - gpg_keyring:/app/.gnupg
     restart: unless-stopped
 
 volumes:
+  gpg_keyring:
   neo4j-data:
   esdata:
 
