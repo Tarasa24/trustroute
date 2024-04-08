@@ -35,12 +35,12 @@ nix-shell
 bundle && yarn
 ```
 
-3. Create database
+3. Migrate the database
 ```bash
-rails db:create && rails db:migrate
+rails neo4j:migrate
 ```
 
-4. (Optional) Seed the database with some data (e.g. for development purposes)
+4. Seed the database with some data
 ```bash
 rails db:seed
 ```
@@ -99,9 +99,12 @@ cp docker/.env.example docker/.env
 vim docker/.env
 ```
 
-4. (Optional) Pull the latest image
+4. Pull the latest image (or build it locally)
 ```bash
 docker compose -f docker/docker-compose.yaml pull
+
+# or
+docker compose -f docker/docker-compose.yaml build
 ```
 
 5. Run the application
