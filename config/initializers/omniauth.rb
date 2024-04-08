@@ -23,14 +23,20 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 
   provider :developer if Rails.env.development?
   provider :github,
-    Rails.application.credentials.oauth_providers.github.id,
-    Rails.application.credentials.oauth_providers.github.secret
+    Rails.env.production? ? ENV.fetch("GITHUB_ID", "") :
+     Rails.application.credentials.oauth_providers.github.id,
+    Rails.env.production? ? ENV.fetch("GITHUB_SECRET", "") :
+      Rails.application.credentials.oauth_providers.github.secret
   provider :twitter2,
-    Rails.application.credentials.oauth_providers.twitter2.id,
-    Rails.application.credentials.oauth_providers.twitter2.secret,
+    Rails.env.production? ? ENV.fetch("TWITTER2_ID", "") :
+      Rails.application.credentials.oauth_providers.twitter2.id,
+    Rails.env.production? ? ENV.fetch("TWITTER2_SECRET", "") :
+      Rails.application.credentials.oauth_providers.twitter2.secret,
     scope: "tweet.read users.read offline.access"
   provider :discord,
-    Rails.application.credentials.oauth_providers.discord.id,
-    Rails.application.credentials.oauth_providers.discord.secret,
+    Rails.env.production? ? ENV.fetch("DISCORD_ID", "") :
+      Rails.application.credentials.oauth_providers.discord.id,
+    Rails.env.production? ? ENV.fetch("DISCORD_SECRET", "") :
+      Rails.application.credentials.oauth_providers.discord.secret,
     scope: "identify email"
 end

@@ -54,7 +54,7 @@ rails db:seed
 
 2. Recreate the credentials
 ```bash
-rm config/credentials.yml.enc
+rm config/credentials.yaml.enc
 rails credentials:edit
 ```
 
@@ -101,12 +101,18 @@ vim docker/.env
 
 4. (Optional) Pull the latest image
 ```bash
-docker compose -f docker/docker-compose.yml pull
+docker compose -f docker/docker-compose.yaml pull
 ```
 
 5. Run the application
 ```bash
-docker compose -f docker/docker-compose.yml up
+docker compose -f docker/docker-compose.yaml up
+```
+
+6. (First time only) Migrate the database and seed production data
+```bash
+docker compose -f docker/docker-compose.yaml exec app bundle exec rake neo4j:migrate
+docker compose -f docker/docker-compose.yaml exec app bundle exec rake db:seed
 ```
 
 ## How to use

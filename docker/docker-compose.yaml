@@ -1,0 +1,51 @@
+name: trustroute-prod
+
+services:
+  neo4j:
+    image: neo4j:latest
+    container_name: neo4j
+    cap_add:
+      - SYS_RESOURCE
+    volumes:
+      - neo4j-data:/data
+    environment:
+      - NEO4J_AUTH=${NEO4J_AUTH}
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - cluster.name=elasticsearch-rails
+      - cluster.routing.allocation.disk.threshold_enabled=false
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+  redis:
+    image: redis:latest
+    container_name: redis
+
+  app:
+    build: .
+    image: trustroute
+    container_name: trustroute
+    environment:
+      - RAILS_ENV=production
+      - RAILS_SERVE_STATIC_FILES=true
+      - RAILS_LOG_TO_STDOUT=true
+      - RAILS_MAX_THREADS=5
+    depends_on:
+      - neo4j
+      - elasticsearch
+      - redis
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+
+volumes:
+  neo4j-data:
+  esdata:
+
+networks:
+  default:

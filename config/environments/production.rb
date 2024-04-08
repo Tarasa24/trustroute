@@ -90,4 +90,21 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Set up the Neo4j driver
+  config.neo4j.driver.url = ENV.fetch("NEO4J_URL", "neo4j://localhost:7687")
+  config.neo4j.driver.username,
+  config.neo4j.driver.password = ENV.fetch("NEO4J_AUTH", "neo4j/password").split("/")
+
+  # Setup SMTP for sending emails
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: ENV.fetch("SMTP_ADDRESS", ""),
+    port: ENV.fetch("SMTP_PORT", 587),
+    domain: ENV.fetch("SMTP_DOMAIN", ""),
+    user_name: ENV.fetch("SMTP_USER_NAME", ""),
+    password: ENV.fetch("SMTP_PASSWORD", ""),
+    authentication: "plain",
+    enable_starttls_auto: true
+  }
 end

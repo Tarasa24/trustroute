@@ -47,3 +47,8 @@ Elasticsearch::Model::Adapter.register(
     klass.ancestors.include?(ActiveGraph::Node)
   end
 )
+
+# Setup client
+#
+Elasticsearch::Model.client =
+  Elasticsearch::Client.new(url: ENV.fetch("ELASTICSEARCH_URL", "http://localhost:9200"))
