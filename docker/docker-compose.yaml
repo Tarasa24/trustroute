@@ -26,8 +26,10 @@ services:
     container_name: redis
 
   app:
-    build: .
-    image: trustroute
+    image: ghcr.io/tarasa24/trustroute:latest
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
     container_name: trustroute
     environment:
       - RAILS_ENV=production
