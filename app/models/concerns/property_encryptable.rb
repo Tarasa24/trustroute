@@ -47,8 +47,8 @@ module PropertyEncryptable
 
     cipher = OpenSSL::Cipher.new("aes-256-cbc")
     cipher.encrypt
-    cipher.key = Rails.application.credentials.secret_key_base[0..31]
-    cipher.iv = Rails.application.credentials.secret_key_base[0..15]
+    cipher.key = secret_key_base[0..31]
+    cipher.iv = secret_key_base[0..15]
     Base64.strict_encode64(cipher.update(value) + cipher.final)
   end
 
