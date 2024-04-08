@@ -48,9 +48,9 @@ rails db:seed
 ## How to run
 
 1. Create following oAuth applications
-    1. [GitHub](https://github.com/settings/applications/new)
-    2. [Twitter](https://developer.twitter.com/en/apps)
-    3. [Discord](https://discord.com/developers/applications)
+    1. [GitHub](https://github.com/settings/applications/new) - set callback URL to `/oauth_identities/github/callback`
+    2. [Twitter](https://developer.twitter.com/en/apps) - set callback URL to `/oauth_identities/twitter2/callback`
+    3. [Discord](https://discord.com/developers/applications) - set callback URL to `/oauth_identities/discord/callback`
 
 2. Recreate the credentials
 ```bash
@@ -87,9 +87,9 @@ overmind start
 ## How to deploy
 
 1. Create following oAuth applications
-    1. [GitHub](https://github.com/settings/applications/new)
-    2. [Twitter](https://developer.twitter.com/en/apps)
-    3. [Discord](https://discord.com/developers/applications)
+    1. [GitHub](https://github.com/settings/applications/new) - set callback URL to `/oauth_identities/github/callback`
+    2. [Twitter](https://developer.twitter.com/en/apps) - set callback URL to `/oauth_identities/twitter2/callback`
+    3. [Discord](https://discord.com/developers/applications) - set callback URL to `/oauth_identities/discord/callback`
 
 2. Setup `.env` file
 ```bash
