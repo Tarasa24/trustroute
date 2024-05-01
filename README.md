@@ -9,7 +9,7 @@ Ruby on Rails application for visualizing and managing web of trust of PGP publi
 
 ## Abstract
 
-...
+The digital communication environment requires data security and identity verification. The concept of web of trust within PGP (Pretty Good Privacy) brings the possibility of identity verification using digital signatures and trust directly between users. Existing tools that implement PGP, however, often do not include this concept. Part of this work is therefore a web application that allows users to visualize and manage the web of trust. The work further analyzes the theoretical foundations of asymmetric cryptography, the principles of the web of trust, and the problems associated with centralized identity verification solutions.
 
 ## Table of contents
 
@@ -20,7 +20,6 @@ Ruby on Rails application for visualizing and managing web of trust of PGP publi
   - [How to run](#how-to-run)
 - Production
   - [How to deploy](#how-to-deploy)
-- [How to use](#how-to-use)
 - [Technologies](#technologies)
 
 ## How to build
@@ -122,41 +121,6 @@ docker compose -f docker/docker-compose.yaml exec app bundle exec rake db:seed
 
 7. App is now running on `localhost:3000`
 
-## How to use
-
-### Sign up flow
-
-1. Have a PGP keypair
-2. Import the public key into the application `/keys/new`
-3. Sign in using signature challenge `/key_sessions/new`
-
-### Managing identities flow
-1. Navigate to identities management page `/keys/:uuid/edit`
-2. Add oAuth idenity using one of the providers
-3. Add and verify email address
-4. Add and verify DNS record
-
-### Vouching flow
-1. Navigate to the key you want to vouch for `/keys/:uuid`
-2. Click on the `Vouch` button
-3. Confirm vouching checklist
-4. Create key signature using and upload it to the application
-
-### Revoking key flow
-1. Navigate to your key `/keys/:uuid`
-2. Click on the `Revoke` button
-3. Create and upload revocation certificate
-
-### Searchign flow
-1. Navigate to the root page `/`
-2. Use the search bar to find the key you are interested in (e.g. by email address, DNS record, etc.)
-3. Click on the key to see the details
-
-### Trust checking flow
-1. Navigate to the key you want to trust `/keys/:uuid`
-2. Using the visuaisation check the path of trust from your key to the key you want to trust
-3. Consider key's identities and vouches and optionally contact intermediaries
-
 ## Technologies
 
 - Ruby on Rails
@@ -167,5 +131,3 @@ docker compose -f docker/docker-compose.yaml exec app bundle exec rake db:seed
 - Scss
 - Docker
 - NixOS
-
-...
