@@ -110,4 +110,7 @@ Rails.application.configure do
     read_timeout: 15,
     open_timeout: 15
   }
+
+  # We can afford to suppress this warning, since we are using Neo4j
+  config.active_record.sqlite3_production_warning = false
 end
