@@ -16,7 +16,7 @@ ruby:
       = f.button :submit, class: "login__form__submit" do
         .fa-solid.fa-cloud-arrow-down
 
-  h2 or
+  h2 = t(".or")
 
   = form_with url: keys_path, class: "signup__form" do |f|
     = f.label :public_key_file, "" do
