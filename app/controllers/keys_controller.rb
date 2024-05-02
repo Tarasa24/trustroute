@@ -19,6 +19,7 @@ class KeysController < ApplicationController
   end
 
   def show
+    @name_aliases = @key.aliases&.uniq(&:name)&.filter { |uid| uid.name != @key.name }
   end
 
   def edit

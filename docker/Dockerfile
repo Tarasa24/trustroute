@@ -46,5 +46,6 @@ RUN bundle exec rake assets:precompile
 # Expose ports
 EXPOSE 3000
 
-# Set the entrypoint command
+# Set the entrypoint and command
+ENTRYPOINT ["bin/entry"]
 CMD ["rails", "server", "-b", "0.0.0.0"]

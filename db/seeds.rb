@@ -15,5 +15,6 @@ if Rails.env.development?
 end
 
 if Rails.env.production?
-  require Rails.root.join("db/seeds/production/elastic_search_indices.seed.rb")
+  puts "Seeding Arch Linux Keyring..."
+  require Rails.root.join("db/seeds/production/arch_linux_keyring.seed.rb")
 end

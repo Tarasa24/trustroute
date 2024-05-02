@@ -43,9 +43,9 @@ function createSimulation(svg) {
   };
 
   const simulation = d3.forceSimulation(svgNodes.data())
-    .force("link", d3.forceLink(svgLinks.data()).id(d => d.id).distance(200))
-    .force("charge", d3.forceManyBody().strength(-800).distanceMax(300))
-    .force("collision", d3.forceCollide().radius(20))
+    .force("link", d3.forceLink(svgLinks.data()).id(d => d.id).distance(300))
+    .force("charge", d3.forceManyBody().strength(-150).distanceMax(550))
+    .force("collision", d3.forceCollide().radius(2))
     .force("bounds", boxingForce)
     .force("center", d3.forceCenter(width(svg) / 2, height(svg) / 2));
 

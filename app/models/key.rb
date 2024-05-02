@@ -56,7 +56,7 @@ class Key
   def keyring_entry(keylist_mode = GPGME::KEYLIST_MODE_LOCAL)
     @keyring_entry ||= GPGME::Ctx.new do |ctx|
       ctx.keylist_mode = keylist_mode
-      ctx.keys(fingerprint.to_s(16)).first
+      ctx.get_key(fingerprint.to_s(16))
     end
   end
 
@@ -64,7 +64,13 @@ class Key
     key = Key.by_query(query)
     return key.first if key.exists?
 
-    key = build_from_keyring_entry(keyserver.new.search_by_query(query))
+    keyring_entry = keyserver.new.search_by_query(query)
+    raise "Key #{query} not found" unless keyring_entry
+
+    existing_key = Key.find_by(fingerprint: keyring_entry.fingerprint.to_i(16))
+    return existing_key if existing_key.present?
+
+    key = build_from_keyring_entry(keyring_entry)
     key.save!
 
     key
@@ -93,10 +99,9 @@ class Key
       raise "Expected GPGME::Key, got #{keyring_entry.class}"
     end
 
-    @keyring_entry = keyring_entry
-
     key = Key.new
     key.fingerprint = keyring_entry.fingerprint.to_i(16)
+    key.instance_variable_set(:@keyring_entry, keyring_entry)
 
     key
   end

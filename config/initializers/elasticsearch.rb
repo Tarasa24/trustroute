@@ -40,7 +40,6 @@ module ActiveGraphAdapter
 end
 
 # Register the adapter
-#
 Elasticsearch::Model::Adapter.register(
   ActiveGraphAdapter,
   lambda do |klass|
@@ -49,6 +48,5 @@ Elasticsearch::Model::Adapter.register(
 )
 
 # Setup client
-#
 Elasticsearch::Model.client =
   Elasticsearch::Client.new(url: ENV.fetch("ELASTICSEARCH_URL", "http://localhost:9200"))
