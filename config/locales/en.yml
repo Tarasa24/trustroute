@@ -72,6 +72,7 @@ en:
       validated: Validated
     new:
       identifier_placeholder: Import using pgp identifier
+      or: or
       title: Sign up
       upload_public_key: Upload your public key
     revoke:

@@ -26,7 +26,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr
 
 # Install node modules
 COPY package.json yarn.lock ./
-RUN yarn install --check-files
+RUN yarn install --check-files --production
 
 # Install gems
 COPY Gemfile Gemfile.lock .ruby-version ./
@@ -38,10 +38,9 @@ COPY . .
 
 # Set the environment
 ENV RAILS_ENV=production
-ENV SECRET_KEY_BASE=unused
 
 # Precompile assets
-RUN bundle exec rake assets:precompile
+RUN SECRET_KEY_BASE=$(openssl rand -hex 16) bundle exec rake assets:precompile
 
 # Expose ports
 EXPOSE 3000

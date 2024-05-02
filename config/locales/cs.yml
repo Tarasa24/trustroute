@@ -72,6 +72,7 @@ cs:
       validated: Validováno
     new:
       identifier_placeholder: Importovat pomocí pgp identifikátoru
+      or: nebo
       title: Registrace
       upload_public_key: Nahrajte svůj veřejný klíč
     revoke:
