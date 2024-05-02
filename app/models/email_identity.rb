@@ -7,7 +7,7 @@ class EmailIdentity
   property :validated, type: Boolean, default: false
   property :email, type: String
 
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: {case_sensitive: false}, if: -> { validated? }
 
   has_one :in, :key, type: :has_identity, model_class: :Key
 

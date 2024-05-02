@@ -55,7 +55,13 @@ class KeySessionsController < ApplicationController
   end
 
   def set_development_key
-    set_current_key Key.order(:created_at).first
+    set_current_key(
+      if params[:id].present?
+        Key.find_by!(uuid: params[:id])
+      else
+        Key.order(:created_at).first
+      end
+    )
 
     redirect_to root_path, flash: {success: t("key_sessions.signature_challenge.success")}
   end
