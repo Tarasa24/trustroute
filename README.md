@@ -20,7 +20,6 @@ The digital communication environment requires data security and identity verifi
   - [How to run](#how-to-run)
 - Production
   - [How to deploy](#how-to-deploy)
-- [Technologies](#technologies)
 
 ## How to build
 
@@ -95,7 +94,7 @@ overmind start
 cp docker/.env.example docker/.env
 ```
 
-3. Fill the `.env` file with the credentials
+3. Fill the `.env` file with the credentials (as per .env.example)
 ```bash
 vim docker/.env
 ```
@@ -113,21 +112,9 @@ docker compose -f docker/docker-compose.yaml build
 docker compose -f docker/docker-compose.yaml up
 ```
 
-6. (First time only) Migrate the database and seed production data
+6. (When desirable) Seed with example data - [Arch Linux developers web of trust](https://archlinux.org/master-keys/)
 ```bash
-docker compose -f docker/docker-compose.yaml exec app bundle exec rake neo4j:migrate
 docker compose -f docker/docker-compose.yaml exec app bundle exec rake db:seed
 ```
 
 7. App is now running on `localhost:3000`
-
-## Technologies
-
-- Ruby on Rails
-- gpgme
-- neo4j
-- ElasticSearch
-- Vite
-- Scss
-- Docker
-- NixOS
