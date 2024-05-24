@@ -1,5 +1,6 @@
 class DNSIdentitiesController < ApplicationController
   before_action :load_identity, only: [:edit, :validate]
+  before_action :set_breadcrumbs, only: %i[edit]
 
   def edit
   end
@@ -33,5 +34,12 @@ class DNSIdentitiesController < ApplicationController
       redirect_to key_path(current_key),
         flash: {notice: t("dns_identities.load_identity.already_validated")}
     end
+  end
+
+  def set_breadcrumbs
+    add_breadcrumb @identity.key.sha, key_path(@identity.key)
+    add_breadcrumb t("keys.edit.breadcrumb"), edit_key_path(@identity.key)
+
+    add_breadcrumb t(".breadcrumb"), edit_dns_identity_path(@identity)
   end
 end

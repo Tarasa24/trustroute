@@ -26,6 +26,7 @@ gem "jbuilder"
 gem "slim-rails", "~> 3.6"
 gem "turbo-rails"
 gem "rqrcode"
+gem "breadcrumbs_on_rails"
 
 # Eco system
 gem "bootsnap", require: false

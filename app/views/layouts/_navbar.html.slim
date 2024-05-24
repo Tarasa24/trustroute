@@ -6,7 +6,7 @@ nav
           = image_tag "/img/logo.svg", alt: "Logo", class: "logo"
           h1 Trustroute
         - else
-          .fa-solid.fa-circle-nodes
+          = render_breadcrumbs
     - if current_key
       li
         a href=key_sessions_path data= { "turbo-method": :delete }

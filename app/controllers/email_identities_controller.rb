@@ -1,5 +1,6 @@
 class EmailIdentitiesController < ApplicationController
   before_action :load_email_identity, only: %i[edit validate]
+  before_action :set_breadcrumbs, only: %i[edit]
 
   def create
     ident = EmailIdentity.find_or_create_by!(key: current_key, email: params[:email])
@@ -27,5 +28,12 @@ class EmailIdentitiesController < ApplicationController
     if @identity.nil? || @identity.key != current_key || @identity.validated
       redirect_to root_path, flash: {error: t("errors.not_found")}
     end
+  end
+
+  def set_breadcrumbs
+    add_breadcrumb @identity.key.sha, key_path(@identity.key)
+    add_breadcrumb t("keys.edit.breadcrumb"), edit_key_path(@identity.key)
+
+    add_breadcrumb t(".breadcrumb"), edit_dns_identity_path(@identity)
   end
 end

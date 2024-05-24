@@ -1,4 +1,6 @@
 class KeySessionsController < ApplicationController
+  before_action :set_breadcrumbs, only: %i[new]
+
   def new
   end
 
@@ -64,5 +66,11 @@ class KeySessionsController < ApplicationController
     )
 
     redirect_to root_path, flash: {success: t("key_sessions.signature_challenge.success")}
+  end
+
+  private
+
+  def set_breadcrumbs
+    add_breadcrumb t(".breadcrumb"), new_key_session_path
   end
 end

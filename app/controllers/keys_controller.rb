@@ -1,5 +1,6 @@
 class KeysController < ApplicationController
   before_action :load_key, only: %i[show edit dump vouch_checklist vouch_form vouch_for revoke destroy]
+  before_action :set_breadcrumbs, only: %i[show new edit dump revoke vouch_checklist vouch_form]
 
   def new
   end
@@ -96,5 +97,14 @@ class KeysController < ApplicationController
     if @key.nil?
       redirect_to root_path, flash: {error: t("errors.not_found")}
     end
+  end
+
+  def set_breadcrumbs
+    return add_breadcrumb t(".breadcrumb"), new_key_path if @key.nil?
+
+    add_breadcrumb @key.sha, key_path(@key)
+    return if action_name == "show"
+
+    add_breadcrumb t(".breadcrumb"), url_for(action: action_name, id: @key.uuid)
   end
 end

@@ -1,9 +1,12 @@
 ---
 en:
+  breadcrumbs:
+    home: Home
   buttons:
     create: Create
   dns_identities:
     edit:
+      breadcrumb: Add DNS identity
       content: Content
       name: Name
       set_dns_record: 'Set a DNS TXT record with the following content:'
@@ -17,6 +20,7 @@ en:
       validation_success: Identity validated
   email_identities:
     edit:
+      breadcrumb: Email validation
       title: Verification email has been sent to %{email}
     validate:
       invalid_pin: Invalid PIN
@@ -41,6 +45,8 @@ en:
       login_with_devkey: Login with DevKey
       or: or
       title: Sign in
+    new:
+      breadcrumb: Sign in
     second_step:
       sign_and_upload_signature: Sign and upload the signature
       title: Signature challenge for %{sha}
@@ -57,9 +63,11 @@ en:
       error: Key destruction failed with error - %{error}
       success: Key was successfully destroyed
     dump:
+      breadcrumb: Key dump
       download_asc: Download ASCII armored
       title: Key dump for %{name}
     edit:
+      breadcrumb: Identity management
       coming_soon: TBA
       discord_identity: Discord identity
       domain: Domain
@@ -71,11 +79,13 @@ en:
     identity:
       validated: Validated
     new:
+      breadcrumb: Sign up
       identifier_placeholder: Import using pgp identifier
       or: or
       title: Sign up
       upload_public_key: Upload your public key
     revoke:
+      breadcrumb: Revoke key
       title: Revoke key %{sha}
       upload_revoke_certificate: Upload the revoke certificate
     show:
@@ -86,6 +96,7 @@ en:
       vouch: Vouch for this key
       vouched: Vouched
     vouch_checklist:
+      breadcrumb: Vouch for key
       know: I know this person
       title: Vouch for %{sha}
       trust: I trust this person
@@ -94,6 +105,7 @@ en:
       error: Vouching for key failed with error - %{error}
       success: Key vouched for successfully
     vouch_form:
+      breadcrumb: Vouch for key
       checklist_incomplete: You must check all boxes to vouch for a key
       title: Vouch for %{sha}
       upload_signature: Upload the signature

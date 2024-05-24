@@ -1,9 +1,12 @@
 ---
 cs:
+  breadcrumbs:
+    home: Domů
   buttons:
     create: Vytvořit
   dns_identities:
     edit:
+      breadcrumb: Přidat DNS identitu
       content: Hodnota
       name: Klíč
       set_dns_record: 'Nastavte DNS TXT záznam s následujícím obsahem:'
@@ -17,6 +20,7 @@ cs:
       validation_success: Identita ověřena
   email_identities:
     edit:
+      breadcrumb: Potvrzení emailu
       title: Verifikační email byl odeslán na %{email}
     validate:
       invalid_pin: Neplatný PIN
@@ -41,6 +45,8 @@ cs:
       login_with_devkey: Přihlásit se pomocí DevKey
       or: nebo
       title: Přihlášení
+    new:
+      breadcrumb: Přihlášení
     second_step:
       sign_and_upload_signature: Podepište a nahrajte podpis
       title: Podpisový challenge pro %{sha}
@@ -57,9 +63,11 @@ cs:
       error: Zničení klíče selhalo s chybou - %{error}
       success: Klíč byl úspěšně zničen
     dump:
+      breadcrumb: Key dump
       download_asc: Stáhnout ASCII armored
       title: Key dump pro %{name}
     edit:
+      breadcrumb: Správa identity
       coming_soon: TBA
       discord_identity: Discord identita
       domain: Doména
@@ -71,11 +79,13 @@ cs:
     identity:
       validated: Validováno
     new:
+      breadcrumb: Registrace
       identifier_placeholder: Importovat pomocí pgp identifikátoru
       or: nebo
       title: Registrace
       upload_public_key: Nahrajte svůj veřejný klíč
     revoke:
+      breadcrumb: Zrušení klíče
       title: Zrušení klíče %{sha}
       upload_revoke_certificate: Nahrajte rušící certifikát
     show:
@@ -86,6 +96,7 @@ cs:
       vouch: Zaručit se za tento klíč
       vouched: Zaručeno
     vouch_checklist:
+      breadcrumb: Zaručení se za klíč
       know: Znám tuto osobu
       title: Zaručit se za klíč %{sha}
       trust: Důvěřuji této osobě
@@ -94,6 +105,7 @@ cs:
       error: Zaručení se za klíč selhalo s chybou - %{error}
       success: Klíč byl úspěšně zaručen
     vouch_form:
+      breadcrumb: Zaručení se za klíč
       checklist_incomplete: Musíte zaškrtnout všechny políčka pro zaručení se za klíč
       title: Zaručit se za klíč %{sha}
       upload_signature: Nahrajte podpis
