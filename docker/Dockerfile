@@ -6,7 +6,6 @@ WORKDIR /app
 RUN apt-get update && \
     apt-get install -y \
     build-essential pkg-config \
-    sqlite3 libsqlite3-dev \
     gnupg \
     pgpdump \
     git curl && \
