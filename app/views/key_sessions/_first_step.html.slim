@@ -4,7 +4,7 @@
 
     = form_with url: key_sessions_path, class: "login__form", turbo: true do |f|
       = f.text_field :identifier, autofocus: true, required: true, placeholder: t(".identifier_placeholder"),
-          value: params[:identifier]
+          value: params[:identifier], pattern: "[a-fA-F0-9]{40}"
 
       = f.button :submit, class: "login__form__submit" do
         .fa-solid.fa-arrow-right

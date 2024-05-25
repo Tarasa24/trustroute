@@ -41,7 +41,7 @@ en:
     create:
       not_found: Key not found
     first_step:
-      identifier_placeholder: key ID, email, name, ...
+      identifier_placeholder: Key ID (full identifier)
       import_key: Import your public key
       login_with_devkey: Login with DevKey
       or: or
@@ -81,7 +81,7 @@ en:
       validated: Validated
     new:
       breadcrumb: Sign up
-      identifier_placeholder: Import using pgp identifier
+      identifier_placeholder: Key ID (full identifier)
       or: or
       title: Sign up
       upload_public_key: Upload your public key

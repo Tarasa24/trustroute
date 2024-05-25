@@ -41,7 +41,7 @@ cs:
     create:
       not_found: Klíč nenalezen
     first_step:
-      identifier_placeholder: key ID, email, jméno, ...
+      identifier_placeholder: Key ID (celý identifikátor)
       import_key: Importujte svůj veřejný klíč
       login_with_devkey: Přihlásit se pomocí DevKey
       or: nebo
@@ -81,7 +81,7 @@ cs:
       validated: Validováno
     new:
       breadcrumb: Registrace
-      identifier_placeholder: Importovat pomocí pgp identifikátoru
+      identifier_placeholder: Key ID (celý identifikátor)
       or: nebo
       title: Registrace
       upload_public_key: Nahrajte svůj veřejný klíč
