@@ -12,7 +12,7 @@ function registerListeners() {
         document.querySelector(".search-bar__results").innerHTML = "";
       else
         searchInput.closest("form").requestSubmit();
-    }, 100);
+    }, 500);
   });
 }
 

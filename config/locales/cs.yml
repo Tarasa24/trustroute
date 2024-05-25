@@ -33,6 +33,7 @@ cs:
     something_went_wrong: Něco se pokazilo %{error}
   graph:
     index:
+      search_button: hledat...
       search_placeholder: key id, email, jméno, ...
     search:
       no_results: Žádné výsledky

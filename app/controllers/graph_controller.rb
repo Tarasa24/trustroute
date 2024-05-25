@@ -31,8 +31,8 @@ class GraphController < ApplicationController
   def search
     @query = params[:query]
     begin
-      @results = Key.search(@query).records
-    rescue Elasticsearch::Transport::Transport::Errors::BadRequest
+      @results = Key.search(@query).first(20)
+    rescue 
       @results = []
     end
   end

@@ -33,6 +33,7 @@ en:
     something_went_wrong: Something went wrong %{error}
   graph:
     index:
+      search_button: search...
       search_placeholder: key id, email, name, ...
     search:
       no_results: No results found
