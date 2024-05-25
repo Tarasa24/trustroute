@@ -30,7 +30,7 @@ cs:
   errors:
     forbidden: Zakázáno
     not_found: Nenalezeno
-    something_went_wrong: Něco se pokazilo
+    something_went_wrong: Něco se pokazilo %{error}
   graph:
     index:
       search_placeholder: key id, email, jméno, ...

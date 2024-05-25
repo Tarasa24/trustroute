@@ -5,6 +5,7 @@ class Key
 
   property :fingerprint, type: Integer
   validates :fingerprint, presence: true, uniqueness: true
+  validates :keyring_entry, presence: true
 
   has_many :out, :vouches_for, rel_class: :VouchRelationship
   has_many :out, :identities, rel_class: :HasIdentityRelationship, dependent: :destroy
@@ -12,9 +13,9 @@ class Key
   after_destroy :remove_from_keyring!
   after_create :create_email_identity
 
-  delegate :name, to: :keyring_entry
-  delegate :email, to: :keyring_entry
-  delegate :comment, to: :keyring_entry
+  delegate :name, to: :keyring_entry, allow_nil: true
+  delegate :email, to: :keyring_entry, allow_nil: true
+  delegate :comment, to: :keyring_entry, allow_nil: true
 
   scope :by_query, ->(query) do
     fingerprints = GPGME::Key.find(:public, query).map(&:fingerprint)
@@ -57,6 +58,8 @@ class Key
     @keyring_entry ||= GPGME::Ctx.new do |ctx|
       ctx.keylist_mode = keylist_mode
       ctx.get_key(fingerprint.to_s(16))
+    rescue EOFError
+      nil
     end
   end
 

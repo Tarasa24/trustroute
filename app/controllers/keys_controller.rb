@@ -94,8 +94,10 @@ class KeysController < ApplicationController
   def load_key
     @key = Key.find_by(uuid: params[:id])
 
-    if @key.nil?
-      redirect_to root_path, flash: {error: t("errors.not_found")}
+    redirect_to root_path, flash: {error: t("errors.not_found")} if @key.nil?
+
+    unless @key.valid?
+      redirect_to root_path, flash: {error: t("errors.something_went_wrong", error: @key.errors.full_messages.join(", "))}
     end
   end
 

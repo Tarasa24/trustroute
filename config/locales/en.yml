@@ -30,7 +30,7 @@ en:
   errors:
     forbidden: Forbidden
     not_found: Not found
-    something_went_wrong: Something went wrong
+    something_went_wrong: Something went wrong %{error}
   graph:
     index:
       search_placeholder: key id, email, name, ...
