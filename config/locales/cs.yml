@@ -39,7 +39,7 @@ cs:
     create:
       not_found: Klíč nenalezen
     first_step:
-      identifier_placeholder: Key ID (celý identifikátor)
+      identifier_placeholder: Key Fingerprint
       import_key: Importujte svůj veřejný klíč
       login_with_devkey: Přihlásit se pomocí DevKey
       or: nebo
@@ -79,7 +79,7 @@ cs:
       validated: Validováno
     new:
       breadcrumb: Registrace
-      identifier_placeholder: Key ID (celý identifikátor)
+      identifier_placeholder: Key Fingerprint
       or: nebo
       title: Registrace
       upload_public_key: Nahrajte svůj veřejný klíč
