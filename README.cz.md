@@ -210,6 +210,7 @@ ELASTICSEARCH_URL=http://elasticsearch:9200
 REDIS_URL=redis://redis:6379/0
 
 # Konfigurace e-mailu
+# Viz https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration
 SMTP_ADDRESS=smtp.gmail.com
 SMTP_PORT=465
 SMTP_DOMAIN=example.com
