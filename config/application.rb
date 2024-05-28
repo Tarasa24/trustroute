@@ -19,8 +19,6 @@ module Trustroute
       g.factory_bot suffix: "factory"
     end
 
-    config.action_cable.mount_path = "/cable"
-
     config.i18n.available_locales = %i[en cs]
     config.i18n.default_locale = :en
   end

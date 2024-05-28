@@ -1,5 +1,4 @@
 name: trustroute-prod
-
 services:
   neo4j:
     image: neo4j:latest

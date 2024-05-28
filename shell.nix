@@ -9,9 +9,10 @@
       overmind
       redis
       libstdcxx5 zlib xz libxml2 prism
+      gnupg gpgme
     ];
 
     shellHook = ''
-      codium .vscode/trustroute.code-workspace
+      [ "$IN_NIX_SHELL" = "impure" ] && codium .vscode/trustroute.code-workspace
     '';
   }

@@ -14,3 +14,19 @@ end
 # Set permissions
 system("find #{home_dir} -type f -exec chmod 600 {} \\;")
 system("find #{home_dir} -type d -exec chmod 700 {} \\;")
+
+# Monkey patch GPGME::UserID to include ActiveModel::Serialization for JSON serialization needed for elasticsearch indexing
+module GPGME
+  class UserID
+    include ActiveModel::Serialization
+
+    def attributes
+      {
+        name: name,
+        email: email,
+        comment: comment,
+        uid: uid
+      }
+    end
+  end
+end

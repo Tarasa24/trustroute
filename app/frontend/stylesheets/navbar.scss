@@ -37,6 +37,13 @@ nav {
         transform: rotate(-10deg);
       }
     }
+
+    .breadcrumbs {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      padding: 10px 0;
+    }
   }
 
   a {

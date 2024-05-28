@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_key
   before_action :set_locale
 
+  add_breadcrumb "Trustroute", :root_path
+
   def current_key
     @current_key ||= session[:key_uuid] && Key.find_by(uuid: session[:key_uuid])
   end

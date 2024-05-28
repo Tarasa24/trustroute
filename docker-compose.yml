@@ -11,15 +11,6 @@ services:
     volumes:
       - neo4j-data:/data
 
-  neo4j-test:
-    image: neo4j:latest
-    container_name: neo4j-test
-    ports:
-      - 7688:7687
-      - 7475:7474
-    environment:
-      - NEO4J_AUTH=neo4j/12345678
-
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.6.0
     container_name: elasticsearch

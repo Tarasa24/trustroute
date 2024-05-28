@@ -23,38 +23,51 @@ module ElasticSearchable::Key
           },
           indexable_dns_identities: {
             only: %i[domain]
-          }
+          },
+          aliases: {}
         }
       )
     end
 
     def self.search(query)
+      el = begin 
       __elasticsearch__.search(
-        {
-          query: {
-            bool: {
-              should: [
-                {
-                  multi_match: {
-                    query: query,
-                    fields: [
-                      "name", "sha", "long_sha", "keyid",
-                      "indexable_oauth_identities.provider", "indexable_oauth_identities.info",
-                      "indexable_email_identities.email",
-                      "indexable_dns_identities.domain"
-                    ]
-                  }
-                },
-                {
-                  wildcard: {
-                    name: "*#{query}*"
-                  }
+        query: {
+          bool: {
+            should: [
+              {
+                multi_match: {
+                  query: query,
+                  type: "bool_prefix",
+                  fields: %w[name^5 aliases.name^5 aliases.email^5 aliases.uid^5 indexable_email_identities.email^5 indexable_dns_identities.domain^5 indexable_oauth_identities.info^5]
                 }
-              ]
-            }
+              },
+              {
+                multi_match: {
+                  query: query,
+                  type: "phrase_prefix",
+                  fields: %w[name^5 aliases.name^5 aliases.email^5 aliases.uid^5 indexable_email_identities.email^5 indexable_dns_identities.domain^5 indexable_oauth_identities.info^5]
+                }
+              }
+            ]
           }
         }
       )
+      rescue Elasticsearch::Transport::Transport::Errors::BadRequest
+        []
+      end
+
+      # Query for exact matches directly in the db
+      keys = Key.by_query(query)
+
+      # Merge the results
+      keys.to_a + el.records
+
+      # Remove duplicates
+      keys.uniq
+
+      # Remove invalid keys
+      keys.select(&:valid?)
     end
 
     private
@@ -71,43 +84,26 @@ module ElasticSearchable::Key
       dns_identities.select(&:validated?)
     end
 
-    settings index: {number_of_shards: 1},
-      analysis: {
-        char_filter: {
-          remove_spaces: {type: "pattern_replace", pattern: " ", replacement: ""}
-        },
-        analyzer: {
-          edge_ngram_analyzer: {tokenizer: "edge_ngram_tokenizer", filter: %w[lowercase]},
-          prefix_analyzer: {
-            tokenizer: "keyword", filter: %w[lowercase prefix_filter], char_filter: %w[remove_spaces]
-          }
-        },
-        tokenizer: {
-          edge_ngram_tokenizer: {
-            type: "edge_ngram",
-            min_gram: 2,
-            max_gram: 10,
-            token_chars: %w[letter digit symbol punctuation]
-          }
-        },
-        filter: {
-          prefix_filter: {type: "edge_ngram", min_gram: 2, max_gram: 20}
-        }
-      } do
+    settings index: {number_of_shards: 1} do
       mappings dynamic: false do
-        indexes :name, type: :text, analyzer: "edge_ngram_analyzer", search_analyzer: "standard"
-        indexes :sha, type: :keyword, fields: {prefix: {type: :text, analyzer: "prefix_analyzer"}}
-        indexes :long_sha, type: :keyword, fields: {prefix: {type: :text, analyzer: "prefix_analyzer"}}
-        indexes :keyid, type: :keyword, fields: {prefix: {type: :text, analyzer: "prefix_analyzer"}}
-        indexes :indexable_oauth_identities do
+        indexes :name, type: :search_as_you_type
+        indexes :sha, type: :keyword
+        indexes :long_sha, type: :keyword
+        indexes :keyid, type: :search_as_you_type
+        indexes :indexable_oauth_identities, type: :nested do
+          indexes :info, type: :text, fields: {keyword: {type: :keyword}}
           indexes :provider, type: :keyword
-          indexes :info, type: :object, dynamic: true
         end
-        indexes :indexable_email_identities do
-          indexes :email, type: :text, analyzer: "edge_ngram_analyzer", search_analyzer: "standard"
+        indexes :indexable_email_identities, type: :nested do
+          indexes :email, type: :text, fields: {keyword: {type: :keyword}}
         end
-        indexes :indexable_dns_identities do
-          indexes :domain, type: :text, analyzer: "edge_ngram_analyzer", search_analyzer: "standard"
+        indexes :indexable_dns_identities, type: :nested do
+          indexes :domain, type: :text, fields: {keyword: {type: :keyword}}
+        end
+        indexes :aliases, type: :nested do
+          indexes :name, type: :search_as_you_type
+          indexes :email, type: :search_as_you_type
+          indexes :uid, type: :search_as_you_type
         end
       end
     end

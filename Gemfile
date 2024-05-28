@@ -8,13 +8,13 @@ gem "activegraph", "~> 11.3"
 gem "neo4j-ruby-driver", "~> 4.4"
 gem "puma", "~> 5.0"
 gem "rails", "~> 7.0.7"
-gem "sqlite3", "~> 1.5"
 gem "active_model_serializers"
 gem "redis", "~> 4.0"
 gem "connection_pool"
 gem "dry-initializer"
 gem "whenever", require: false
 gem "rails-i18n", "~> 7.0.0"
+gem "activerecord-nulldb-adapter"
 
 # Assets
 gem "sassc-rails", "~> 2.1"
@@ -26,6 +26,7 @@ gem "jbuilder"
 gem "slim-rails", "~> 3.6"
 gem "turbo-rails"
 gem "rqrcode"
+gem "breadcrumbs_on_rails"
 
 # Eco system
 gem "bootsnap", require: false

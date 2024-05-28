@@ -9,7 +9,7 @@ ruby:
   h1 = t(".title")
   = form_with url: keys_path, class: "signup__form" do |f|
     = f.text_field :identifier, autofocus: true, required: true, placeholder: t(".identifier_placeholder"),
-        value: params[:identifier]
+        value: params[:identifier], pattern: "[a-fA-F0-9]{40}"
 
     .signup__form__submit-container
       = f.select :keyserver, keyservers, required: true

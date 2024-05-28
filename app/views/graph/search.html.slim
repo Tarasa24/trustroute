@@ -7,9 +7,6 @@
             .dot
             = highlight("#{record.name} (#{record.email}) - #{record.sha}",
                         [@query, @query.downcase, @query.upcase])
-            .search-bar__result__identities
-              - (record.oauth_identities + record.dns_identities).each do |identity|
-                = identity_icon(identity)
     - else
       li.search-bar__result.search-bar__result--empty
         .fa-solid.fa-search
