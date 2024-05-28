@@ -8,13 +8,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.1.0] - 2024-05-28
+
+### Added
 - Add simple breadcrumbs to improve navigation
 - Created this CHANGELOG.md file
 
 ### Changed
 - Changed Readmes to be more comprehensive
-
-### Deprecated
 
 ### Removed
 - Remove dependency on sqlite3
@@ -23,8 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix searching by email
 - Handle missing `keyring_entry` error
 
-### Security
-
 ## [1.0.0] - 2024-05-28
 
 ### Added
@@ -32,5 +42,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Thesis itself which is available in the `docs` directory.
 
 
-[unreleased]: https://github.com/Tarasa24/trustroute/compare/v1.0.0...HEAD
+[unreleased]: https://github.com/Tarasa24/trustroute/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/Tarasa24/trustroute/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Tarasa24/trustroute/releases/tag/v1.0.0
