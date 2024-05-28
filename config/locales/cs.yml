@@ -1,7 +1,5 @@
 ---
 cs:
-  breadcrumbs:
-    home: Domů
   buttons:
     create: Vytvořit
   dns_identities:

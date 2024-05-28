@@ -1,7 +1,5 @@
 ---
 en:
-  breadcrumbs:
-    home: Home
   buttons:
     create: Create
   dns_identities:
