@@ -8,14 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Add simple breadcrumbs to improve navigation
+- Created this CHANGELOG.md file
 
 ### Changed
+- Changed Readmes to be more comprehensive
 
 ### Deprecated
 
 ### Removed
+- Remove dependency on sqlite3
 
 ### Fixed
+- Fix searching by email
+- Handle missing `keyring_entry` error
 
 ### Security
 
